@@ -19,7 +19,8 @@
                         {{ session('status') }}
                     </div>
                     @endif 
-                    Daftar menu 
+                    <a href="{{ /sales }}">Sales</a>
+                    <a href="{{ /store }}">Store</a>
                 </div>
             </div>
         </div>
