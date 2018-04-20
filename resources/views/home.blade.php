@@ -19,7 +19,7 @@
                         {{ session('status') }}
                     </div>
                     @endif 
-                    <p class="title">Wasiman</p>
+                    Daftar menu 
                 </div>
             </div>
         </div>
