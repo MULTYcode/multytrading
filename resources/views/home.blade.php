@@ -19,8 +19,8 @@
                         {{ session('status') }}
                     </div>
                     @endif 
-                    <a href="{{ /home }}">Sales</a>
-                    <a href="{{ /home }}">Store</a>
+                    <a href="http://">Store</a>
+                    <a href="http://">Member</a>
                 </div>
             </div>
         </div>
