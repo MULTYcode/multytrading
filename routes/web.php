@@ -1,5 +1,7 @@
 <?php
 
+use App\dt_routes;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', function () {
+    $daftarmenu = dt_routes::all();
+    return view('home', ['daftarmenu' => $daftarmenu]);
+});
+
 
 Route::get('/menu', 'viewctrl@index')->name('menu');
 

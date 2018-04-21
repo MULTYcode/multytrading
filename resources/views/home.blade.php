@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-<style>
-    .title {
-        font-size: 84px;
-    }
-</style>
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -19,8 +13,24 @@
                         {{ session('status') }}
                     </div>
                     @endif 
-                    <a href="http://">Store</a>
-                    <a href="http://">Member</a>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>MENU</th>
+                                <th>KETERANGAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($daftarmenu as $menu)
+                            <tr>
+                                <td><a href={{$menu['route']}}>{{$menu['label']}}</a></td>
+                                <td>{{$menu['description']}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
