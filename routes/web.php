@@ -27,13 +27,12 @@ Route::get('verifyDone','Auth\RegisterController@verifyDone')->name('verifyDone'
 
 Route::middleware('auth')->group(function(){
 
-    route::get('dashboard','DashboardwebCtrl@index')->name('dashboard');
-
-    Route::get('home', function () {
+/*     Route::get('home', function () {
         $daftarmenu = dt_routes::all();
         return view('home', ['daftarmenu' => $daftarmenu]);
-    });
+    }); */
 
+    route::get('dashboard','DashboardwebCtrl@index')->name('dashboard');
     route::get('store','StoreCtrl@index')->name('store');
 
 }); 
