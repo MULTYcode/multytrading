@@ -26,6 +26,5 @@ Route::get('/home', function () {
     return view('home', ['daftarmenu' => $daftarmenu]);
 });
 
-
-Route::get('/menu', 'viewctrl@index')->name('menu');
-
+Route::get('verifyEmailFirst', 'Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');
+Route::get('verify/{email}/{verifytoken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
