@@ -21,7 +21,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -77,16 +77,29 @@ class RegisterController extends Controller
         return $user;
     }
 
-    public function sendEmail($thisUser){
+    public function sendEmail($thisUser)
+    {
         Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
     }
 
-    public function verifyEmailFirst(){
+    public function verifyEmailFirst()
+    {
         return view('email.verifyEmailFirst');
     }
 
-    public function sendEmailDone(){
+    public function verifyDone(){
+        return view('email.verifyAccept');
+    }
 
+    public function sendEmailDone($email, $verifytoken)
+    {
+        $user = User::where(['email' => $email, 'verifytoken' => $verifytoken])->first();
+        if ($user) {
+            User::where(['email' => $email, 'verifytoken' => $verifytoken])->update(['verified' => '1', 'verifytoken' => null]);
+            return redirect(route('verifyDone'));
+        } else {
+            return view('email.verifyDenied');
+        }
     }
 
 }

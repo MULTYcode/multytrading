@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-use  \Illuminate\Http\Request;
+use \Illuminate\Http\Request;
 use \Illuminate\Http\RedirectResponse;
 use \Illuminate\Http\Response;
 
@@ -72,8 +72,11 @@ class LoginController extends Controller
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
         // Customization: If client status is inactive (0) return failed_status error.
-        if ($client->activated === 0) {
-            return $this->sendFailedLoginResponse($request, 'auth.failed_status');
+        if ($client['verified'] === 0) {
+            return $this->sendFailedLoginResponse($request, 'auth.verified_status');
+        }
+        if ($client['activated'] === 0) {
+            return $this->sendFailedLoginResponse($request, 'auth.disable_status');
         }
         return $this->sendFailedLoginResponse($request);
     }

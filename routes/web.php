@@ -28,3 +28,4 @@ Route::get('/home', function () {
 
 Route::get('verifyEmailFirst', 'Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');
 Route::get('verify/{email}/{verifytoken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
+Route::get('verifyDone','Auth\RegisterController@verifyDone')->name('verifyDone');

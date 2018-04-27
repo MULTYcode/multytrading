@@ -3,13 +3,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Thanks</div>
+                <div class="panel-heading">Thanks, your email is verified</div>
                 <div class="panel-body">
-                    @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                    @endif Please Verify Email To Activate Your Account
+                    Please make sure and contact your administrator to enabled your account
                 </div>
             </div>
         </div>
