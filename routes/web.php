@@ -21,11 +21,21 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home', function () {
-    $daftarmenu = dt_routes::all();
-    return view('home', ['daftarmenu' => $daftarmenu]);
-});
-
 Route::get('verifyEmailFirst', 'Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');
 Route::get('verify/{email}/{verifytoken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
 Route::get('verifyDone','Auth\RegisterController@verifyDone')->name('verifyDone');
+
+Route::middleware('auth')->group(function(){
+
+    route::get('dashboard','DashboardwebCtrl@index')->name('dashboard');
+
+    Route::get('home', function () {
+        $daftarmenu = dt_routes::all();
+        return view('home', ['daftarmenu' => $daftarmenu]);
+    });
+
+    route::get('store','StoreCtrl@index')->name('store');
+
+}); 
+
+//route::get('store','StoreCtrl@index')->name('store');
