@@ -32,9 +32,10 @@ Route::middleware('auth')->group(function(){
         return view('home', ['daftarmenu' => $daftarmenu]);
     }); */
 
-    route::get('dashboard','DashboardwebCtrl@index')->name('dashboard');
-    route::get('store','StoreCtrl@index')->name('store');
-
+    Route::get('dashboard','DashboardwebCtrl@index')->name('dashboard');
+    Route::get('store','StoreCtrl@index')->name('store');
+    Route::get('profile/{id}', 'ProfileCtrl@index')->name('profile');
+    
 }); 
 
 //route::get('store','StoreCtrl@index')->name('store');
