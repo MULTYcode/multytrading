@@ -89,7 +89,7 @@ return [
             'collation' => 'utf8_unicode_ci',
         ],
 
-        'tamo' => [
+/*         'tamo' => [
             'driver' => 'mysql',
             'host' => env('DB3_HOST'),
             'port' => env('DB3_PORT',3306),
@@ -98,7 +98,7 @@ return [
             'password' => env('DB3_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
-        ],
+        ], */
 
     ],
 

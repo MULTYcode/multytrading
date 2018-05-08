@@ -75,14 +75,3 @@ Route::middleware('auth:api')->group(function(){
 Route::middleware('auth:api')->group(function(){
     Route::get('/getdivisi', 'DashboardCtrl@getdivisi')->name('getdivisi');
 }); 
-
-// TAMO
-Route::post('/tamoregister', 'TamoUserCtrl@register')->name('tamoregister');
-Route::post('/tamologin', 'Tamo\TamoUserCtrl@login')->name('tamologin');
-Route::middleware('auth:api')->group(function(){
-    Route::get('/tamogetuser', 'TamoUserCtrl@getuser')->name('tamogetuser');
-    Route::post('/tamoupdateuser', 'TamoUserCtrl@updateuser')->name('tamoupdateuser');
-    Route::post('/tamogantipwduser', 'TamoUserCtrl@gantipwduser')->name('tamogantipwduser');
-    Route::post('/tamopicuser', 'TamoUserCtrl@picuser')->name('tamopicuser');
-    Route::get('/tamogetpicuser', 'TamoUserCtrl@getpicuser')->name('tamogetpicuser');
-}); 
