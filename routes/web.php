@@ -34,8 +34,8 @@ Route::middleware('auth')->group(function(){
 
     Route::get('dashboard','DashboardwebCtrl@index')->name('dashboard');
     Route::get('store','StoreCtrl@index')->name('store');
-    Route::get('profile/{id}', 'ProfileCtrl@index')->name('profile');
+
+    Route::get('profile', 'ProfileCtrl@index')->name('profile');
+    Route::post('profile', 'ProfileCtrl@update_avatar');
     
 }); 
-
-//route::get('store','StoreCtrl@index')->name('store');
