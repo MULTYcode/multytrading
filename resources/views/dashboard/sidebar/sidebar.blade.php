@@ -14,112 +14,18 @@
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
+
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
+            @foreach($daftarmenu as $menu) @if($menu->sub=='-')
+            <li class="header">{{$menu->main}}</li>
+            @else
             <li>
-                <a href="{{route('dashboard')}}">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
-                </a>
+                <a href={{$menu->route}}>
+                    <i class="{{$menu->icon}}"></i> {{$menu->main}}</a>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>Store List</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>Member</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>Adviser</span>
-                </a>
-            </li>
-            <li class="header">DATA BARANG</li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>Kode Barang</span>
-                </a>
-            </li>
-            <li class="header">SALES</li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-pie-chart"></i>
-                    <span>Sales</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="pages/charts/chartjs.html">
-                            <i class="fa fa-circle-o"></i> By Store</a>
-                    </li>
-                    <li>
-                        <a href="pages/charts/morris.html">
-                            <i class="fa fa-circle-o"></i> By Article</a>
-                    </li>
-                    <li>
-                        <a href="pages/charts/flot.html">
-                            <i class="fa fa-circle-o"></i> By Adviser</a>
-                    </li>
-                    <li>
-                        <a href="pages/charts/inline.html">
-                            <i class="fa fa-circle-o"></i> By Class</a>
-                    </li>
-                    <li>
-                        <a href="pages/charts/inline.html">
-                            <i class="fa fa-circle-o"></i> By Colour</a>
-                    </li>
-                    <li>
-                        <a href="pages/charts/inline.html">
-                            <i class="fa fa-circle-o"></i> By Size</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="header">INVENTORY</li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-laptop"></i>
-                    <span>Master Barang</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="pages/UI/general.html">
-                            <i class="fa fa-circle-o"></i> General</a>
-                    </li>
-                    <li>
-                        <a href="pages/UI/icons.html">
-                            <i class="fa fa-circle-o"></i> Icons</a>
-                    </li>
-                    <li>
-                        <a href="pages/UI/buttons.html">
-                            <i class="fa fa-circle-o"></i> Buttons</a>
-                    </li>
-                    <li>
-                        <a href="pages/UI/sliders.html">
-                            <i class="fa fa-circle-o"></i> Sliders</a>
-                    </li>
-                    <li>
-                        <a href="pages/UI/timeline.html">
-                            <i class="fa fa-circle-o"></i> Timeline</a>
-                    </li>
-                    <li>
-                        <a href="pages/UI/modals.html">
-                            <i class="fa fa-circle-o"></i> Modals</a>
-                    </li>
-                </ul>
-            </li>
+            @endif @endforeach
         </ul>
+
     </section>
     <!-- /.sidebar -->
 </aside>
