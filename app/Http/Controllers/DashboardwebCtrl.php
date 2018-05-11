@@ -16,8 +16,14 @@ class DashboardwebCtrl extends Controller
 
     public function index()
     {
+        // cr - pcs - rupiah
+        $sls = DB::connection('tal')->select('call wsm_cr');
+
+        // member
         $member = DB::connection('tal')->select('call wsm_jumlahmember');
 
-        return view('dashboard', ['member' => $member]);
+        return view('dashboard', ['member' => $member, 'sls' => $sls]);
+
     }
+
 }

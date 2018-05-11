@@ -4,7 +4,6 @@
     <section id="header" class="content-header">
         @yield('header')
     </section>
-
     <!-- Main content -->
     <section id="content" class="content">
         @yield('content')
