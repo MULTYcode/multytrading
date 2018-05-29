@@ -9,6 +9,7 @@
   </li>
   <li class="active">Profile</li>
 </ol>
+
 @endsection() @section('content')
 <div class="row">
   <div class="col-md-3">
@@ -92,12 +93,13 @@
                 <input type="text" class="form-control" name="inputName" value="{{ Auth::user()->name }}">
               </div>
             </div>
-            {{--  <div class="form-group">
+            {{--
+            <div class="form-group">
               <label for="inputEmail" class="col-sm-2 control-label">Email</label>
               <div class="col-sm-10">
                 <input type="email" class="form-control" name="inputEmail" placeholder="{{ Auth::user()->email }}">
               </div>
-            </div>  --}}
+            </div> --}}
             <div class="form-group">
               <label for="inputSkill" class="col-sm-2 control-label">Skill</label>
               <div class="col-sm-10">

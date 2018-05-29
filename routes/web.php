@@ -26,6 +26,7 @@ Route::get('verifyDone', 'Auth\RegisterController@verifyDone')->name('verifyDone
 Route::middleware('auth')->group(function () {
 
     Route::get('dashboard', 'DashboardwebCtrl@index')->name('dashboard');
+
     Route::get('store', 'StoreCtrl@index')->name('store');
 
     Route::get('profile', 'ProfileCtrl@index')->name('profile');

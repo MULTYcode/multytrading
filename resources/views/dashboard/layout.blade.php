@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-
+{{--  @include('dashboard.loader')  --}}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <style>
+        .preloader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('/images/loading.gif') 50% 50% no-repeat rgb(249, 249, 249);
+            opacity: .8;
+        }
+    </style>
 
     <title>{{ config('app.name', 'L.tru') }} | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -33,7 +46,9 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href={{asset( "plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}>
     <!-- Pace style -->
-    <link rel="stylesheet" href={{asset("plugins/pace/pace.min.css")}}>
+    <link rel="stylesheet" href={{asset( "plugins/pace/pace.min.css")}}>
+    <!-- jQuery 3 -->
+    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 
     <!--[if lt IE 9]>-->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -42,7 +57,15 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#preloaders").fadeOut("slow");
+        });
+    </script>
+
 </head>
+<div class="preloader" id="preloaders"></div>
 <body class="hold-transition skin-blue sidebar-mini">
 
         <div class="wrapper">
@@ -54,8 +77,7 @@
         </section>
         </div>
 
-        <!-- jQuery 3 -->
-        <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+
         <!-- jQuery UI 1.11.4 -->
         <script src="{{asset('bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

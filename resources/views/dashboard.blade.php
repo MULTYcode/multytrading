@@ -1,4 +1,5 @@
-@extends('dashboard.layout') @section('header')
+@extends('dashboard.layout') 
+@section('header')
 <h1>Dashboard
     <small>Control panel</small>
 </h1>
@@ -9,7 +10,9 @@
     </li>
     <li class="active">Dashboard</li>
 </ol>
-@endsection() @section('content')
+@endsection() 
+
+@section('content')
 <!-- Small boxes (Stat box) -->
 <div class="row">
     <div class="col-lg-3 col-xs-6">
