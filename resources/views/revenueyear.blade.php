@@ -47,7 +47,8 @@
                     <tr>
                         <th>YEAR</th>
                         <th>MONTH</th>
-                        <th>TRANSACTION</th>
+                        <th>QTY</th>
+                        <th>REVENUE</th>
                     </tr>
                     @foreach($revenueyear as $revenueyears)
                     <tr>
@@ -56,6 +57,9 @@
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
                             <h5>{{ $revenueyears->bulan }}</h5>
+                        </td>
+                        <td style="padding:0px 0px 0px 10px;">
+                            <h5>{{ number_format($revenueyears->revenue,0) }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
                             <h5>{{ number_format($revenueyears->revenue,0) }}</h5>
@@ -110,6 +114,7 @@
                         <th>RANK</th>
                         <th>YEAR</th>
                         <th>QUANTITY</th>
+                        <th>REVENUE</th>
                     </tr>
                     @foreach($storerank as $key => $storeranks)
                     <tr>
@@ -117,7 +122,10 @@
                             <h5>{{ $key + 1 }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ $storeranks->store }}</h5>
+                            <a href="#"><h5>{{ $storeranks->store }}</h5></a>
+                        </td>
+                        <td style="padding:0px 0px 0px 10px;">
+                            <h5>{{ number_format($storeranks->qty,0) }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
                             <h5>{{ number_format($storeranks->total,0) }}</h5>

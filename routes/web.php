@@ -37,4 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('pcsyear', 'pcsyearCtrl@index')->name('pcsyear');
     Route::get('revenueyear', 'revenueyearCtrl@index')->name('revenueyear');
 
+    Route::get('member', 'memberCtrl@index')->name('member');
+    Route::get('membertrans/{bulan}', 'memberCtrl@trans')->name('membertrans');
+
 }); 
