@@ -180,6 +180,9 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
 
+        /* chart */
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+
     ],
 
     /*

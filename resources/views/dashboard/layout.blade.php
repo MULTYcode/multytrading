@@ -49,11 +49,14 @@
     <link rel="stylesheet" href={{asset( "plugins/pace/pace.min.css")}}>
     <!-- jQuery 3 -->
     <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
-
+    {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>  --}}
     <!--[if lt IE 9]>-->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- chart.js charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -88,7 +91,7 @@
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <!-- Morris.js charts -->
         <script src="{{asset('bower_components/raphael/raphael.min.js')}}"></script>
-        <script src="bower_components/morris.js/morris.min.js"></script>
+        <script src="{{asset('bower_components/morris.js/morris.min.js')}}"></script>
         <!-- Sparkline -->
         <script src="{{asset('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
         <!-- jvectormap -->

@@ -33,4 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::post('updateavatar', 'ProfileCtrl@update_avatar');
     Route::post('updateprofile', 'ProfileCtrl@update_profile');
 
+    Route::get('cryear', 'cryearCtrl@index')->name('cryear');
+    Route::get('pcsyear', 'pcsyearCtrl@index')->name('pcsyear');
+    Route::get('revenueyear', 'revenueyearCtrl@index')->name('revenueyear');
+
 }); 
