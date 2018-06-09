@@ -40,4 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('member', 'memberCtrl@index')->name('member');
     Route::get('membertrans/{bulan}', 'memberCtrl@trans')->name('membertrans');
 
+    Route::get('catalog', 'catalogCtrl@index');
+    //Route::post('catalog', 'catalogCtrl@getitemAJAX');
+    Route::post('catalog', 'catalogCtrl@getitem');
+    Route::get('catalog/{id}', 'catalogCtrl@getitemposisi')->name("catalogstore");
+
 }); 
