@@ -45,4 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::post('catalog', 'catalogCtrl@getitem');
     Route::get('catalog/{id}', 'catalogCtrl@getitemposisi')->name("catalogstore");
 
+    Route::get('sales', 'salesCtrl@index');
+
 }); 

@@ -12,15 +12,19 @@
 
 @endsection() @section('content')
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <form action="{{ url('catalog') }}" method="POST">
+                <title class="box-title" style="font-weight:normal;">Filter and Find Product Items</title>
+            </div>
+            <div class="box-body">
+                <form action="{{ url('catalog') }}" method="POST" style="font-weight:normal;">
                     <div class="form-group">
                         <input type="text" class="form-control" name="item" placeholder="Description">
+                        <label for="items" style="font-weight:normal;">Find item base on their descriptions, descriptions can be contains word</label>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary">Find</button>
                 </form>
             </div>
         </div>
