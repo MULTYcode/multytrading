@@ -81,6 +81,9 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#preloaders").fadeOut("slow");
+                $('[data-widget="tree"]').each(function () {
+                    $.fn.tree.call($(this));
+                });
             });
         </script>
 
@@ -115,10 +118,10 @@
         <script src="{{asset('bower_components/fastclick/lib/fastclick.js')}}"></script>
         <!-- AdminLTE App -->
         <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        {{-- <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="{{asset('dist/js/demo.js')}}"></script>
+        <script src="{{asset('dist/js/demo.js')}}"></script> --}}
         <!-- PACE -->
         <script src="{{asset('bower_components/PACE/pace.min.js')}}"></script>          
 </body>

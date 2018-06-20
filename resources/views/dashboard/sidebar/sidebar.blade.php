@@ -16,14 +16,40 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
 
         <ul class="sidebar-menu" data-widget="tree">
-            @foreach($daftarmenu as $menu) @if($menu->sub=='-')
-            <li class="header">{{$menu->main}}</li>
-            @else
-            <li>
-                <a href={{$menu->route}}>
-                    <i class="{{$menu->icon}}"></i> {{$menu->main}}</a>
-            </li>
-            @endif @endforeach
+            @foreach($daftarmenu as $menu) 
+                @if($menu->sub_order > 0)
+                    @break
+                @endif
+                @if($menu->sub == '-')
+                    <li class="header">{{$menu->main}}</li>
+                @else
+                    @if($menu->sub_order <= -1)
+                        <li>
+                            <a href={{$menu->route}}>
+                                <i class="{{$menu->icon}}"></i> {{$menu->main}}</a>
+                        </li>
+                    @else
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>{{$menu->description}}</span>
+                                <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                @foreach($daftarmenu as $submenu)
+                                    @if($menu->main == $submenu->sub)
+                                        <li>
+                                            <a href={{$submenu->route}}>
+                                                <i class="{{$submenu->icon}}"></i> {{$submenu->main}}</a>
+                                        </li>
+                                    @endif
+                                @endforeach                
+                            </ul>
+                        </li>
+                    @endif
+                @endif 
+            @endforeach
         </ul>
 
     </section>

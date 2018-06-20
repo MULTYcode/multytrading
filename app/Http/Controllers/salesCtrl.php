@@ -171,6 +171,24 @@ class salesCtrl extends Controller
             'ukuran' => $ukuran,
             'barChartUkuran' => $barChartUkuran,
         ]);
-
     }
+
+    public function sales()
+    {
+        return view('salesfind');
+    }
+
+    public function salesfindview(Request $kode)
+    {
+        $res = DB::connection('mysql')->select("call wsm_findsaleskode('" . $kode->item . "')");
+        $jmlqty = 0;
+        $jmltotal = 0;
+        foreach ($res as $rows) {
+            $jmlqty += $rows->pcs;
+            $jmltotal += $rows->rupiah;
+        }
+        return view('salesfindview', ['res' => $res, 'tpcs' => $jmlqty, 'ttotal' => $jmltotal]);
+    }
+
 }
+
