@@ -89,7 +89,7 @@ class UserController extends Controller
         }else{
             if($login->activated != 1 || $login->activated == null){
                 return response()->json(['error'=>true,'msg' => 'Silahkan anda klik link verifikasi yang kami kirim ke email anda'], 200);
-            }elseif($login->verification != 1 || $login->verification == null){
+            }elseif($login->activated != 1 || $login->activated == null){
                 return response()->json(['error'=>true,'msg' => 'Maaf, akun anda belum aktif, silahkan menghubungi administrator'], 200);
             }
             if ($hasher->check($password, $login->password)) {
