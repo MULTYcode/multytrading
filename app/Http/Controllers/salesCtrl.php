@@ -190,5 +190,17 @@ class salesCtrl extends Controller
         return view('salesfindview', ['res' => $res, 'tpcs' => $jmlqty, 'ttotal' => $jmltotal]);
     }
 
+    public function salesperiode()
+    {
+        return view('salesperiode');
+    }
+
+    public function salesperiodeview(Request $date)
+    {
+        $res = DB::connection('mysql')->select("call wsm_salesperiode('" . $date->datefrom . "','" . $date->dateto . "')");
+        return view('salesperiodeview', ['res' => $res]);
+    }
+
+
 }
 

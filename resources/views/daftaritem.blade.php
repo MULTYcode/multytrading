@@ -69,33 +69,37 @@
                 <h3 class="box-title">Product Items</h3>
             </div>
             <div class="box-body">
-                <table class="table">
-                    <tr>
-                        <th>BARCODE</th>
-                        <th>DESCRIPTION</th>
-                        <th>BRAND</th>
-                        <th>CLASS</th>
-                        <th>SUBCLASS</th>
-                        <th>SIZE</th>
-                        <th>COLOUR</th>
-                        <th>PRICE</th>
-                        <th>STOCK</th>
-                    </tr>
-                    @foreach($item as $items)
-                    <tr style="font-weight: normal;">
-                        <td>
-                            <a href="{{ route('catalogstore',['kode'=>$items->bkode]) }}">{{ $items->bkode }}</a>
-                        </td>
-                        <td>{{ $items->bnama }}</td>
-                        <td>{{ $items->brand }}</td>
-                        <td>{{ $items->class }}</td>
-                        <td>{{ $items->subclass }}</td>
-                        <td>{{ $items->size }}</td>
-                        <td>{{ $items->warna }}</td>
-                        <td>{{ number_format($items->harga,0) }}</td>
-                        <td>{{ number_format($items->stok,0) }}</td>
-                    </tr>
-                    @endforeach
+                <table id="layout" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>BRAND</th>
+                            <th>CLASS</th>
+                            <th>SUBCLASS</th>
+                            <th>SIZE</th>
+                            <th>COLOUR</th>
+                            <th>PRICE</th>
+                            <th>STOCK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($item as $items)
+                        <tr style="font-weight: normal;">
+                            <td>
+                                <a href="{{ route('catalogstore',['kode'=>$items->bkode]) }}">{{ $items->bkode }}</a>
+                            </td>
+                            <td>{{ $items->bnama }}</td>
+                            <td>{{ $items->brand }}</td>
+                            <td>{{ $items->class }}</td>
+                            <td>{{ $items->subclass }}</td>
+                            <td>{{ $items->size }}</td>
+                            <td>{{ $items->warna }}</td>
+                            <td>{{ number_format($items->harga,0) }}</td>
+                            <td>{{ number_format($items->stok,0) }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -160,4 +164,10 @@
             </div>
         </div>
     </div>
-</div> --}} @endsection()
+</div> --}}
+<script>
+    $(function () {
+        $('#layout').DataTable()
+    })
+</script>
+@endsection()

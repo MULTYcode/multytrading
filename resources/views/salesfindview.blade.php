@@ -9,9 +9,10 @@
     </li>
     <li class="active">Sales</li>
 </ol>
-@endsection() @section('content')
+@endsection() 
+@section('content')
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-12">
         <a href="javascript:history.go(-1)">
             <button class="btn btn-primary">
                 <i class="fa fa-arrow-left"></i> Back</button>
@@ -21,30 +22,50 @@
                 <h3 class="box-title">Sales Items</h3>
             </div>
             <div class="box-body">
-                <table class="table">
-                    <tr>
-                        <th>STORE</th>
-                        <th>DATE</th>
-                        <th>QTY</th>
-                        <th>TOTAL</th>
-                    </tr>
-                    @foreach($res as $rows)
-                    <tr style="font-weight: normal;">
-                        <td>{{ $rows->store }}</td>
-                        <td>{{ $rows->sitgl }}</td>
-                        <td>{{ number_format($rows->pcs,0) }}</td>
-                        <td>{{ number_format($rows->rupiah,0) }}</td>
-                    </tr>
-                    @endforeach
-                    <tr>
-                        <th>TOTAL</th>
-                        <th></th>
-                        <th>{{ number_format($tpcs,0) }}</th>
-                        <th>{{ number_format($ttotal,0) }}</th>
-                    </tr>
+                <table id="layout" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STORE</th>
+                            <th>ITEM</th>
+                            <th>COLOR</th>
+                            <th>SIZE</th>
+                            <th>DATE</th>
+                            <th>QTY</th>
+                            <th>TOTAL</th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        @foreach($res as $rows)
+                        <tr style="font-weight: normal;">
+                            <td>{{ $rows->store }}</td>
+                            <td>{{ $rows->namabarang }}</td>
+                            <td>{{ $rows->warna }}</td>
+                            <td>{{ $rows->ukuran }}</td>
+                            <td>{{ $rows->sitgl }}</td>
+                            <td>{{ number_format($rows->pcs,0) }}</td>
+                            <td>{{ number_format($rows->rupiah,0) }}</td>
+                        </tr>
+                        @endforeach    
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>TOTAL</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>{{ number_format($tpcs,0) }}</th>
+                            <th>{{ number_format($ttotal,0) }}</th>
+                        </tr>    
+                    </tfoot>
                 </table>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+      $('#layout').DataTable()
+    })
+</script>
 @endsection()
