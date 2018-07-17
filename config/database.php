@@ -78,7 +78,7 @@ return [
             'prefix' => '',
         ], */
         
-/*         'tal' => [
+         'tal' => [
             'driver' => 'mysql',
             'host' => env('DB2_HOST'),
             'port' => env('DB2_PORT',3306),
@@ -87,7 +87,7 @@ return [
             'password' => env('DB2_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
-        ], */
+        ], 
 
 /*         'tamo' => [
             'driver' => 'mysql',
