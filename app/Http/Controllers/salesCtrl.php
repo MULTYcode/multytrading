@@ -15,7 +15,7 @@ class salesCtrl extends Controller
     public function index()
     {
         /*=== TOP SOLD ===*/
-        $sold = DB::connection('mysql')->select('call wsm_topsold');
+        $sold = DB::connection('mysql')->select('call w_topsold');
         $soldlabels = [];
         $soldvalues = [];
         foreach ($sold as $key => $rows) {
@@ -53,7 +53,7 @@ class salesCtrl extends Controller
         
                 
         /* TOP REVENUE */
-        $revenue = DB::connection('mysql')->select('call wsm_toprevenue');
+        $revenue = DB::connection('mysql')->select('call w_toprevenue');
         $revenuelabels = [];
         $revenuevalues = [];
         foreach ($revenue as $key => $rows) {
@@ -90,7 +90,7 @@ class salesCtrl extends Controller
             ]);
         
         /*======= TOP WARNA =======*/
-        $warna = DB::connection('mysql')->select('call wsm_topwarna');
+        $warna = DB::connection('mysql')->select('call w_topwarna');
         $warnalabels = [];
         $warnavalues = [];
         foreach ($warna as $key => $rows) {
@@ -127,7 +127,7 @@ class salesCtrl extends Controller
             ]);
                 
         /*======= TOP UKURAN =======*/
-        $ukuran = DB::connection('mysql')->select('call wsm_topukuran');
+        $ukuran = DB::connection('mysql')->select('call w_topukuran');
         $ukuranlabels = [];
         $ukuranvalues = [];
         foreach ($ukuran as $key => $rows) {

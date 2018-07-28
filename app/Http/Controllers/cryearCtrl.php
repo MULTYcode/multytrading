@@ -14,7 +14,7 @@ class cryearCtrl extends Controller
     }
     public function index()
     {
-        $cryear = DB::connection('mysql')->select('call wsm_cryear');
+        $cryear = DB::connection('mysql')->select('call w_cryear');
 
         $cryearlabelsA = [];
         $cryearvaluesA = [];
@@ -24,10 +24,10 @@ class cryearCtrl extends Controller
 
         foreach ($cryear as $key => $rows) {
             if ($cryear[$key]->tahun == date("Y")) {
-                $cryearlabelsA[] = $cryear[$key]->bulan;
+                $cryearlabelsA[] = $cryear[$key]->namabulan;
                 $cryearvaluesA[] = $cryear[$key]->cr;
-            } else {
-                $cryearlabelsB[] = $cryear[$key]->bulan;
+            } elseif ($cryear[$key]->tahun == date("Y") - 1) {
+                $cryearlabelsB[] = $cryear[$key]->namabulan;
                 $cryearvaluesB[] = $cryear[$key]->cr;
             }
         }

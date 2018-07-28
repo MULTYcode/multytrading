@@ -16,12 +16,12 @@ class DashboardwebCtrl extends Controller
     public function index()
     {
         // cr - pcs - rupiah
-        $sls = DB::connection('mysql')->select('call wsm_cr');
+        $sls = DB::connection('mysql')->select('call w_sls_rekap');
         // member
-        $member = DB::connection('mysql')->select('call wsm_jumlahmember');
+        $member = DB::connection('mysql')->select('call w_member');
 
         /*=== TOP AREA ===*/
-        $area = DB::connection('mysql')->select('call wsm_toparea');
+        $area = DB::connection('mysql')->select('call w_target_area');
         $arealabels = [];
         $areavalues = [];
         foreach ($area as $key => $rows) {
@@ -51,11 +51,11 @@ class DashboardwebCtrl extends Controller
             ]);
 
         /* SALES TOP CATEGORI */
-        $category = DB::connection('mysql')->select('call wsm_topcategory');
+        $category = DB::connection('mysql')->select('call w_sls_categori');
         $categorylabels = [];
         $categoryvalues = [];
         foreach ($category as $key => $rows) {
-            $categorylabels[] = $category[$key]->cat;
+            $categorylabels[] = $category[$key]->categori;
             $categoryvalues[] = $category[$key]->total;
         }
 

@@ -49,7 +49,7 @@
                             <h5>{{ $cryears->tahun }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ $cryears->bulan }}</h5>
+                            <h5>{{ $cryears->namabulan }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
                             <h5>{{ number_format($cryears->cr,0) }}</h5>

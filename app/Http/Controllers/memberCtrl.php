@@ -13,13 +13,51 @@ class memberCtrl extends Controller
     }
     public function index()
     {
-        $membermonth = DB::connection('mysql')->select('call wsm_membermonth');
-        $memberstore = DB::connection('mysql')->select('call wsm_memberstore');
+        $membermonth = DB::connection('mysql')->select('call w_membermonth');
+        $memberstore = DB::connection('mysql')->select('call w_memberstore');
         $total = 0;
         foreach ($membermonth as $rows) {
             $total = $total + $rows->jmlmember;
         }
-        return view('member', ['membermonth' => $membermonth, 'memberstore' => $memberstore, 'total' => $total]);
+
+        $arealabels = [];
+        $areavalues = [];
+        foreach ($membermonth as $key => $rows) {
+            $arealabels[] = $membermonth[$key]->namabulan;
+            $areavalues[] = $membermonth[$key]->jmlmember;
+        }
+
+        $chartarea = app()->chartjs
+            ->name('lineChart')
+            ->type('line')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels($arealabels)
+            ->datasets([
+                [
+                    "label" => "Member per month",
+                    'backgroundColor' => 'rgba(0,255,255,0.5)',
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $areavalues
+                ]
+            ])
+            ->options([
+                'responsive' => true,
+                'maintainAspectRatio' => false,
+                'tooltips' => [
+                    'mode' => 'index',
+                    'intersect' => false,
+                ],
+                'hover' => [
+                    'mode' => 'nearest',
+                    'intersect' => true
+                ],
+            ]);
+
+        return view('member', ['membermonth' => $membermonth, 'memberstore' => $memberstore, 'total' => $total, 'chartarea' => $chartarea, '_tahun' => date("Y")]);
     }
     public function trans($bulan)
     {

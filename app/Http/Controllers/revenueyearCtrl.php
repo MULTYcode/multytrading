@@ -13,9 +13,9 @@ class revenueyearCtrl extends Controller
     }
     public function index()
     {
-        $rekaprevenue = DB::connection('mysql')->select('call wsm_rekaprevenue');
-        $revenueyear = DB::connection('mysql')->select('call wsm_revenueyear');
-        $storerank = DB::connection('mysql')->select('call wsm_storerank');
+        $rekaprevenue = DB::connection('mysql')->select('call w_rekaprevenue');
+        $revenueyear = DB::connection('mysql')->select('call w_revenueyear');
+        $storerank = DB::connection('mysql')->select('call w_storerank');
 
         $cagrAwal = 0;
         $cagrAkhir = 0;
@@ -44,10 +44,10 @@ class revenueyearCtrl extends Controller
 
         foreach ($revenueyear as $key => $rows) {
             if ($revenueyear[$key]->tahun == date("Y")) {
-                $revenueyearlabelsA[] = $revenueyear[$key]->bulan;
+                $revenueyearlabelsA[] = $revenueyear[$key]->namabulan;
                 $revenueyearvaluesA[] = $revenueyear[$key]->revenue;
-            } else {
-                $revenueyearlabelsB[] = $revenueyear[$key]->bulan;
+            } elseif($revenueyear[$key]->tahun == date("Y")-1) {
+                $revenueyearlabelsB[] = $revenueyear[$key]->namabulan;
                 $revenueyearvaluesB[] = $revenueyear[$key]->revenue;
             }
         }
@@ -96,7 +96,14 @@ class revenueyearCtrl extends Controller
                 ]
             );
 
-        return view('revenueyear', ['revenueyear' => $revenueyear, 'chartarea' => $chartarea, 'rekaprevenue' => $rekaprevenue, 'storerank' => $storerank, 'cagr' => $cagr]);
+        return view('revenueyear', [
+            'revenueyear' => $revenueyear,
+            'chartarea' => $chartarea,
+            'rekaprevenue' => $rekaprevenue,
+            'storerank' => $storerank,
+            'cagr' => $cagr,
+            '_year' => $storerank[0]->tahun
+        ]);
 
     }
 }

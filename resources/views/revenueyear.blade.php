@@ -16,7 +16,6 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">REVENUE : Current Year vs last Year</h3>
-
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -56,10 +55,10 @@
                             <h5>{{ $revenueyears->tahun }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ $revenueyears->bulan }}</h5>
+                            <h5>{{ $revenueyears->namabulan }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ number_format($revenueyears->revenue,0) }}</h5>
+                            <h5>{{ number_format($revenueyears->pcs,0) }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
                             <h5>{{ number_format($revenueyears->revenue,0) }}</h5>
@@ -106,13 +105,13 @@
     <div class="col-md-6 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Store Ranking</h3>
+                <h3 class="box-title">Store Ranking In {{$_year}}</h3>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                     <tr>
                         <th>RANK</th>
-                        <th>YEAR</th>
+                        <th>STORE</th>
                         <th>QUANTITY</th>
                         <th>REVENUE</th>
                     </tr>

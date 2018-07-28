@@ -14,7 +14,7 @@
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Additional Store Member</h3>
+                <h3 class="box-title">Additional per Store In {{$_tahun}}</h3>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
@@ -22,40 +22,13 @@
                         <th>STORE</th>
                         <th>NEW MEMBER</th>
                     </tr>
-                    @foreach($memberstore as $memberstores)
+                    @foreach($memberstore as $memberstore)
                     <tr>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ $memberstores->store }}</h5>
+                            <h5>{{ $memberstore->store }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ number_format($memberstores->jmlmember,0) }}</h5>
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Additional Member Per Month</h3>
-            </div>
-            <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                    <tr>
-                        <th>MONTH</th>
-                        <th>NEW MEMBER</th>
-                    </tr>
-                    @foreach($membermonth as $membermonths)
-                    <tr>
-                        <td style="padding:0px 0px 0px 10px;">
-                            <a href="{{ route('membertrans',['bulan'=>$membermonths->bulan]) }}">
-                                <h5>{{ $membermonths->bulan }}</h5>
-                            </a>
-                        </td>
-                        <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ number_format($membermonths->jmlmember,0) }}</h5>
+                            <h5>{{ number_format($memberstore->jmlmember,0) }}</h5>
                         </td>
                     </tr>
                     @endforeach
@@ -67,5 +40,44 @@
             </div>
         </div>
     </div>
-</div>
+
+    <div class="col-xs-6">
+        <!-- AREA CHART -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Additional per Month In {{$_tahun}}</h3>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <div style="height:auto;">
+                        {!! $chartarea->render() !!}
+                    </div>
+                </div>
+            </div>
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>MONTH</th>
+                        <th>NEW MEMBER</th>
+                    </tr>
+                    @foreach($membermonth as $membermonth)
+                    <tr>
+                        <td style="padding:0px 0px 0px 10px;">
+                            <a href="{{ route('membertrans',['bulan'=>$membermonth->namabulan]) }}">
+                                <h5>{{ $membermonth->namabulan }}</h5>
+                            </a>
+                        </td>
+                        <td style="padding:0px 0px 0px 10px;">
+                            <h5>{{ number_format($membermonth->jmlmember,0) }}</h5>
+                        </td>
+                    </tr>
+                    @endforeach
+                    <tr>
+                        <th>TOTAL</th>
+                        <th>{{number_format($total,0)}}</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection()

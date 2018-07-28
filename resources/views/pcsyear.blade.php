@@ -49,7 +49,7 @@
                             <h5>{{ $pcsyears->tahun }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ $pcsyears->bulan }}</h5>
+                            <h5>{{ $pcsyears->namabulan }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
                             <h5>{{ number_format($pcsyears->pcs,0) }}</h5>

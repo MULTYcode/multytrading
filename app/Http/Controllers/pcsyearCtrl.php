@@ -13,7 +13,7 @@ class pcsyearCtrl extends Controller
     }
     public function index()
     {
-        $pcsyear = DB::connection('mysql')->select('call wsm_pcsyear');
+        $pcsyear = DB::connection('mysql')->select('call w_pcsyear');
 
         $pcsyearlabelsA = [];
         $pcsyearvaluesA = [];
@@ -23,10 +23,10 @@ class pcsyearCtrl extends Controller
 
         foreach ($pcsyear as $key => $rows) {
             if ($pcsyear[$key]->tahun == date("Y")) {
-                $pcsyearlabelsA[] = $pcsyear[$key]->bulan;
+                $pcsyearlabelsA[] = $pcsyear[$key]->namabulan;
                 $pcsyearvaluesA[] = $pcsyear[$key]->pcs;
-            } else {
-                $pcsyearlabelsB[] = $pcsyear[$key]->bulan;
+            } elseif ($pcsyear[$key]->tahun == date("Y") - 1) {
+                $pcsyearlabelsB[] = $pcsyear[$key]->namabulan;
                 $pcsyearvaluesB[] = $pcsyear[$key]->pcs;
             }
         }

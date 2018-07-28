@@ -181,7 +181,7 @@
                     @foreach($category as $categorys)
                     <tr>
                         <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ $categorys->cat }}</h5>
+                            <h5>{{ $categorys->categori }}</h5>
                         </td>
                         <td style="padding:0px 0px 0px 10px;">
                             <h5>{{ number_format($categorys->total,0) }}</h5>
