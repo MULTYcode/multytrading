@@ -87,16 +87,16 @@
                         @foreach($item as $items)
                         <tr style="font-weight: normal;">
                             <td>
-                                <a href="{{ route('catalogstore',['kode'=>$items->bkode]) }}">{{ $items->bkode }}</a>
+                                <a href="{{ route('catalogstore',['kode'=>$items->kode]) }}">{{ $items->kode }}</a>
                             </td>
-                            <td>{{ $items->bnama }}</td>
+                            <td>{{ $items->nama }}</td>
                             <td>{{ $items->brand }}</td>
                             <td>{{ $items->class }}</td>
                             <td>{{ $items->subclass }}</td>
                             <td>{{ $items->size }}</td>
                             <td>{{ $items->warna }}</td>
-                            <td>{{ number_format($items->harga,0) }}</td>
-                            <td>{{ number_format($items->stok,0) }}</td>
+                            <td>{{ number_format($items->hjual,0) }}</td>
+                            <td>{{ number_format($items->stock,0) }}</td>
                         </tr>
                         @endforeach
                     </tbody>

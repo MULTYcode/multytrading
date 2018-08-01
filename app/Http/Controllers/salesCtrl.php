@@ -195,9 +195,16 @@ class salesCtrl extends Controller
         return view('salesperiode');
     }
 
-    public function salesperiodeview(Request $date)
+    public function salesperiodeview(Request $request)
     {
-        $res = DB::connection('mysql')->select("call wsm_salesperiode('" . $date->datefrom . "','" . $date->dateto . "')");
+        $sqlstr = "select tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual,stock 
+                from w_sls_detail
+                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+        if ($request->item == "") {
+            $res = DB::connection('mysql')->select($sqlstr);
+        } else {
+            $res = DB::connection('mysql')->select($sqlstr . " and nama like CONCAT('%" . $request->item . "%')");
+        }
         return view('salesperiodeview', ['res' => $res]);
     }
 

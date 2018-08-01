@@ -25,8 +25,7 @@
                 <table id="layout" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>YEAR</th>
-                            <th>MONTH</th>
+                            <th>DATE</th>
                             <th>CODE</th>
                             <th>DESCRIPTION</th>
                             <th>ARTICLE</th>
@@ -36,7 +35,6 @@
                             <th>SIZE</th>
                             <th>COLOUR</th>
                             <th>STORE</th>
-                            <th>@COST</th>
                             <th>@PRICE</th>
                             <th>QTTY</th>
                             <th>TOTAL</th>
@@ -46,10 +44,9 @@
                     <tbody>
                          @foreach($res as $rows)
                         <tr style="font-weight: normal;">
-                            <td>{{ $rows->tahun }}</td>
-                            <td>{{ $rows->bulan }}</td>
-                            <td>{{ $rows->bkode }}</td>
-                            <td>{{ $rows->bnama }}</td>
+                            <td>{{ $rows->tanggal }}</td>
+                            <td>{{ $rows->kode }}</td>
+                            <td>{{ $rows->nama }}</td>
                             <td>{{ $rows->artikel }}</td>
                             <td>{{ $rows->brand }}</td>
                             <td>{{ $rows->class }}</td>
@@ -57,11 +54,10 @@
                             <td>{{ $rows->size }}</td>
                             <td>{{ $rows->warna }}</td>
                             <td>{{ $rows->store }}</td>
-                            <td>{{ number_format($rows->hbeli,0) }}</td>
                             <td>{{ number_format($rows->hjual,0) }}</td>
-                            <td>{{ number_format($rows->qty,0) }}</td>
-                            <td>{{ number_format($rows->rupiah,0) }}</td>
-                            <td>{{ number_format($rows->stok,0) }}</td>
+                            <td>{{ number_format($rows->pcs,0) }}</td>
+                            <td>{{ number_format($rows->total_jual,0) }}</td>
+                            <td>{{ number_format($rows->stock,0) }}</td>
                         </tr>
                         @endforeach
                     </tbody>

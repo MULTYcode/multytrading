@@ -34,6 +34,10 @@
                             <input data-date-format="yyyy-mm-dd" type="text" class="form-control pull-right" id="dateto" name="dateto">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="item" placeholder="Description">
+                        <label for="items" style="font-weight:normal;">Find item base on their descriptions, descriptions can be contains word or leave it empty</label>
+                    </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="btn btn-primary">Search</button>
                 </form>

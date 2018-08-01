@@ -24,7 +24,7 @@ Route::get('verify/{email}/{verifytoken}', 'Auth\RegisterController@sendEmailDon
 Route::get('verifyDone', 'Auth\RegisterController@verifyDone')->name('verifyDone');
 
 Route::middleware('auth')->group(function () {
-
+  
     Route::get('dashboard', 'DashboardwebCtrl@index')->name('dashboard');
 
     Route::get('store', 'StoreCtrl@index')->name('store');
