@@ -45,9 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('catalog', 'catalogCtrl@getitem');
     Route::get('catalog/{id}', 'catalogCtrl@getitemposisi')->name("catalogstore");
 
-    /* 
-    SALES
-    */
+    /* SALES */
     Route::get('sales', 'salesCtrl@index');
 
     Route::get('salesfind', 'salesCtrl@sales');
@@ -55,5 +53,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('salesperiode', 'salesCtrl@salesperiode');
     Route::post('salesperiodeview', 'salesCtrl@salesperiodeview');
+
+    /* WAREHOUSE */
+    Route::get('warehouse', 'warehouseCtrl@index');
 
 }); 
