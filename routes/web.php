@@ -56,5 +56,5 @@ Route::middleware('auth')->group(function () {
 
     /* WAREHOUSE */
     Route::get('warehouse', 'warehouseCtrl@index');
-
+    Route::post('mutasiperiodeview', 'warehouseCtrl@mutasiperiodeview');
 }); 

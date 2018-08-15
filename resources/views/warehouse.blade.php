@@ -18,7 +18,7 @@
                 <title class="box-title" style="font-weight:normal;">Search Mutasi By Periode</title>
             </div>
             <div class="box-body">
-                <form action="{{ url('salesperiodeview') }}" method="POST" style="font-weight:normal;">
+                <form action="{{ url('mutasiperiodeview') }}" method="POST" style="font-weight:normal;">
                     <div class="form-group">
                         <label>From Date :</label>
                         <div class="input-group date">
@@ -36,7 +36,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="store" placeholder="Store or Warehouse">
+                        <input type="text" class="form-control" name="storefrom" placeholder="FROM Store or Warehouse">
+                        <label for="items" style="font-weight:normal;">Find mutasi by store name and Warehouse name or leave it empty</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="storeto" placeholder="TO Store or Warehouse">
                         <label for="items" style="font-weight:normal;">Find mutasi by store name and Warehouse name or leave it empty</label>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
