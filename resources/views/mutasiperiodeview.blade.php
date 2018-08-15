@@ -9,8 +9,7 @@
     </li>
     <li class="active">Mutasi</li>
 </ol>
-@endsection() 
-@section('content')
+@endsection() @section('content')
 <div class="row">
     <div class="col-xs-12">
         <a href="javascript:history.go(-1)">
@@ -37,10 +36,10 @@
                             <th>STORE TO</th>
                             <th>VALUE</th>
                             <th>QTTY</th>
-                        </tr>    
+                        </tr>
                     </thead>
                     <tbody>
-                         @foreach($res as $rows)
+                        @foreach($res as $rows)
                         <tr style="font-weight: normal;">
                             <td>{{ $rows->tanggal }}</td>
                             <td>{{ $rows->kode }}</td>
@@ -78,7 +77,7 @@
 </div>
 <script>
     $(function () {
-      $('#layout').DataTable()
+        $('#layout').DataTable()
     })
 </script>
 @endsection()

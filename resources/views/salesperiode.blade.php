@@ -10,6 +10,10 @@
     <li class="active">Sales Periode</li>
 </ol>
 @endsection() @section('content')
+<div class="callout callout-info">
+        <h4>Information!</h4>
+        <i class="fa fa-hand-o-right"></i> Find item base on their descriptions, descriptions can be contains word or leave it empty
+</div>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">

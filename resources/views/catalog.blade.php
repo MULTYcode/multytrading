@@ -11,6 +11,10 @@
 </ol>
 
 @endsection() @section('content')
+<div class="callout callout-info">
+        <h4>Information!</h4>
+        <i class="fa fa-hand-o-right"></i> Find item base on their descriptions, descriptions can be contains word or leave it empty
+</div>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -21,7 +25,6 @@
                 <form action="{{ url('catalog') }}" method="POST" style="font-weight:normal;">
                     <div class="form-group">
                         <input type="text" class="form-control" name="item" placeholder="Description">
-                        <label for="items" style="font-weight:normal;">Find item base on their descriptions, descriptions can be contains word</label>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="btn btn-primary">Find</button>
