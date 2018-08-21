@@ -40,8 +40,12 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="item" placeholder="Description">
-                        <label for="items" style="font-weight:normal;">Find item base on their descriptions, descriptions can be contains word or leave it empty</label>
                     </div>
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="rekap" value="1"> Result as summery
+                        </label>
+                      </div> 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="btn btn-primary">Search</button>
                 </form>
@@ -53,6 +57,11 @@
     $(function () {
         $('#datefrom').datepicker()
         $('#dateto').datepicker()
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass   : 'iradio_flat-green'
     })
 </script>
 @endsection()

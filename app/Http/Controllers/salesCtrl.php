@@ -197,15 +197,29 @@ class salesCtrl extends Controller
 
     public function salesperiodeview(Request $request)
     {
-        $sqlstr = "select tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual,stock 
-                from w_sls_detail
-                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
-        if ($request->item == "") {
-            $res = DB::connection('mysql')->select($sqlstr);
+        if ($request->rekap == 1) {
+            $sqlstr = "select kode,nama,artikel,brand,class,subclass,size,warna,hjual,sum(pcs) as pcs,sum(total_jual) as total_jual,stock 
+            from w_sls_detail
+            where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            if ($request->item == "") {
+                $res = DB::connection('mysql')->select($sqlstr . "group by kode,nama,artikel,brand,class,subclass,size,warna,hjual,stock");
+            } else {
+                $res = DB::connection('mysql')->select($sqlstr . " and nama like CONCAT('%" . $request->item . "%') 
+                group by kode,nama,artikel,brand,class,subclass,size,warna,hjual,stock");
+            }
         } else {
-            $res = DB::connection('mysql')->select($sqlstr . " and nama like CONCAT('%" . $request->item . "%')");
+            $sqlstr = "select tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual,stock 
+            from w_sls_detail
+            where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            if ($request->item == "") {
+                $res = DB::connection('mysql')->select($sqlstr);
+            } else {
+                $res = DB::connection('mysql')->select($sqlstr . " and nama like CONCAT('%" . $request->item . "%')");
+            }
         }
-        return view('salesperiodeview', ['res' => $res]);
+        //return $rekap;
+        //return $res;
+        return view('salesperiodeview', ['res' => $res, 'rekap' => $request->rekap]);
     }
 
 

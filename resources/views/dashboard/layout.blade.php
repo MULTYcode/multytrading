@@ -49,6 +49,8 @@
     <link rel="stylesheet" href="{{asset('plugins/pace/pace.min.css')}}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}} ">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{{asset('plugins/iCheck/all.css')}}">
 
     <!-- jQuery 3 -->
     <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -123,6 +125,9 @@
         <script src="{{asset('bower_components/fastclick/lib/fastclick.js')}}"></script>
         <!-- AdminLTE App -->
         <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+        <!-- iCheck 1.0.1 -->
+        <script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
+
         {{-- <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
         <!-- AdminLTE for demo purposes -->

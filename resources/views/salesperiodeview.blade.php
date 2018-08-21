@@ -1,5 +1,5 @@
 @extends('dashboard.layout') @section('header')
-<h1>Catalog
+<h1>Sales
     <small>Sales Periode</small>
 </h1>
 <ol class="breadcrumb">
@@ -9,8 +9,7 @@
     </li>
     <li class="active">Sales</li>
 </ol>
-@endsection() 
-@section('content')
+@endsection() @section('content')
 <div class="row">
     <div class="col-xs-12">
         <a href="javascript:history.go(-1)">
@@ -21,6 +20,46 @@
             <div class="box-header">
                 <h3 class="box-title">Sales Items</h3>
             </div>
+            @if($rekap == 1)
+            <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">
+                <table id="layout" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>CODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>ARTICLE</th>
+                            <th>BRAND</th>
+                            <th>CLASS</th>
+                            <th>SUBCLASS</th>
+                            <th>SIZE</th>
+                            <th>COLOR</th>
+                            <th>@PRICE</th>
+                            <th>QTTY</th>
+                            <th>TOTAL</th>
+                            <th>STOCK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($res as $rows)
+                        <tr style="font-weight: normal;">
+                            <td>{{ $rows->kode }}</td>
+                            <td>{{ $rows->nama }}</td>
+                            <td>{{ $rows->artikel }}</td>
+                            <td>{{ $rows->brand }}</td>
+                            <td>{{ $rows->class }}</td>
+                            <td>{{ $rows->subclass }}</td>
+                            <td>{{ $rows->size }}</td>
+                            <td>{{ $rows->warna }}</td>
+                            <td>{{ number_format($rows->hjual,0) }}</td>
+                            <td>{{ number_format($rows->pcs,0) }}</td>
+                            <td>{{ number_format($rows->total_jual,0) }}</td>
+                            <td>{{ number_format($rows->stock,0) }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @else
             <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">
                 <table id="layout" class="table table-bordered table-hover">
                     <thead>
@@ -37,12 +76,10 @@
                             <th>STORE</th>
                             <th>@PRICE</th>
                             <th>QTTY</th>
-                            <th>TOTAL</th>
-                            <th>STOCK</th>
-                        </tr>    
+                        </tr>
                     </thead>
                     <tbody>
-                         @foreach($res as $rows)
+                        @foreach($res as $rows)
                         <tr style="font-weight: normal;">
                             <td>{{ $rows->tanggal }}</td>
                             <td>{{ $rows->kode }}</td>
@@ -56,19 +93,18 @@
                             <td>{{ $rows->store }}</td>
                             <td>{{ number_format($rows->hjual,0) }}</td>
                             <td>{{ number_format($rows->pcs,0) }}</td>
-                            <td>{{ number_format($rows->total_jual,0) }}</td>
-                            <td>{{ number_format($rows->stock,0) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            @endif
         </div>
     </div>
 </div>
 <script>
     $(function () {
-      $('#layout').DataTable()
+        $('#layout').DataTable()
     })
 </script>
 @endsection()
