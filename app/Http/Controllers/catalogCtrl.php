@@ -34,7 +34,13 @@ class catalogCtrl extends Controller
         left join myerpplus_tal.m1_size ukuran on ukuran.skode=mst.baukuran
         left join myerpplus_tal.m1_color warna on warna.ckode=mst.bawarna
         where mst.bnama like CONCAT('%','" . $id->item . "','%');");
-        return view('daftaritem', ['item' => $item]);
+
+        $tstock=0;
+        foreach($item as $rows){
+            $tstock += $rows->stock;
+        }
+
+        return view('daftaritem', ['item' => $item, 'tstock'=>$tstock]);
         //return response()->json(array('item' => $id->item), 200);
     }
 

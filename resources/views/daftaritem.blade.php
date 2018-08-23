@@ -100,6 +100,18 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <th>TOTAL</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <td>{{ number_format($tstock,0) }}</td>
+                        </th>
+                    </tfoot>
                 </table>
             </div>
         </div>
