@@ -54,6 +54,15 @@ Route::middleware('auth')->group(function () {
     Route::get('salesperiode', 'salesCtrl@salesperiode');
     Route::post('salesperiodeview', 'salesCtrl@salesperiodeview');
 
+    Route::get('salesbybrand', 'salesCtrl@salesbybrand');
+    Route::post('salesbybrandview', 'salesCtrl@salesbybrandview');
+    Route::get('salesbybrandview/{store}/{datefrom}/{dateto}', 'salesCtrl@getstorebrand')->name('getstorebrand');
+    Route::get('salesbybrandview/{store}/{brand}/{datefrom}/{dateto}', 'salesCtrl@getsalesitems')->name('getsalesitems');
+
+    Route::get('salesbystore', 'salesCtrl@salesbystore');
+    Route::post('salesbystoreview', 'salesCtrl@salesbystoreview');
+    Route::get('salesbystoreview/{brand}/{datefrom}/{dateto}', 'salesCtrl@getstore')->name('getstore');
+
     /* WAREHOUSE */
     Route::get('warehouse', 'warehouseCtrl@index');
     Route::post('mutasiperiodeview', 'warehouseCtrl@mutasiperiodeview');

@@ -31,14 +31,14 @@
                     @else
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>{{$menu->description}}</span>
+                                <i class="{{$menu->icon}}"></i> <span>{{$menu->main}}</span>
                                 <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
                                 @foreach($daftarmenu as $submenu)
-                                    @if($menu->main == $submenu->sub)
+                                    @if($menu->main == $submenu->sub and $submenu->sub_order !== 0)
                                         <li>
                                             <a href={{$submenu->route}}>
                                                 <i class="{{$submenu->icon}}"></i> {{$submenu->main}}</a>

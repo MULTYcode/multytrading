@@ -18,7 +18,7 @@
         </a>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Sales Items</h3>
+                <h3 class="box-title">SALES ITEMS {{$store}} FROM {{$datefrom}} TO {{$dateto}}</h3>
             </div>
             @if($rekap == 1)
             <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">
@@ -36,7 +36,7 @@
                             <th>@PRICE</th>
                             <th>QTTY</th>
                             <th>TOTAL</th>
-                            <th>STOCK</th>
+                            <th>ACTUAL STOCK</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +57,20 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <th>TOTAL</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{number_format($tpcs,0)}}</th>
+                        <th>{{number_format($tjual,0)}}</th>
+                        <th>{{number_format($tstock,0)}}</th>
+                    </tfoot>
                 </table>
             </div>
             @else
@@ -96,6 +110,20 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <th>TOTAL</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>{{number_format($tpcs,0)}}</th>
+                    </tfoot>
                 </table>
             </div>
             @endif
