@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class DashboardwebCtrl extends Controller
 {
@@ -16,12 +17,28 @@ class DashboardwebCtrl extends Controller
 
     public function index()
     {
-        // cr - pcs - rupiah
-        $sls = DB::connection('mysql')->select('call w_sls_rekap');
-        // member
-        $member = DB::connection('mysql')->select('call w_member');
+        $route = Route::currentRouteName();
+        $akses = DB::connection('mysql')->select("select REPLACE(dt_routes.route,'/','') as route from dt_routes
+        left join dt_auth on dt_auth.route_id = dt_routes.id
+        where dt_auth.user_id = " . Auth::user()->id . " and REPLACE(dt_routes.route,'/','') = '" . $route . "'");
+        $sama = "";
+        foreach ($akses as $rowsakses) {
+            if ($rowsakses->route == $route) {
+                return $this->dashboard();
+                break;
+            }
+        }
+        return view('noaccess');
+    }
 
-        /*=== TOP AREA ===*/
+    private function dashboard()
+    {
+                // cr - pcs - rupiah
+        $sls = DB::connection('mysql')->select('call w_sls_rekap');
+                // member
+        $member = DB::connection('mysql')->select('call w_member');
+        
+                /*=== TOP AREA ===*/
         $area = DB::connection('mysql')->select('call w_target_area');
         $arealabels = [];
         $areavalues = [];
@@ -50,8 +67,8 @@ class DashboardwebCtrl extends Controller
                 'responsive' => true,
                 'maintainAspectRatio' => false,
             ]);
-
-        /* SALES TOP CATEGORI */
+        
+                /* SALES TOP CATEGORI */
         $category = DB::connection('mysql')->select('call w_sls_categori');
         $categorylabels = [];
         $categoryvalues = [];
@@ -97,7 +114,6 @@ class DashboardwebCtrl extends Controller
             'category' => $category,
             'chartcategory' => $chartcategory,
         ]);
-
     }
 
 }

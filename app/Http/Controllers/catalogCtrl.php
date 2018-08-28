@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class catalogCtrl extends Controller
 {
@@ -14,7 +16,18 @@ class catalogCtrl extends Controller
 
     public function index()
     {
-        return view('catalog');
+        $route = Route::currentRouteName();
+        $akses = DB::connection('mysql')->select("select REPLACE(dt_routes.route,'/','') as route from dt_routes
+        left join dt_auth on dt_auth.route_id = dt_routes.id
+        where dt_auth.user_id = " . Auth::user()->id . " and REPLACE(dt_routes.route,'/','') = '" . $route . "'");
+        $sama = "";
+        foreach ($akses as $rowsakses) {
+            if ($rowsakses->route == $route) {
+                return view('catalog');
+                break;
+            }
+        }
+        return view('noaccess');
     }
 
     // public function getitemAJAX(Request $id)
@@ -35,12 +48,12 @@ class catalogCtrl extends Controller
         left join myerpplus_tal.m1_color warna on warna.ckode=mst.bawarna
         where mst.bnama like CONCAT('%','" . $id->item . "','%');");
 
-        $tstock=0;
-        foreach($item as $rows){
+        $tstock = 0;
+        foreach ($item as $rows) {
             $tstock += $rows->stock;
         }
 
-        return view('daftaritem', ['item' => $item, 'tstock'=>$tstock]);
+        return view('daftaritem', ['item' => $item, 'tstock' => $tstock]);
         //return response()->json(array('item' => $id->item), 200);
     }
 

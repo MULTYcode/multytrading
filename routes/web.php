@@ -40,13 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::get('member', 'memberCtrl@index')->name('member');
     Route::get('membertrans/{bulan}', 'memberCtrl@trans')->name('membertrans');
 
-    Route::get('catalog', 'catalogCtrl@index');
+    Route::get('catalog', 'catalogCtrl@index')->name('catalog');
     //Route::post('catalog', 'catalogCtrl@getitemAJAX');
     Route::post('catalog', 'catalogCtrl@getitem');
     Route::get('catalog/{id}', 'catalogCtrl@getitemposisi')->name("catalogstore");
 
     /* SALES */
-    Route::get('sales', 'salesCtrl@index');
+    Route::get('sales', 'salesCtrl@index')->name('sales');
 
     Route::get('salesfind', 'salesCtrl@sales');
     Route::post('salesfindview', 'salesCtrl@salesfindview');
@@ -64,6 +64,6 @@ Route::middleware('auth')->group(function () {
     Route::get('salesbystoreview/{brand}/{datefrom}/{dateto}', 'salesCtrl@getstore')->name('getstore');
 
     /* WAREHOUSE */
-    Route::get('warehouse', 'warehouseCtrl@index');
+    Route::get('warehouse', 'warehouseCtrl@index')->name('warehouse');
     Route::post('mutasiperiodeview', 'warehouseCtrl@mutasiperiodeview');
 }); 

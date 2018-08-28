@@ -12,9 +12,10 @@
 
 @endsection() @section('content')
 <div class="callout callout-info">
-        <h4>Information!</h4>
-        <i class="fa fa-hand-o-right"></i> You have to select date before search <br>
-        <i class="fa fa-hand-o-right"></i> You can find mutasi by store name and warehouse name or leave it empty
+    <h4>Information!</h4>
+    <i class="fa fa-hand-o-right"></i> You have to select date before search
+    <br>
+    <i class="fa fa-hand-o-right"></i> You can find mutasi by store name and warehouse name or leave it empty
 </div>
 <div class="row">
     <div class="col-xs-12">
@@ -45,6 +46,11 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="storeto" placeholder="TO Store or Warehouse">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="rekap" value="1"> Result as summery
+                        </label>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="btn btn-primary">Search</button>

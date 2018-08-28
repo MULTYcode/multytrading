@@ -11,8 +11,8 @@
 </ol>
 @endsection() @section('content')
 <div class="callout callout-info">
-        <h4>Information!</h4>
-        <i class="fa fa-hand-o-right"></i> Find item base on their descriptions, descriptions can be contains word or leave it empty
+    <h4>Information!</h4>
+    <i class="fa fa-hand-o-right"></i> Find item base on their descriptions, descriptions can be contains word or leave it empty
 </div>
 <div class="row">
     <div class="col-xs-12">
@@ -43,9 +43,9 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                          <input type="checkbox" name="rekap" value="1"> Result as summery
+                            <input type="checkbox" name="rekap" value="1"> Result as summery
                         </label>
-                      </div> 
+                    </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="btn btn-primary">Search</button>
                 </form>
@@ -61,7 +61,7 @@
     //Flat red color scheme for iCheck
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
         checkboxClass: 'icheckbox_flat-green',
-        radioClass   : 'iradio_flat-green'
+        radioClass: 'iradio_flat-green'
     })
 </script>
 @endsection()
