@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class salesCtrl extends Controller
 {
@@ -14,7 +16,23 @@ class salesCtrl extends Controller
 
     public function index()
     {
-        /*=== TOP SOLD ===*/
+        $route = Route::currentRouteName();
+        $akses = DB::connection('mysql')->select("select REPLACE(dt_routes.route,'/','') as route from dt_routes
+        left join dt_auth on dt_auth.route_id = dt_routes.id
+        where dt_auth.user_id = " . Auth::user()->id . " and REPLACE(dt_routes.route,'/','') = '" . $route . "'");
+        $sama = "";
+        foreach ($akses as $rowsakses) {
+            if ($rowsakses->route == $route) {
+                return $this->onload();
+                break;
+            }
+        }
+        return view('noaccess');
+    }
+
+    private function onload()
+    {
+                /*=== TOP SOLD ===*/
         $sold = DB::connection('mysql')->select('call w_topsold');
         $soldlabels = [];
         $soldvalues = [];
@@ -50,9 +68,9 @@ class salesCtrl extends Controller
                 'responsive' => true,
                 'maintainAspectRatio' => false,
             ]);
-        
                 
-        /* TOP REVENUE */
+                        
+                /* TOP REVENUE */
         $revenue = DB::connection('mysql')->select('call w_toprevenue');
         $revenuelabels = [];
         $revenuevalues = [];
@@ -88,8 +106,8 @@ class salesCtrl extends Controller
                 'responsive' => true,
                 'maintainAspectRatio' => false,
             ]);
-        
-        /*======= TOP WARNA =======*/
+                
+                /*======= TOP WARNA =======*/
         $warna = DB::connection('mysql')->select('call w_topwarna');
         $warnalabels = [];
         $warnavalues = [];
@@ -125,8 +143,8 @@ class salesCtrl extends Controller
                 'responsive' => true,
                 'maintainAspectRatio' => false,
             ]);
-                
-        /*======= TOP UKURAN =======*/
+                        
+                /*======= TOP UKURAN =======*/
         $ukuran = DB::connection('mysql')->select('call w_topukuran');
         $ukuranlabels = [];
         $ukuranvalues = [];
@@ -383,6 +401,60 @@ class salesCtrl extends Controller
             'datefrom' => $datefrom,
             'dateto' => $dateto
         ]);
+    }
+
+    public function salesbyclass()
+    {
+        return view('salesbyclass');
+    }
+
+    public function getsalesbyclass(Request $request)
+    {
+        if ($request->rekap == 1) {
+            if ($request->class == "") {
+                $sqlstr = "select class,sum(pcs) as pcs,sum(total_jual) as total_jual,sum(stock) as stock 
+                from w_sls_detail
+                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+                $res = DB::connection('mysql')->select($sqlstr . "group by class");
+            } else {
+                $sqlstr = "select class,sum(pcs) as pcs,sum(total_jual) as total_jual,sum(stock) as stock 
+                from w_sls_detail
+                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+                $res = DB::connection('mysql')->select($sqlstr . " and class like CONCAT('%" . $request->class . "%') 
+                group by class");
+            }
+        } else {
+            $sqlstr = "select tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual,sum(stock) as stock 
+            from w_sls_detail
+            where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            if ($request->class == "") {
+                $res = DB::connection('mysql')->select($sqlstr . " group by tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual");
+            } else {
+                $res = DB::connection('mysql')->select($sqlstr . " and class like CONCAT('%" . $request->class . "%') 
+                group by tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual");
+            }
+        }
+
+        $tpcs = 0;
+        $tjual = 0;
+        $tstock = 0;
+        foreach ($res as $rows) {
+            $tpcs += $rows->pcs;
+            $tjual += $rows->total_jual;
+            $tstock += $rows->stock;
+        }
+
+        return view('salesbyclassview', [
+            'tjual' => $tjual,
+            'tpcs' => $tpcs,
+            'tstock' => $tstock,
+            'res' => $res,
+            'rekap' => $request->rekap,
+            'class' => $request->class,
+            'datefrom' => $request->datefrom,
+            'dateto' => $request->dateto
+        ]);
+
     }
 
 }

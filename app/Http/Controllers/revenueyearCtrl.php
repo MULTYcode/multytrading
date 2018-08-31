@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class revenueyearCtrl extends Controller
 {
@@ -12,6 +14,22 @@ class revenueyearCtrl extends Controller
         $this->middleware('auth');
     }
     public function index()
+    {
+        $route = Route::currentRouteName();
+        $akses = DB::connection('mysql')->select("select REPLACE(dt_routes.route,'/','') as route from dt_routes
+        left join dt_auth on dt_auth.route_id = dt_routes.id
+        where dt_auth.user_id = " . Auth::user()->id . " and REPLACE(dt_routes.route,'/','') = '" . $route . "'");
+        $sama = "";
+        foreach ($akses as $rowsakses) {
+            if ($rowsakses->route == $route) {
+                return $this->onload();
+                break;
+            }
+        }
+        return view('noaccess');
+    }
+
+    private function onload()
     {
         $rekaprevenue = DB::connection('mysql')->select('call w_rekaprevenue');
         $revenueyear = DB::connection('mysql')->select('call w_revenueyear');
@@ -46,7 +64,7 @@ class revenueyearCtrl extends Controller
             if ($revenueyear[$key]->tahun == date("Y")) {
                 $revenueyearlabelsA[] = $revenueyear[$key]->namabulan;
                 $revenueyearvaluesA[] = $revenueyear[$key]->revenue;
-            } elseif($revenueyear[$key]->tahun == date("Y")-1) {
+            } elseif ($revenueyear[$key]->tahun == date("Y") - 1) {
                 $revenueyearlabelsB[] = $revenueyear[$key]->namabulan;
                 $revenueyearvaluesB[] = $revenueyear[$key]->revenue;
             }
