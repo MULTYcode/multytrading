@@ -19,6 +19,7 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
+//Route::get('register', 'Auth\RegisterController@create')->name('register');
 Route::get('verifyEmailFirst', 'Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');
 Route::get('verify/{email}/{verifytoken}', 'Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
 Route::get('verifyDone', 'Auth\RegisterController@verifyDone')->name('verifyDone');
