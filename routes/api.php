@@ -30,8 +30,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Route::get('/register', 'API\Auth\RegisterController@register')->name('register');
 
-Route::post('/register', 'UserController@register')->name('registermobile');
-Route::post('/login', 'UserController@login')->name('loginmobile');
+Route::post('/register', 'UserController@register')->name('register');
+Route::post('/login', 'UserController@login')->name('login');
 
 Route::middleware('auth:api')->group(function(){
     Route::get('/getuser', 'UserController@getuser')->name('getuser');
