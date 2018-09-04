@@ -457,5 +457,92 @@ class salesCtrl extends Controller
 
     }
 
+    public function salesbycategory()
+    {
+        $category = DB::connection('mysql')->select('call w_sls_categori');
+        $categorylabels = [];
+        $categoryvalues = [];
+        $total = 0;
+        foreach ($category as $key => $rows) {
+            $total += $rows->total;
+            $categorylabels[] = $category[$key]->categori;
+            $categoryvalues[] = $category[$key]->total;
+        }
+
+        $chartcategory = app()->chartjs
+            ->name('barChartCategory')
+            ->type('horizontalBar')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels($categorylabels)
+            ->datasets([
+                [
+                    "label" => "Top 10 categorys",
+                    'backgroundColor' => [
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                        'rgba(0,128,0, 0.5)',
+                    ],
+                    'data' => $categoryvalues
+                ]
+            ])
+            ->options([
+                'responsive' => true,
+                'maintainAspectRatio' => false,
+            ]);
+
+        return view('salesbycategory', [
+            'total' => $total,
+            'category' => $category,
+            'chartcategory' => $chartcategory,
+        ]);
+    }
+
+    public function  salesachievement()
+    {
+        $area = DB::connection('mysql')->select('call w_target_area');
+        $arealabels = [];
+        $areavalues = [];
+        foreach ($area as $key => $rows) {
+            $arealabels[] = $area[$key]->area;
+            $areavalues[] = $area[$key]->rupiah;
+        }
+
+        $chartarea = app()->chartjs
+            ->name('pieChartArea')
+            ->type('pie')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels($arealabels)
+            ->datasets([
+                [
+                    "label" => "Sales By Area",
+                    'backgroundColor' => [
+                        'rgba(0,0,255,0.5)',
+                        'rgba(255,0,0,0.5)',
+                        'rgba(0,255,255,0.5)',
+                    ],
+                    'data' => $areavalues
+                ]
+            ])
+            ->options([
+                'responsive' => true,
+                'maintainAspectRatio' => false,
+            ]);
+
+        return view(
+            'salesarchivment',
+            [
+                'area' => $area,
+                'chartarea' => $chartarea,
+            ]
+        );
+    }
+
 }
 

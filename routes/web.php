@@ -67,6 +67,10 @@ Route::middleware('auth')->group(function () {
     Route::get('salesbyclass', 'salesCtrl@salesbyclass');
     Route::post('salesbyclassview', 'salesCtrl@getsalesbyclass');
 
+    Route::get('salesbycategory', 'salesCtrl@salesbycategory');
+
+    Route::get('salesachievement', 'salesCtrl@salesachievement');
+
     /* WAREHOUSE */
     Route::get('warehouse', 'warehouseCtrl@index')->name('warehouse');
     Route::post('mutasiperiodeview', 'warehouseCtrl@mutasiperiodeview');

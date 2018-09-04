@@ -174,20 +174,28 @@
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
-                    <tr>
-                        <th>CATEGORY</th>
-                        <th>REVENUE</th>
-                    </tr>
-                    @foreach($category as $categorys)
-                    <tr>
-                        <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ $categorys->categori }}</h5>
-                        </td>
-                        <td style="padding:0px 0px 0px 10px;">
-                            <h5>{{ number_format($categorys->total,0) }}</h5>
-                        </td>
-                    </tr>
-                    @endforeach
+                    <thead>
+                        <tr>
+                            <th>CATEGORY</th>
+                            <th>REVENUE</th>
+                        </tr>            
+                    </thead>
+                    <tbody>
+                        @foreach($category as $categorys)
+                        <tr>
+                            <td style="padding:0px 0px 0px 10px;">
+                                <h5>{{ $categorys->categori }}</h5>
+                            </td>
+                            <td style="padding:0px 0px 0px 10px;">
+                                <h5>{{ number_format($categorys->total,0) }}</h5>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <th>TOTAL</th>
+                        <th>{{ number_format($total,0) }}</th>
+                    </tfoot>
                 </table>
             </div>
         </div>
