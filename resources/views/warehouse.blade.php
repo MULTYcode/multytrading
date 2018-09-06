@@ -47,6 +47,14 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="storeto" placeholder="TO Store or Warehouse">
                     </div>
+                    <div class="form-group">
+                            <input type="text" class="form-control" name="item" placeholder="Description">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="tgl" value="1"> Use date range
+                        </label>
+                    </div>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="rekap" value="1"> Result as summery

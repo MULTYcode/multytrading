@@ -22,6 +22,52 @@
             </div>
             <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">
                 <table id="layout" class="table table-bordered table-hover">
+                    @if($rekap == 1)
+                    <thead>
+                        <tr>
+                            <th>CODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>BRAND</th>
+                            <th>CLASS</th>
+                            <th>COLOUR</th>
+                            <th>SIZE</th>
+                            <th>STORE FROM</th>
+                            <th>STORE TO</th>
+                            <th>VALUE</th>
+                            <th>QTTY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($data as $rows)
+                        <tr style="font-weight: normal;">
+                            <td>{{ $rows->kode }}</td>
+                            <td>{{ $rows->nama }}</td>
+                            <td>{{ $rows->brand }}</td>
+                            <td>{{ $rows->class }}</td>
+                            <td>{{ $rows->warna }}</td>
+                            <td>{{ $rows->ukuran }}</td>
+                            <td>{{ $rows->asal }}</td>
+                            <td>{{ $rows->tujuan }}</td>
+                            <td>{{ number_format($rows->tjual,0) }}</td>
+                            <td>{{ number_format($rows->tqty,0) }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>TOTAL</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>{{number_format($total,0)}}</th>
+                            <th>{{number_format($totalpcs,0)}}</th>
+                        </tr>        
+                    </tfoot>
+                    @else
                     <thead>
                         <tr>
                             <th>DATE</th>
@@ -39,7 +85,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($res as $rows)
+                        @foreach($data as $rows)
                         <tr style="font-weight: normal;">
                             <td>{{ $rows->tanggal }}</td>
                             <td>{{ $rows->kode }}</td>
@@ -70,6 +116,7 @@
                         <th>{{number_format($total,0)}}</th>
                         <th>{{number_format($totalpcs,0)}}</th>
                     </tr>
+                    @endif
                 </table>
             </div>
         </div>

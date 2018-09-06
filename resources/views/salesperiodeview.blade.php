@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
                         @foreach($res as $rows)
-                        <tr style="font-weight: normal;">
+                        <tr style="font-weight: normal;">   
                             <td>{{ $rows->kode }}</td>
                             <td>{{ $rows->nama }}</td>
                             <td>{{ $rows->artikel }}</td>

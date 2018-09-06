@@ -43,6 +43,11 @@
                     </div>
                     <div class="checkbox">
                         <label>
+                            <input type="checkbox" name="tgl" value="1"> Use date range
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
                             <input type="checkbox" name="rekap" value="1"> Result as summery
                         </label>
                     </div>

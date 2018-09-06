@@ -49,8 +49,8 @@ Route::middleware('auth')->group(function () {
     /* SALES */
     Route::get('sales', 'salesCtrl@index')->name('sales');
 
-    Route::get('salesfind', 'salesCtrl@sales');
-    Route::post('salesfindview', 'salesCtrl@salesfindview');
+    //Route::get('salesfind', 'salesCtrl@sales');
+    //Route::post('salesfindview', 'salesCtrl@salesfindview');
 
     Route::get('salesperiode', 'salesCtrl@salesperiode');
     Route::post('salesperiodeview', 'salesCtrl@salesperiodeview');

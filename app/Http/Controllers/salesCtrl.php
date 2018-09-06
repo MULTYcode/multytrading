@@ -216,19 +216,30 @@ class salesCtrl extends Controller
     public function salesperiodeview(Request $request)
     {
         if ($request->rekap == 1) {
-            $sqlstr = "select kode,nama,artikel,brand,class,subclass,size,warna,hjual,sum(pcs) as pcs,sum(total_jual) as total_jual,stock 
-            from w_sls_detail
-            where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            if ($request->tgl == 1) {
+                $sqlstr = "select kode,nama,artikel,brand,class,subclass,size,warna,hjual,sum(pcs) as pcs,sum(total_jual) as total_jual,stock 
+                from w_sls_detail
+                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date) ";
+            } else {
+                $sqlstr = "select kode,nama,artikel,brand,class,subclass,size,warna,hjual,sum(pcs) as pcs,sum(total_jual) as total_jual,stock 
+                from w_sls_detail where tanggal is not null ";
+            }
             if ($request->item == "") {
-                $res = DB::connection('mysql')->select($sqlstr . "group by kode,nama,artikel,brand,class,subclass,size,warna,hjual,stock");
+                $res = DB::connection('mysql')->select($sqlstr . " group by kode,nama,artikel,brand,class,subclass,size,warna,hjual,stock");
             } else {
                 $res = DB::connection('mysql')->select($sqlstr . " and nama like CONCAT('%" . $request->item . "%') 
                 group by kode,nama,artikel,brand,class,subclass,size,warna,hjual,stock");
             }
         } else {
-            $sqlstr = "select tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual,stock 
-            from w_sls_detail
-            where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            if ($request->tgl == 1) {
+                $sqlstr = "select tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual,stock 
+                from w_sls_detail
+                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            } else {
+                $sqlstr = "select tanggal,kode,nama,artikel,brand,class,subclass,size,warna,store,hjual,pcs,total_jual,stock 
+                from w_sls_detail
+                where tanggal is not null";
+            }
             if ($request->item == "") {
                 $res = DB::connection('mysql')->select($sqlstr);
             } else {
@@ -253,7 +264,8 @@ class salesCtrl extends Controller
             'store' => 'ALL',
             'datefrom' => $request->datefrom,
             'dateto' => $request->dateto,
-            'rekap' => $request->rekap
+            'rekap' => $request->rekap,
+            'tgl' => $request->tgl,
         ]);
     }
 
@@ -504,7 +516,7 @@ class salesCtrl extends Controller
         ]);
     }
 
-    public function  salesachievement()
+    public function salesachievement()
     {
         $area = DB::connection('mysql')->select('call w_target_area');
         $arealabels = [];
