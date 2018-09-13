@@ -105,4 +105,8 @@ class warehouseCtrl extends Controller
         return view('mutasiperiodeview', ['data' => $data, 'total' => $total, 'totalpcs' => $totalpcs, 'rekap' => $request->rekap]);
     }
 
+    public function mutasistore(){
+        return view('mutasistore');
+    }
+
 }
