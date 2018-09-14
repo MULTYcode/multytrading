@@ -75,5 +75,9 @@ Route::middleware('auth')->group(function () {
     Route::get('warehouse', 'warehouseCtrl@index')->name('warehouse');
     Route::post('mutasiperiodeview', 'warehouseCtrl@mutasiperiodeview');
     Route::get('mutasistore', 'warehouseCtrl@mutasistore')->name('mutasistore');
-    Route::get('mutasistoreview', 'warehouseCtrl@mutasistoreview')->name('mutasistoreview');
+    Route::post('mutasistoreview', 'warehouseCtrl@mutasistoreview')->name('mutasistoreview');
+    Route::get('mutasibrand', 'warehouseCtrl@mutasibrand')->name('mutasibrand');
+    Route::post('mutasibrandview', 'warehouseCtrl@mutasibrandview')->name('mutasibrandview');
+    Route::get('mutasiclass', 'warehouseCtrl@mutasiclass')->name('mutasiclass');
+    Route::post('mutasiclassview', 'warehouseCtrl@mutasiclassview')->name('mutasiclassview');
 }); 

@@ -7,21 +7,21 @@
         <a href="{{route('dashboard')}}">
             <i class="fa fa-dashboard"></i> Home</a>
     </li>
-    <li class="active">Mutasi Store</li>
+    <li class="active">Mutasi Classify</li>
 </ol>
 @endsection() @section('content')
 <div class="callout callout-info">
     <h4>Information!</h4>
-    <i class="fa fa-hand-o-right"></i> Summery mutasi by store
+    <i class="fa fa-hand-o-right"></i> Summery mutasi by classify
 </div>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <title class="box-title" style="font-weight:normal;">Summery Mutasi By Store By Periode</title>
+                <title class="box-title" style="font-weight:normal;">Summery Mutasi By Classify By Periode</title>
             </div>
             <div class="box-body">
-                <form action="{{ url('mutasistoreview') }}" method="POST" style="font-weight:normal;">
+                <form action="{{ url('mutasiclassview') }}" method="POST" style="font-weight:normal;">
                     <div class="form-group">
                         <label>From Date :</label>
                         <div class="input-group date">

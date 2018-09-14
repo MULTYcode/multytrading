@@ -110,15 +110,65 @@ class warehouseCtrl extends Controller
         return view('mutasistore');
     }
 
-    public function mutasistoreview()
+    public function mutasistoreview(Request $request)
     {
-        if ($request->rekap == 1) {
-            if ($request->tgl == 1) {
-                $strsql="select asal, sum(totalkirim) tpcs, sum(totaljual) tjual
-                from w_mutasi where tanggal CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)
-                group by asal";
-            }
+        $res = DB::connection('mysql')->select("select asal, sum(totalkirim) tpcs, sum(totaljual) tjual
+                                                from w_mutasi where 
+                                                tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date) 
+                                                group by asal");
+
+        $totpcs = 0;
+        $totvalue = 0;
+        foreach ($res as $restotal) {
+            $totpcs = $totpcs + $restotal->tpcs;
+            $totvalue = $totvalue + $restotal->tjual;
         }
+
+        return view('mutasistoreview', ['res' => $res, 'totpcs' => $totpcs, 'totvalue' => $totvalue, 'datefrom' => $request->datefrom, 'dateto' => $request->dateto]);
+    }
+
+    public function mutasibrand()
+    {
+        return view('mutasibrand');
+    }
+
+    public function mutasibrandview(Request $request)
+    {
+        $res = DB::connection('mysql')->select("select brand, sum(totalkirim) tpcs, sum(totaljual) tjual
+                                                from w_mutasi where 
+                                                tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date) 
+                                                group by brand");
+
+        $totpcs = 0;
+        $totvalue = 0;
+        foreach ($res as $restotal) {
+            $totpcs = $totpcs + $restotal->tpcs;
+            $totvalue = $totvalue + $restotal->tjual;
+        }
+
+        return view('mutasibrandview', ['res' => $res, 'totpcs' => $totpcs, 'totvalue' => $totvalue, 'datefrom' => $request->datefrom, 'dateto' => $request->dateto]);
+    }
+
+    public function mutasiclass()
+    {
+        return view('mutasiclass');
+    }
+
+    public function mutasiclassview(Request $request)
+    {
+        $res = DB::connection('mysql')->select("select class, sum(totalkirim) tpcs, sum(totaljual) tjual
+                                                from w_mutasi where 
+                                                tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date) 
+                                                group by class");
+
+        $totpcs = 0;
+        $totvalue = 0;
+        foreach ($res as $restotal) {
+            $totpcs = $totpcs + $restotal->tpcs;
+            $totvalue = $totvalue + $restotal->tjual;
+        }
+
+        return view('mutasiclassview', ['res' => $res, 'totpcs' => $totpcs, 'totvalue' => $totvalue, 'datefrom' => $request->datefrom, 'dateto' => $request->dateto]);
     }
 
 }
