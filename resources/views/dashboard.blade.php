@@ -94,7 +94,7 @@
 
     {{-- GRAFIK & TABLE --}}
 
-    <div class="col-xs-6">
+    <div class="col-lg-6 col-xs-12">
         <!-- AREA CHART -->
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -149,7 +149,7 @@
         </div>
     </div>
 
-    <div class="col-xs-6">
+    <div class="col-lg-6 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Sales By Category</h3>

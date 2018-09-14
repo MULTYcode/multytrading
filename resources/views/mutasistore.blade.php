@@ -21,7 +21,7 @@
                 <title class="box-title" style="font-weight:normal;">Search Mutasi To Store By Periode</title>
             </div>
             <div class="box-body">
-                <form action="{{ url('salesperiodeview') }}" method="POST" style="font-weight:normal;">
+                <form action="{{ url('mutasistoreview') }}" method="POST" style="font-weight:normal;">
                     <div class="form-group">
                         <label>From Date :</label>
                         <div class="input-group date">

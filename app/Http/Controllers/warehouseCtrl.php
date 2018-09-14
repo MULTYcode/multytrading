@@ -29,12 +29,12 @@ class warehouseCtrl extends Controller
     {
         if ($request->rekap == 1) {
 
-            if($request->tgl == 1){
+            if ($request->tgl == 1) {
                 $sqlstr = "select kode,nama,brand,class,warna,ukuran,asal,tujuan,sum(totaljual) as tjual,sum(totalkirim) as tqty from w_mutasi
-                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";    
-            }else{
+                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            } else {
                 $sqlstr = "select kode,nama,brand,class,warna,ukuran,asal,tujuan,sum(totaljual) as tjual,sum(totalkirim) as tqty from w_mutasi
-                where tanggal is not null";    
+                where tanggal is not null";
             }
 
             if ($request->storefrom == "" and $request->storeto == "") {
@@ -62,11 +62,11 @@ class warehouseCtrl extends Controller
 
         } else {
 
-            if($request->tgl == 1){
+            if ($request->tgl == 1) {
                 $sqlstr = "select * from w_mutasi
-                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";    
-            }else{
-                $sqlstr = "select * from w_mutasi where tanggal is not null";    
+                where tanggal BETWEEN CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)";
+            } else {
+                $sqlstr = "select * from w_mutasi where tanggal is not null";
             }
 
             if ($request->storefrom == "" and $request->storeto == "") {
@@ -92,7 +92,7 @@ class warehouseCtrl extends Controller
             if ($request->item !== "") {
                 $data = DB::connection('mysql')->select($res . " and nama like CONCAT('%" . $request->item . "%')");
             }
-            
+
             $total = 0;
             $totalpcs = 0;
             foreach ($data as $restotal) {
@@ -105,8 +105,20 @@ class warehouseCtrl extends Controller
         return view('mutasiperiodeview', ['data' => $data, 'total' => $total, 'totalpcs' => $totalpcs, 'rekap' => $request->rekap]);
     }
 
-    public function mutasistore(){
+    public function mutasistore()
+    {
         return view('mutasistore');
+    }
+
+    public function mutasistoreview()
+    {
+        if ($request->rekap == 1) {
+            if ($request->tgl == 1) {
+                $strsql="select asal, sum(totalkirim) tpcs, sum(totaljual) tjual
+                from w_mutasi where tanggal CAST('" . $request->datefrom . "' AS Date) and CAST('" . $request->dateto . "' AS Date)
+                group by asal";
+            }
+        }
     }
 
 }
