@@ -1,6 +1,6 @@
 @extends('dashboard.layout') @section('header')
 <h1>Mutasi
-    <small>Summery Mutasi</small>
+    <small>Summary Mutasi</small>
 </h1>
 <ol class="breadcrumb">
     <li>
@@ -12,13 +12,13 @@
 @endsection() @section('content')
 <div class="callout callout-info">
     <h4>Information!</h4>
-    <i class="fa fa-hand-o-right"></i> Summery mutasi by brand
+    <i class="fa fa-hand-o-right"></i> Summary mutasi by brand
 </div>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <title class="box-title" style="font-weight:normal;">Summery Mutasi By Brand By Periode</title>
+                <title class="box-title" style="font-weight:normal;">Summary Mutasi By Brand By Periode</title>
             </div>
             <div class="box-body">
                 <form action="{{ url('mutasibrandview') }}" method="POST" style="font-weight:normal;">

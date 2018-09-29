@@ -177,6 +177,7 @@
                     <thead>
                         <tr>
                             <th>CATEGORY</th>
+                            <th>QUANTITY</th>
                             <th>REVENUE</th>
                         </tr>            
                     </thead>
@@ -184,17 +185,21 @@
                         @foreach($category as $categorys)
                         <tr>
                             <td style="padding:0px 0px 0px 10px;">
-                                <h5>{{ $categorys->categori }}</h5>
+                                <h5><a href="{{ route('subcategory',['category'=>$categorys->categori]) }}">{{ $categorys->categori }}</a></h5>
                             </td>
                             <td style="padding:0px 0px 0px 10px;">
-                                <h5>{{ number_format($categorys->total,0) }}</h5>
+                                <h5>{{ number_format($categorys->pcs,0) }}</h5>
                             </td>
-                        </tr>
+                            <td style="padding:0px 0px 0px 10px;">
+                                    <h5>{{ number_format($categorys->total,0) }}</h5>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <th>TOTAL</th>
-                        <th>{{ number_format($total,0) }}</th>
+                        <th>{{ number_format($catpcs,0) }}</th>
+                        <th>{{ number_format($catjual,0) }}</th>
                     </tfoot>
                 </table>
             </div>

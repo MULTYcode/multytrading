@@ -28,20 +28,23 @@
                     <thead>
                         <tr>
                             <th>CATEGORY</th>
-                            <th>TOTAL</th>
+                            <th>TOTAL PCS</th>
+                            <th>TOTAL PRICE</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($category as $rows)
                         <tr style="font-weight: normal;">
-                            <td>{{ $rows->categori }}</td>
+                            <td><a href="{{ route('subcategory',['category'=>$rows->categori]) }}">{{ $rows->categori }}</a></td>
+                            <td>{{ number_format($rows->pcs,0) }}</td>
                             <td>{{ number_format($rows->total,0) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <th>TOTAL</th>
-                        <th>{{number_format($total,0)}}</th>
+                        <th>{{number_format($tpcs,0)}}</th>
+                        <th>{{number_format($tjual,0)}}</th>
                     </tfoot>
                 </table>
             </div>

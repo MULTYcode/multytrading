@@ -72,9 +72,11 @@ class DashboardwebCtrl extends Controller
         $category = DB::connection('mysql')->select('call w_sls_categori');
         $categorylabels = [];
         $categoryvalues = [];
-        $total = 0;
+        $catjual = 0;
+        $catpcs = 0;
         foreach ($category as $key => $rows) {
-            $total += $rows->total;
+            $catjual += $rows->total;
+            $catpcs += $rows->pcs;
             $categorylabels[] = $category[$key]->categori;
             $categoryvalues[] = $category[$key]->total;
         }
@@ -114,7 +116,8 @@ class DashboardwebCtrl extends Controller
             'area' => $area,
             'chartarea' => $chartarea,
             'category' => $category,
-            'total' => $total,
+            'catpcs' => $catpcs,
+            'catjual' => $catjual,
             'chartcategory' => $chartcategory,
         ]);
     }

@@ -474,9 +474,11 @@ class salesCtrl extends Controller
         $category = DB::connection('mysql')->select('call w_sls_categori');
         $categorylabels = [];
         $categoryvalues = [];
-        $total = 0;
+        $tpcs = 0;
+        $tjual =0;
         foreach ($category as $key => $rows) {
-            $total += $rows->total;
+            $tpcs += $rows->pcs;
+            $tjual += $rows->total;
             $categorylabels[] = $category[$key]->categori;
             $categoryvalues[] = $category[$key]->total;
         }
@@ -510,10 +512,29 @@ class salesCtrl extends Controller
             ]);
 
         return view('salesbycategory', [
-            'total' => $total,
+            'tjual' => $tjual,
+            'tpcs' => $tpcs,
             'category' => $category,
             'chartcategory' => $chartcategory,
         ]);
+    }
+
+    public function subcategory($category)
+    {
+        $res = DB::connection('mysql')->select("select class,sum(pcs) as tpcs,sum(total_jual) as tjual 
+        from w_sls_detail
+        where category = '" . $category . "' and year(tanggal)=YEAR(CURDATE())
+        group by class
+        order by tpcs desc");
+
+        $tpcs = 0;
+        $tjual = 0;
+        foreach ($res as $rows) {
+            $tpcs += $rows->tpcs;
+            $tjual += $rows->tjual;
+        }
+
+        return view('salesbycategorysub', ['res' => $res, 'category' => $category, 'tpcs' => $tpcs, 'tjual' => $tjual]);
     }
 
     public function salesachievement()

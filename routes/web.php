@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
     Route::post('salesbyclassview', 'salesCtrl@getsalesbyclass');
 
     Route::get('salesbycategory', 'salesCtrl@salesbycategory');
+    Route::get('salesbycategory/{category}', 'salesCtrl@subcategory')->name('subcategory');
 
     Route::get('salesachievement', 'salesCtrl@salesachievement');
 

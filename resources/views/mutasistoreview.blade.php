@@ -7,7 +7,7 @@
         <a href="{{route('dashboard')}}">
             <i class="fa fa-dashboard"></i> Home</a>
     </li>
-    <li class="active">Summery Store</li>
+    <li class="active">Summary Store</li>
 </ol>
 @endsection() @section('content')
 <div class="row">
@@ -18,7 +18,7 @@
         </a>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">SUMMERY STORE FROM {{$datefrom}} TO {{$dateto}}</h3>
+                <h3 class="box-title">SUMMARY STORE FROM {{$datefrom}} TO {{$dateto}}</h3>
             </div>
             <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">
                 <table id="layout" class="table table-bordered table-hover">

@@ -57,7 +57,7 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="rekap" value="1"> Result as summery
+                            <input type="checkbox" name="rekap" value="1"> Result as summary
                         </label>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
