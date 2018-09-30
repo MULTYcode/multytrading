@@ -18,7 +18,7 @@
         </a>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">SALES ITEMS {{$store}} FROM {{$datefrom}} TO {{$dateto}}</h3>
+                <h3 class="box-title">Sales items "{{$store}}" from "{{$datefrom}}" to "{{$dateto}}"</h3>
             </div>
             @if($rekap == 1)
             <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">

@@ -18,7 +18,7 @@
         </a>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">SUMMARY CLASSIFY FROM {{$datefrom}} TO {{$dateto}}</h3>
+                <h3 class="box-title">Summary classify from "{{$datefrom}}" to "{{$dateto}}"</h3>
             </div>
             <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">
                 <table id="layout" class="table table-bordered table-hover">

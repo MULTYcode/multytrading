@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('salesbycategory', 'salesCtrl@salesbycategory');
     Route::get('salesbycategory/{category}', 'salesCtrl@subcategory')->name('subcategory');
+    Route::get('salesbycategory/{category}/{item}', 'salesCtrl@subcategoryitem')->name('subcategoryitem');
 
     Route::get('salesachievement', 'salesCtrl@salesachievement');
 

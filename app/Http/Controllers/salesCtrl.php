@@ -475,7 +475,7 @@ class salesCtrl extends Controller
         $categorylabels = [];
         $categoryvalues = [];
         $tpcs = 0;
-        $tjual =0;
+        $tjual = 0;
         foreach ($category as $key => $rows) {
             $tpcs += $rows->pcs;
             $tjual += $rows->total;
@@ -535,6 +535,24 @@ class salesCtrl extends Controller
         }
 
         return view('salesbycategorysub', ['res' => $res, 'category' => $category, 'tpcs' => $tpcs, 'tjual' => $tjual]);
+    }
+
+    public function subcategoryitem($category, $subcategory)
+    {
+        $res = DB::connection('mysql')->select("select kode,nama,warna,size,store,sum(pcs) as tpcs,sum(total_jual) as tjual 
+        from w_sls_detail
+        where category = '" . $category . "' and class = '" . $subcategory . "' and year(tanggal)=YEAR(CURDATE())
+        group by kode,nama,warna,size,store
+        order by tpcs desc");
+
+        $tpcs = 0;
+        $tjual = 0;
+        foreach ($res as $rows) {
+            $tpcs += $rows->tpcs;
+            $tjual += $rows->tjual;
+        }
+
+        return view('salesbycategorysubitem', ['res' => $res, 'category' => $category, 'subcategory' => $subcategory, 'tpcs' => $tpcs, 'tjual' => $tjual]);
     }
 
     public function salesachievement()

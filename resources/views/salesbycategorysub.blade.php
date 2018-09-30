@@ -18,7 +18,7 @@
         </a>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">SALES BY CATEGORY {{$category}}</h3>
+                <h3 class="box-title">Sales by category {{$category}}</h3>
             </div>
             <div class="box-body" style="width: 100%; overflow: auto; white-space: nowrap;">
                 <table id="layout" class="table table-bordered table-hover">
@@ -32,7 +32,7 @@
                     <tbody>
                         @foreach($res as $rows)
                         <tr style="font-weight: normal;">
-                            <td>{{ $rows->class }}</a></td>
+                            <td><a href="{{ route('subcategoryitem',['category'=>$category,'class'=>$rows->class]) }}">{{ $rows->class }}</a></a></td>
                             <td>{{ number_format($rows->tpcs,0) }}</td>
                             <td>{{ number_format($rows->tjual,0) }}</td>
                         </tr>
