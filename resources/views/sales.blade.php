@@ -46,7 +46,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab_1" data-toggle="tab">Month to Date</a></li>
                     <li><a href="#tab_2" data-toggle="tab">Last Month</a></li>
-                    <li class="pull-right"><a href="{{ route('salesbychannel') }}" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                    <li class="pull-right"><a href="{{ route('salesbychannel') }}" class="text-muted"><i class="fa fa-calendar"></i></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
