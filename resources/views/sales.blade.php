@@ -11,7 +11,6 @@
 </ol>
 @endsection() @section('content')
 <div class="row">
-
     <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -143,12 +142,11 @@
                 </div>
                 <!-- /.tab-content -->
             </div>
-
         </div>
     </div>
 </div>
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -256,7 +254,7 @@
 
             <!-- /.box-body -->
         </div>
-    </div>
+    </div> --}}
 
 </div>
 

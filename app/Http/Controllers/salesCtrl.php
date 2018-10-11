@@ -158,176 +158,193 @@ class salesCtrl extends Controller
             $ttotal1 += $rows->total;
         }
 
-                /*=== TOP SOLD ===*/
-        $sold = DB::connection('mysql')->select('call w_topsold');
-        $soldlabels = [];
-        $soldvalues = [];
-        foreach ($sold as $key => $rows) {
-            $soldlabels[] = $sold[$key]->namabarang;
-            $soldvalues[] = $sold[$key]->qty;
-        }
+        //         /*=== TOP SOLD ===*/
+        // $sold = DB::connection('mysql')->select('call w_topsold');
+        // $soldlabels = [];
+        // $soldvalues = [];
+        // foreach ($sold as $key => $rows) {
+        //     $soldlabels[] = $sold[$key]->namabarang;
+        //     $soldvalues[] = $sold[$key]->qty;
+        // }
 
-        $chartSold = app()->chartjs
-            ->name('barChartTest1')
-            ->type('horizontalBar')
-            ->size(['width' => 400, 'height' => 200])
-            ->labels($soldlabels)
-            ->datasets([
-                [
-                    "label" => "Top 10 Items Sold",
-                    'backgroundColor' => [
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                        'rgba(0,0,128,0.5)',
-                    ],
-                    'data' => $soldvalues
-                ]
-            ])
-            ->options([
-                'responsive' => true,
-                'maintainAspectRatio' => false,
-            ]);
+        // $chartSold = app()->chartjs
+        //     ->name('barChartTest1')
+        //     ->type('horizontalBar')
+        //     ->size(['width' => 400, 'height' => 200])
+        //     ->labels($soldlabels)
+        //     ->datasets([
+        //         [
+        //             "label" => "Top 10 Items Sold",
+        //             'backgroundColor' => [
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //                 'rgba(0,0,128,0.5)',
+        //             ],
+        //             'data' => $soldvalues
+        //         ]
+        //     ])
+        //     ->options([
+        //         'responsive' => true,
+        //         'maintainAspectRatio' => false,
+        //     ]);
                 
                         
-                /* TOP REVENUE */
-        $revenue = DB::connection('mysql')->select('call w_toprevenue');
-        $revenuelabels = [];
-        $revenuevalues = [];
-        foreach ($revenue as $key => $rows) {
-            $revenuelabels[] = $revenue[$key]->namabarang;
-            $revenuevalues[] = $revenue[$key]->harga;
-        }
+        //         /* TOP REVENUE */
+        // $revenue = DB::connection('mysql')->select('call w_toprevenue');
+        // $revenuelabels = [];
+        // $revenuevalues = [];
+        // foreach ($revenue as $key => $rows) {
+        //     $revenuelabels[] = $revenue[$key]->namabarang;
+        //     $revenuevalues[] = $revenue[$key]->harga;
+        // }
 
-        $chartrevenue = app()->chartjs
-            ->name('barChartRevenue')
-            ->type('horizontalBar')
-            ->size(['width' => 400, 'height' => 200])
-            ->labels($revenuelabels)
-            ->datasets([
-                [
-                    "label" => "Top 10 Revenues",
-                    'backgroundColor' => [
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                        'rgba(0,128,0, 0.5)',
-                    ],
-                    'data' => $revenuevalues
-                ]
-            ])
-            ->options([
-                'responsive' => true,
-                'maintainAspectRatio' => false,
-            ]);
+        // $chartrevenue = app()->chartjs
+        //     ->name('barChartRevenue')
+        //     ->type('horizontalBar')
+        //     ->size(['width' => 400, 'height' => 200])
+        //     ->labels($revenuelabels)
+        //     ->datasets([
+        //         [
+        //             "label" => "Top 10 Revenues",
+        //             'backgroundColor' => [
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //                 'rgba(0,128,0, 0.5)',
+        //             ],
+        //             'data' => $revenuevalues
+        //         ]
+        //     ])
+        //     ->options([
+        //         'responsive' => true,
+        //         'maintainAspectRatio' => false,
+        //     ]);
                 
-                /*======= TOP WARNA =======*/
-        $warna = DB::connection('mysql')->select('call w_topwarna');
-        $warnalabels = [];
-        $warnavalues = [];
-        foreach ($warna as $key => $rows) {
-            $warnalabels[] = $warna[$key]->warna;
-            $warnavalues[] = $warna[$key]->total;
-        }
+        //         /*======= TOP WARNA =======*/
+        // $warna = DB::connection('mysql')->select('call w_topwarna');
+        // $warnalabels = [];
+        // $warnavalues = [];
+        // foreach ($warna as $key => $rows) {
+        //     $warnalabels[] = $warna[$key]->warna;
+        //     $warnavalues[] = $warna[$key]->total;
+        // }
 
-        $barChartWarna = app()->chartjs
-            ->name('barChartWarna')
-            ->type('horizontalBar')
-            ->size(['width' => 400, 'height' => 200])
-            ->labels($warnalabels)
-            ->datasets([
-                [
-                    "label" => "Top 10 Colour",
-                    'backgroundColor' => [
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                        'rgba(128,0,0, 0.5)',
-                    ],
-                    'data' => $warnavalues
-                ]
-            ])
-            ->options([
-                'responsive' => true,
-                'maintainAspectRatio' => false,
-            ]);
+        // $barChartWarna = app()->chartjs
+        //     ->name('barChartWarna')
+        //     ->type('horizontalBar')
+        //     ->size(['width' => 400, 'height' => 200])
+        //     ->labels($warnalabels)
+        //     ->datasets([
+        //         [
+        //             "label" => "Top 10 Colour",
+        //             'backgroundColor' => [
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //                 'rgba(128,0,0, 0.5)',
+        //             ],
+        //             'data' => $warnavalues
+        //         ]
+        //     ])
+        //     ->options([
+        //         'responsive' => true,
+        //         'maintainAspectRatio' => false,
+        //     ]);
                         
-                /*======= TOP UKURAN =======*/
-        $ukuran = DB::connection('mysql')->select('call w_topukuran');
-        $ukuranlabels = [];
-        $ukuranvalues = [];
-        foreach ($ukuran as $key => $rows) {
-            $ukuranlabels[] = $ukuran[$key]->ukuran;
-            $ukuranvalues[] = $ukuran[$key]->total;
-        }
+        //         /*======= TOP UKURAN =======*/
+        // $ukuran = DB::connection('mysql')->select('call w_topukuran');
+        // $ukuranlabels = [];
+        // $ukuranvalues = [];
+        // foreach ($ukuran as $key => $rows) {
+        //     $ukuranlabels[] = $ukuran[$key]->ukuran;
+        //     $ukuranvalues[] = $ukuran[$key]->total;
+        // }
 
-        $barChartUkuran = app()->chartjs
-            ->name('barChartUkuran')
-            ->type('horizontalBar')
-            ->size(['width' => 400, 'height' => 200])
-            ->labels($ukuranlabels)
-            ->datasets([
-                [
-                    "label" => "Top 10 Size",
-                    'backgroundColor' => [
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                        'rgba(128,128,0, 0.5)',
-                    ],
-                    'data' => $ukuranvalues
-                ]
-            ])
-            ->options([
-                'responsive' => true,
-                'maintainAspectRatio' => false,
-            ]);
+        // $barChartUkuran = app()->chartjs
+        //     ->name('barChartUkuran')
+        //     ->type('horizontalBar')
+        //     ->size(['width' => 400, 'height' => 200])
+        //     ->labels($ukuranlabels)
+        //     ->datasets([
+        //         [
+        //             "label" => "Top 10 Size",
+        //             'backgroundColor' => [
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //                 'rgba(128,128,0, 0.5)',
+        //             ],
+        //             'data' => $ukuranvalues
+        //         ]
+        //     ])
+        //     ->options([
+        //         'responsive' => true,
+        //         'maintainAspectRatio' => false,
+        //     ]);
+
+        // return view('sales', [
+        //     'channelchartarea' => $channelchartarea,
+        //     'saleschannelm2d' => $saleschannelm2d,
+        //     'tonline' => $tonline,
+        //     'toffline' => $toffline,
+        //     'tkonsinasi' => $tkonsinasi,
+        //     'tbazar' => $tbazar,
+        //     'ttotal' => $ttotal,
+        //     'saleschannelm2d1' => $saleschannelm2d1,
+        //     'tonline1' => $tonline1,
+        //     'toffline1' => $toffline1,
+        //     'tkonsinasi1' => $tkonsinasi1,
+        //     'tbazar1' => $tbazar1,
+        //     'ttotal1' => $ttotal1,
+        //     'chartrevenue' => $chartrevenue,
+        //     'chartsold' => $chartSold,
+        //     'warna' => $warna,
+        //     'barChartWarna' => $barChartWarna,
+        //     'ukuran' => $ukuran,
+        //     'barChartUkuran' => $barChartUkuran,
+        // ]);
 
         return view('sales', [
-            'channelchartarea' => $channelchartarea,
-            'saleschannelm2d' => $saleschannelm2d,
-            'tonline' => $tonline,
-            'toffline' => $toffline,
-            'tkonsinasi' => $tkonsinasi,
-            'tbazar' => $tbazar,
-            'ttotal' => $ttotal,
-            'saleschannelm2d1' => $saleschannelm2d1,
-            'tonline1' => $tonline1,
-            'toffline1' => $toffline1,
-            'tkonsinasi1' => $tkonsinasi1,
-            'tbazar1' => $tbazar1,
-            'ttotal1' => $ttotal1,
-            'chartrevenue' => $chartrevenue,
-            'chartsold' => $chartSold,
-            'warna' => $warna,
-            'barChartWarna' => $barChartWarna,
-            'ukuran' => $ukuran,
-            'barChartUkuran' => $barChartUkuran,
-        ]);
+             'channelchartarea' => $channelchartarea,
+             'saleschannelm2d' => $saleschannelm2d,
+             'tonline' => $tonline,
+             'toffline' => $toffline,
+             'tkonsinasi' => $tkonsinasi,
+             'tbazar' => $tbazar,
+             'ttotal' => $ttotal,
+             'saleschannelm2d1' => $saleschannelm2d1,
+             'tonline1' => $tonline1,
+             'toffline1' => $toffline1,
+             'tkonsinasi1' => $tkonsinasi1,
+             'tbazar1' => $tbazar1,
+             'ttotal1' => $ttotal1,
+         ]);
+
     }
 
     public function sales()
