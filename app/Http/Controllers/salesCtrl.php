@@ -32,6 +32,132 @@ class salesCtrl extends Controller
 
     private function onload()
     {
+
+        //$this->channelbulanan();
+                                /*=== SALES CHANNEL BULANAN ===*/
+        $saleschannel = DB::connection('mysql')->select('call w_channelbulanan');
+
+        $labelsOffline = [];
+        $valuesOffline = [];
+
+        $labelsOnline = [];
+        $valuesonline = [];
+
+        $labelsKonsinasi = [];
+        $valueskonsinasi = [];
+
+        $labelsBazar = [];
+        $valuesBazar = [];
+
+        foreach ($saleschannel as $key => $rows) {
+            $labelsOffline[] = $saleschannel[$key]->bulan;
+            $valuesOffline[] = $saleschannel[$key]->offline;
+
+            $labelsOnline[] = $saleschannel[$key]->bulan;
+            $valuesOnline[] = $saleschannel[$key]->online;
+
+            $labelsKonsinasi[] = $saleschannel[$key]->bulan;
+            $valuesKonsinasi[] = $saleschannel[$key]->konsinasi;
+
+            $labelsBazar[] = $saleschannel[$key]->bulan;
+            $valuesBazar[] = $saleschannel[$key]->bazar;
+        }
+
+        $channelchartarea = app()->chartjs
+            ->name('lineChart')
+            ->type('line')
+            ->size(['width' => 400, 'height' => 150])
+            ->labels(['Januari', 'February', 'March', 'April', 'May', 'June', 'July', 'Agustus', 'September', 'October', 'November', 'December'])
+            ->datasets([
+                [
+                    "label" => "Offline",
+                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valuesOffline,
+                    'fill' => false
+                ],
+                [
+                    "label" => "Online",
+                    'backgroundColor' => "rgba(0,255,0, 0.31)",
+                    'borderColor' => "rgba(0,255,0, 0.7)",
+                    "pointBorderColor" => "rgba(0,255,0, 0.7)",
+                    "pointBackgroundColor" => "rgba(0,255,0, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valuesOnline,
+                    'fill' => false
+                ],
+                [
+                    "label" => "Konsinasi",
+                    'backgroundColor' => "rgba(176, 44, 17, 1)",
+                    'borderColor' => "rgba(176, 44, 17, 1)",
+                    "pointBorderColor" => "rgba(176, 44, 17, 1)",
+                    "pointBackgroundColor" => "rgba(176, 44, 17, 1)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valueskonsinasi,
+                    'fill' => false
+                ],
+                [
+                    "label" => "Bazar",
+                    'backgroundColor' => "rgba(176, 142, 17, 1)",
+                    'borderColor' => "rgba(176, 142, 17, 1)",
+                    "pointBorderColor" => "rgba(176, 142, 17, 1)",
+                    "pointBackgroundColor" => "rgba(176, 142, 17, 1)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valuesBazar,
+                    'fill' => false
+                ],
+            ])
+            ->options(
+                [
+                    'responsive' => true,
+                    'maintainAspectRatio' => false,
+                    'tooltips' => [
+                        'mode' => 'index',
+                        'intersect' => false,
+                    ],
+                    'hover' => [
+                        'mode' => 'nearest',
+                        'intersect' => true
+                    ],
+                ]
+            );
+                        
+/* Sales channel month to date */
+        $saleschannelm2d = DB::connection('mysql')->select('call w_saleschannel');
+        $tonline = 0;
+        $toffline = 0;
+        $tkonsinasi = 0;
+        $tbazar = 0;
+        $ttotal = 0;
+        foreach ($saleschannelm2d as $rows) {
+            $tonline += $rows->online;
+            $toffline += $rows->offline;
+            $tkonsinasi += $rows->konsinasi;
+            $tbazar += $rows->bazar;
+            $ttotal += $rows->total;
+        }
+
+        $saleschannelm2d1 = DB::connection('mysql')->select('call w_saleschannellastmonth');
+        $tonline1 = 0;
+        $toffline1 = 0;
+        $tkonsinasi1 = 0;
+        $tbazar1 = 0;
+        $ttotal1 = 0;
+        foreach ($saleschannelm2d1 as $rows) {
+            $tonline1 += $rows->online;
+            $toffline1 += $rows->offline;
+            $tkonsinasi1 += $rows->konsinasi;
+            $tbazar1 += $rows->bazar;
+            $ttotal1 += $rows->total;
+        }
+
                 /*=== TOP SOLD ===*/
         $sold = DB::connection('mysql')->select('call w_topsold');
         $soldlabels = [];
@@ -182,6 +308,19 @@ class salesCtrl extends Controller
             ]);
 
         return view('sales', [
+            'channelchartarea' => $channelchartarea,
+            'saleschannelm2d' => $saleschannelm2d,
+            'tonline' => $tonline,
+            'toffline' => $toffline,
+            'tkonsinasi' => $tkonsinasi,
+            'tbazar' => $tbazar,
+            'ttotal' => $ttotal,
+            'saleschannelm2d1' => $saleschannelm2d1,
+            'tonline1' => $tonline1,
+            'toffline1' => $toffline1,
+            'tkonsinasi1' => $tkonsinasi1,
+            'tbazar1' => $tbazar1,
+            'ttotal1' => $ttotal1,
             'chartrevenue' => $chartrevenue,
             'chartsold' => $chartSold,
             'warna' => $warna,
@@ -593,6 +732,140 @@ class salesCtrl extends Controller
                 'chartarea' => $chartarea,
             ]
         );
+    }
+
+    private function channelbulanan()
+    {
+                        /*=== SALES CHANNEL BULANAN ===*/
+        $res = DB::connection('mysql')->select('call w_channelbulanan');
+
+        $labelsOffline = [];
+        $valuesOffline = [];
+
+        $labelsOnline = [];
+        $valuesonline = [];
+
+        $labelsKonsinasi = [];
+        $valueskonsinasi = [];
+
+        $labelsBazar = [];
+        $valuesBazar = [];
+
+        foreach ($res as $key => $rows) {
+            $labelsOffline[] = $res[$key]->bulan;
+            $valuesOffline[] = $res[$key]->offlinestore;
+
+            $labelsOnline[] = $res[$key]->bulan;
+            $valuesOnline[] = $res[$key]->onlinestore;
+
+            $labelsKonsinasi[] = $res[$key]->bulan;
+            $valuesKonsinasi[] = $res[$key]->konsinasi;
+
+            $labelsBazar[] = $res[$key]->bulan;
+            $valuesBazar[] = $res[$key]->bazar;
+        }
+
+        $chartarea = app()->chartjs
+            ->name('lineChart')
+            ->type('line')
+            ->size(['width' => 400, 'height' => 150])
+            ->labels('Januari', 'February', 'March', 'April', 'May', 'June', 'July', 'Agustus', 'September', 'October', 'November', 'December')
+            ->datasets([
+                [
+                    "label" => "Year 2017",
+                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valuesOffline,
+                    'fill' => false
+                ],
+                [
+                    "label" => "Year 2018",
+                    'backgroundColor' => "rgba(0,255,0, 0.31)",
+                    'borderColor' => "rgba(0,255,0, 0.7)",
+                    "pointBorderColor" => "rgba(0,255,0, 0.7)",
+                    "pointBackgroundColor" => "rgba(0,255,0, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valuesOnline,
+                    'fill' => false
+                ],
+                [
+                    "label" => "Year 2018",
+                    'backgroundColor' => "rgba(0,255,0, 0.31)",
+                    'borderColor' => "rgba(0,255,0, 0.7)",
+                    "pointBorderColor" => "rgba(0,255,0, 0.7)",
+                    "pointBackgroundColor" => "rgba(0,255,0, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valueskonsinasi,
+                    'fill' => false
+                ],
+                [
+                    "label" => "Year 2018",
+                    'backgroundColor' => "rgba(0,255,0, 0.31)",
+                    'borderColor' => "rgba(0,255,0, 0.7)",
+                    "pointBorderColor" => "rgba(0,255,0, 0.7)",
+                    "pointBackgroundColor" => "rgba(0,255,0, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $valuesBazar,
+                    'fill' => false
+                ],
+            ])
+            ->options(
+                [
+                    'responsive' => true,
+                    'maintainAspectRatio' => false,
+                    'tooltips' => [
+                        'mode' => 'index',
+                        'intersect' => false,
+                    ],
+                    'hover' => [
+                        'mode' => 'nearest',
+                        'intersect' => true
+                    ],
+                ]
+            );
+
+        return view('res', ['res' => $res, 'chartarea' => $chartarea]);
+    }
+
+    public function salesbychannel()
+    {
+        return view('salesbychannel');
+    }
+
+    public function getsalesbychannel(request $request)
+    {
+        $res = DB::connection('mysql')->select("call w_saleschanneldate('" . $request->datefrom . "','" . $request->dateto . "')");
+
+        $tonline = 0;
+        $toffline = 0;
+        $tkonsinasi = 0;
+        $tbazar = 0;
+        $ttotal = 0;
+        foreach ($res as $rows) {
+            $tonline += $rows->online;
+            $toffline += $rows->offline;
+            $tkonsinasi += $rows->konsinasi;
+            $tbazar += $rows->bazar;
+            $ttotal += $rows->total;
+        }
+
+        return view('salesbychannelview', [
+            'res' => $res,
+            'tonline' => $tonline,
+            'toffline' => $toffline,
+            'tkonsinasi' => $tkonsinasi,
+            'tbazar' => $tbazar,
+            'ttotal' => $ttotal,
+            'datefrom' => $request->datefrom,
+            'dateto' => $request->dateto
+        ]);
     }
 
 }

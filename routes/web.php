@@ -70,6 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::get('salesbycategory', 'salesCtrl@salesbycategory');
     Route::get('salesbycategory/{category}', 'salesCtrl@subcategory')->name('subcategory');
     Route::get('salesbycategory/{category}/{item}', 'salesCtrl@subcategoryitem')->name('subcategoryitem');
+ 
+    Route::get('salesbychannel', 'salesCtrl@salesbychannel')->name('salesbychannel');
+    Route::post('salesbychannelview', 'salesCtrl@getsalesbychannel')->name('getsalesbychannel');
 
     Route::get('salesachievement', 'salesCtrl@salesachievement');
 
@@ -82,4 +85,11 @@ Route::middleware('auth')->group(function () {
     Route::post('mutasibrandview', 'warehouseCtrl@mutasibrandview')->name('mutasibrandview');
     Route::get('mutasiclass', 'warehouseCtrl@mutasiclass')->name('mutasiclass');
     Route::post('mutasiclassview', 'warehouseCtrl@mutasiclassview')->name('mutasiclassview');
+
+    /* INVENTORY */
+    Route::get('grn2sls', 'invCtrl@index')->name('grn2sls');
+    Route::post('grn2slsview', 'invCtrl@grn2slsview')->name('grn2slsview');
+    Route::get('grn2slsviewgrn/{barcode}', 'invCtrl@grn2slsview_grn')->name('grn2slsviewgrn');
+    Route::get('grn2slsviewmutasi/{barcode}', 'invCtrl@grn2slsview_mutasi')->name('grn2slsviewmutasi');
+    Route::get('grn2slsviewsales/{barcode}', 'invCtrl@grn2slsview_sales')->name('grn2slsviewsales');
 }); 
