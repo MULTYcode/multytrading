@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('salesbystore', 'salesCtrl@salesbystore');
     Route::post('salesbystoreview', 'salesCtrl@salesbystoreview');
-    Route::get('salesbystoreview/{brand}/{datefrom}/{dateto}', 'salesCtrl@getstore')->name('getstore');
+    Route::get('salesbystoreview/{jenis}/{brand}/{datefrom}/{dateto}', 'salesCtrl@getstore')->name('getstore');
 
     Route::get('salesbyclass', 'salesCtrl@salesbyclass');
     Route::post('salesbyclassview', 'salesCtrl@getsalesbyclass');

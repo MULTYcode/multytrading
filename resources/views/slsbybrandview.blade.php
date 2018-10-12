@@ -34,7 +34,7 @@
                         @foreach($res as $rows)
                         <tr style="font-weight: normal;">
                             <td>
-                                <a href="{{ route('getstore',['brand'=>$rows->brand,'datefrom'=>$datefrom,'dateto'=>$dateto]) }}">{{ $rows->brand }}</a>
+                                <a href="{{ route('getstore',['jenis'=>'store','brand'=>$rows->brand,'datefrom'=>$datefrom,'dateto'=>$dateto]) }}">{{ $rows->brand }}</a>
                             </td>
                             <td>{{ number_format($rows->pcs,0) }}</td>
                             <td>{{ number_format($rows->total_jual,0) }}</td>

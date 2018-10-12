@@ -330,20 +330,20 @@ class salesCtrl extends Controller
         // ]);
 
         return view('sales', [
-             'channelchartarea' => $channelchartarea,
-             'saleschannelm2d' => $saleschannelm2d,
-             'tonline' => $tonline,
-             'toffline' => $toffline,
-             'tkonsinasi' => $tkonsinasi,
-             'tbazar' => $tbazar,
-             'ttotal' => $ttotal,
-             'saleschannelm2d1' => $saleschannelm2d1,
-             'tonline1' => $tonline1,
-             'toffline1' => $toffline1,
-             'tkonsinasi1' => $tkonsinasi1,
-             'tbazar1' => $tbazar1,
-             'ttotal1' => $ttotal1,
-         ]);
+            'channelchartarea' => $channelchartarea,
+            'saleschannelm2d' => $saleschannelm2d,
+            'tonline' => $tonline,
+            'toffline' => $toffline,
+            'tkonsinasi' => $tkonsinasi,
+            'tbazar' => $tbazar,
+            'ttotal' => $ttotal,
+            'saleschannelm2d1' => $saleschannelm2d1,
+            'tonline1' => $tonline1,
+            'toffline1' => $toffline1,
+            'tkonsinasi1' => $tkonsinasi1,
+            'tbazar1' => $tbazar1,
+            'ttotal1' => $ttotal1,
+        ]);
 
     }
 
@@ -511,13 +511,18 @@ class salesCtrl extends Controller
         ]);
     }
 
-    public function getstore($brand, $datefrom, $dateto)
+    public function getstore($jenis, $brand, $datefrom, $dateto)
     {
-        $sqlstr = "select store,sum(pcs) as pcs,sum(total_jual) as total_jual,sum(stock) as stock
+        $sqlstr1 = "select store,sum(pcs) as pcs,sum(total_jual) as total_jual,sum(stock) as stock
             from w_sls_detail
-            where tanggal BETWEEN CAST('" . $datefrom . "' AS Date) and CAST('" . $dateto . "' AS Date)
-            and brand like '%" . $brand . "%' 
-            group by store order by sum(pcs) desc";
+            where tanggal BETWEEN CAST('" . $datefrom . "' AS Date) and CAST('" . $dateto . "' AS Date)";
+        $sqlstr2 = $jenis == 'channel' ? " and storestatus like '%" . $brand . "%'" : " and brand like '%" . $brand . "%'";
+        $sqlstr3 = " group by store order by sum(pcs) desc";
+        $sqlstr = $sqlstr1 . $sqlstr2 . $sqlstr3;
+
+        //return $sqlstr;
+        //$dd;
+
         $res = DB::connection('mysql')->select($sqlstr);
 
         $tpcs = 0;
