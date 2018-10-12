@@ -133,7 +133,7 @@ class memberCtrl extends Controller
 
     public function membertransview(Request $request)
     {
-        $res = DB::connection('mysql')->select("call w_membertrans;");
+        $res = DB::connection('mysql')->select("call w_membertrans('" . $request->datefrom . "','" . $request->dateto . "');");
 
         $jmltrans = 0;
         $jmlpcs = 0;
