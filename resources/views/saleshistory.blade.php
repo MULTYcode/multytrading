@@ -33,7 +33,7 @@
                         @foreach($res as $rows)
                         <tr style="font-weight: normal;">   
                             <td>{{ $rows->id_trans }}</td>
-                            <td>{{ $rows->tanggal }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rows->tanggal)->format('Y-m-d') }}</td>
                             <td>{{ number_format($rows->pcs,0) }}</td>
                         </tr>
                         @endforeach

@@ -33,7 +33,7 @@
                         @foreach($res as $rows)
                         <tr style="font-weight: normal;">   
                             <td>{{ $rows->notransaksi }}</td>
-                            <td>{{ $rows->tanggal }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rows->tanggal)->format('Y-m-d') }}</td>
                             <td>{{ number_format($rows->mutasi,0) }}</td>
                         </tr>
                         @endforeach

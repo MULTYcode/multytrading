@@ -87,7 +87,7 @@
                     <tbody>
                         @foreach($data as $rows)
                         <tr style="font-weight: normal;">
-                            <td>{{ $rows->tanggal }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rows->tanggal)->format('Y-m-d') }}</td>
                             <td>{{ $rows->kode }}</td>
                             <td>{{ $rows->nama }}</td>
                             <td>{{ $rows->brand }}</td>
