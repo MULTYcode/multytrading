@@ -21,7 +21,7 @@
                 <title class="box-title" style="font-weight:normal;">Summary Mutasi By Brand By Periode</title>
             </div>
             <div class="box-body">
-                <form action="{{ url('mutasibrandview') }}" method="POST" style="font-weight:normal;">
+                <form action="{{ url('mutasibrandview') }}" method="POST" style="font-weight:normal;" autocomplete="off">
                     <div class="form-group">
                         <label>From Date :</label>
                         <div class="input-group date">

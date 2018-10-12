@@ -92,4 +92,10 @@ Route::middleware('auth')->group(function () {
     Route::get('grn2slsviewgrn/{barcode}', 'invCtrl@grn2slsview_grn')->name('grn2slsviewgrn');
     Route::get('grn2slsviewmutasi/{barcode}', 'invCtrl@grn2slsview_mutasi')->name('grn2slsviewmutasi');
     Route::get('grn2slsviewsales/{barcode}', 'invCtrl@grn2slsview_sales')->name('grn2slsviewsales');
+
+    /* CRM */
+    Route::get('membertrans', 'memberCtrl@membertrans')->name('membertrans');    
+    Route::post('membertransview', 'memberCtrl@membertransview')->name('membertransview');
+    Route::get('membertransview/{idcust}', 'memberCtrl@membertransdetail')->name('membertransdetail');    
+
 }); 

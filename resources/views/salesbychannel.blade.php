@@ -21,7 +21,7 @@
                 <title class="box-title" style="font-weight:normal;">Search Sales By Channel</title>
             </div>
             <div class="box-body">
-                <form action="{{ url('salesbychannelview') }}" method="POST" style="font-weight:normal;">
+                <form action="{{ url('salesbychannelview') }}" method="POST" style="font-weight:normal;" autocomplete="off">
                     <div class="form-group">
                         <label>From Date :</label>
                         <div class="input-group date">

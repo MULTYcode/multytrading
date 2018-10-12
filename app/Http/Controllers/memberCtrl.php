@@ -125,4 +125,39 @@ class memberCtrl extends Controller
         }
         return $res;
     }
+
+    public function membertrans()
+    {
+        return view('membertrans');
+    }
+
+    public function membertransview(Request $request)
+    {
+        $res = DB::connection('mysql')->select("call w_membertrans;");
+
+        $jmltrans = 0;
+        $jmlpcs = 0;
+        $jmlrevenue = 0;
+        foreach ($res as $rows) {
+            $jmltrans += $rows->ttrans;
+            $jmlpcs += $rows->tpcs;
+            $jmlrevenue += $rows->tjual;
+        }
+
+        return view('membertransview', [
+            'res' => $res,
+            'jmltrans' => $jmltrans,
+            'jmlpcs' => $jmlpcs,
+            'jmlrevenue' => $jmlrevenue,
+            'datefrom' => $request->datefrom,
+            'dateto' => $request->dateto
+        ]);
+    }
+
+    public function membertransdetail($custcode)
+    {
+        //{{ route('membertransdetail',['custcode'=>$rows->custcode]) }}
+        return view('membertransdetail');
+    }
+
 }
