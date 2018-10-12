@@ -62,7 +62,7 @@
                                 @foreach($saleschannelm2d as $row)
                                 <tr>
                                     <td style="padding:0px 0px 0px 10px;">
-                                        <h5>{{ $row->tanggal }}</h5>
+                                        <h5>{{ \Carbon\Carbon::parse($row->tanggal)->format('Y-m-d') }}</h5>
                                     </td>
                                     <td style="padding:0px 0px 0px 10px;">
                                         <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'offline','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{ number_format($row->offline,0) }}</a></h5>
@@ -108,7 +108,7 @@
                                 @foreach($saleschannelm2d1 as $row)
                                 <tr>
                                     <td style="padding:0px 0px 0px 10px;">
-                                        <h5>{{ $row->tanggal }}</h5>
+                                        <h5>{{ \Carbon\Carbon::parse($row->tanggal)->format('Y-m-d') }}</h5>
                                     </td>
                                     <td style="padding:0px 0px 0px 10px;">
                                         <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'offline','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{ number_format($row->offline,0) }}</a></h5>
