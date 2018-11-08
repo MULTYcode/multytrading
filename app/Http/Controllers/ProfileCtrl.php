@@ -14,7 +14,7 @@ class ProfileCtrl extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function profile()
     {
     return view('profile'/*, array('user' => Auth::user())*/);
     }

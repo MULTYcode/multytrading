@@ -14,29 +14,12 @@ class catalogCtrl extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function catalog()
     {
-        $route = Route::currentRouteName();
-        $akses = DB::connection('mysql')->select("select REPLACE(dt_routes.route,'/','') as route from dt_routes
-        left join dt_auth on dt_auth.route_id = dt_routes.id
-        where dt_auth.user_id = " . Auth::user()->id . " and REPLACE(dt_routes.route,'/','') = '" . $route . "'");
-        $sama = "";
-        foreach ($akses as $rowsakses) {
-            if ($rowsakses->route == $route) {
-                return view('catalog');
-                break;
-            }
-        }
-        return view('noaccess');
+        return view('catalog');
     }
 
-    // public function getitemAJAX(Request $id)
-    // {
-    //     $item = DB::connection('mysql')->select("call w_items('" . $id->name . "')");
-    //     return response()->json(array('item' => $item), 200);
-    // }
-
-    public function getitem(Request $id)
+    public function catalogview(Request $id)
     {
         $item = DB::connection('tal')->select("select mst.bkode as kode, mst.bnama as nama, kat.mnama as brand, cl.cnama as class, c.scnama as subclass, ukuran.snama as size, 
         warna.cnama as warna, mst.bhargajual1 as hjual,mst.bstok as stock 
@@ -68,7 +51,13 @@ class catalogCtrl extends Controller
         WHERE i.bkode LIKE CONCAT('%'," . $id . ",'%')
         group by i.bnama, isw.kgudang, wh.wnama
         ORDER BY isw.kgudang, i.bkode;");
-        return view('daftaritemposisi', ['posisi' => $posisi]);
+
+        $tpcs = 0;
+        foreach ($posisi as $items) {
+            $tpcs += $items->stok;
+        }
+
+        return view('daftaritemposisi', ['posisi' => $posisi, 'tpcs' => $tpcs]);
         //return response()->json(array('item' => $id), 200);
     }
 }

@@ -10,12 +10,14 @@
     <li class="active">Sales by brand</li>
 </ol>
 @endsection() @section('content')
+<div class="callout callout-info">
+    <a href="javascript:history.go(-1)">
+        <button class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Back</button>
+    </a>
+</div>
 <div class="row">
     <div class="col-xs-12">
-        <a href="javascript:history.go(-1)">
-            <button class="btn btn-primary">
-                <i class="fa fa-arrow-left"></i> Back</button>
-        </a>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Sales "{{$store}}" from "{{$datefrom}}" to "{{$dateto}}"</h3>
@@ -34,7 +36,8 @@
                         @foreach($res as $rows)
                         <tr style="font-weight: normal;">
                             <td>
-                                <a href="{{ route('getstore',['jenis'=>'store','brand'=>$rows->brand,'datefrom'=>$datefrom,'dateto'=>$dateto]) }}">{{ $rows->brand }}</a>
+                                <a href="{{ route('getstore',['jenis'=>'store','brand'=>$rows->brand,'datefrom'=>$datefrom,'dateto'=>$dateto]) }}">{{
+                                    $rows->brand }}</a>
                             </td>
                             <td>{{ number_format($rows->pcs,0) }}</td>
                             <td>{{ number_format($rows->total_jual,0) }}</td>

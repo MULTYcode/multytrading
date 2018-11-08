@@ -13,23 +13,8 @@ class memberCtrl extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
-    {
-        $route = Route::currentRouteName();
-        $akses = DB::connection('mysql')->select("select REPLACE(dt_routes.route,'/','') as route from dt_routes
-        left join dt_auth on dt_auth.route_id = dt_routes.id
-        where dt_auth.user_id = " . Auth::user()->id . " and REPLACE(dt_routes.route,'/','') = '" . $route . "'");
-        $sama = "";
-        foreach ($akses as $rowsakses) {
-            if ($rowsakses->route == $route) {
-                return $this->onload();
-                break;
-            }
-        }
-        return view('noaccess');
-    }
 
-    private function onload()
+    public function member()
     {
         $membermonth = DB::connection('mysql')->select('call w_membermonth');
         $memberstore = DB::connection('mysql')->select('call w_memberstore');
@@ -156,8 +141,48 @@ class memberCtrl extends Controller
 
     public function membertransdetail($custcode)
     {
-        //{{ route('membertransdetail',['custcode'=>$rows->custcode]) }}
-        return view('membertransdetail');
+        $res = DB::connection('mysql')->select("call w_memberinfo('" . $custcode . "');");
+        $grafik = DB::connection('mysql')->select("call w_memberinfografik('" . $custcode . "');");
+
+        $labels = [];
+        $values = [];
+
+        foreach ($grafik as $key => $rows) {
+            $labels[] = $grafik[$key]->namabulan;
+            $values[] = $grafik[$key]->growth;
+        }
+
+        $chart = app()->chartjs
+            ->name('lineChart')
+            ->type('line')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels($labels)
+            ->datasets([
+                [
+                    "label" => "Member per month",
+                    'backgroundColor' => 'rgba(0,255,255,0.5)',
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $values
+                ]
+            ])
+            ->options([
+                'responsive' => true,
+                'maintainAspectRatio' => false,
+                'tooltips' => [
+                    'mode' => 'index',
+                    'intersect' => false,
+                ],
+                'hover' => [
+                    'mode' => 'nearest',
+                    'intersect' => true
+                ],
+            ]);
+
+        return view('membertransdetail', ['res' => $res, 'grafik' => $grafik, 'chart' => $chart]);
     }
 
 }

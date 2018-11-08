@@ -10,12 +10,14 @@
     <li class="active">Sales Category</li>
 </ol>
 @endsection() @section('content')
+<div class="callout callout-info">
+    <a href="javascript:history.go(-1)">
+        <button class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Back</button>
+    </a>
+</div>
 <div class="row">
     <div class="col-xs-12">
-        <a href="javascript:history.go(-1)">
-            <button class="btn btn-primary">
-            <i class="fa fa-arrow-left"></i> Back</button>
-        </a>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Sales by category {{$category}}</h3>
@@ -32,7 +34,8 @@
                     <tbody>
                         @foreach($res as $rows)
                         <tr style="font-weight: normal;">
-                            <td><a href="{{ route('subcategoryitem',['category'=>$category,'class'=>$rows->class]) }}">{{ $rows->class }}</a></a></td>
+                            <td><a href="{{ route('subcategoryitem',['category'=>$category,'class'=>$rows->class]) }}">{{
+                                    $rows->class }}</a></a></td>
                             <td>{{ number_format($rows->tpcs,0) }}</td>
                             <td>{{ number_format($rows->tjual,0) }}</td>
                         </tr>

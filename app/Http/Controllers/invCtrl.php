@@ -16,18 +16,7 @@ class invCtrl extends Controller
 
     public function index()
     {
-        $route = Route::currentRouteName();
-        $akses = DB::connection('mysql')->select("select REPLACE(dt_routes.route,'/','') as route from dt_routes
-        left join dt_auth on dt_auth.route_id = dt_routes.id
-        where dt_auth.user_id = " . Auth::user()->id . " and REPLACE(dt_routes.route,'/','') = '" . $route . "'");
-        $sama = "";
-        foreach ($akses as $rowsakses) {
-            if ($rowsakses->route == $route) {
-                return $this->grn2sls();
-                break;
-            }
-        }
-        return view('noaccess');
+        return $this->grn2sls();
     }
 
     public function grn2sls()

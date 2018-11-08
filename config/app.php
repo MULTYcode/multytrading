@@ -183,6 +183,8 @@ return [
         /* chart */
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
 
     /*
@@ -235,6 +237,8 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
         'Images' => Intervention\Image\Facades\Image::class,
+
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

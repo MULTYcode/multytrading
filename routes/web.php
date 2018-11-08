@@ -24,33 +24,36 @@ Route::get('verifyEmailFirst', 'Auth\RegisterController@verifyEmailFirst')->name
 Route::get('verify/{email}/{verifytoken}', 'Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
 Route::get('verifyDone', 'Auth\RegisterController@verifyDone')->name('verifyDone');
 
-Route::middleware('auth')->group(function () {
-  
-    Route::get('dashboard', 'DashboardwebCtrl@index')->name('dashboard');
+Route::get('noaccess', function () {
+    return view('noaccess');
+})->name('noaccess');
 
-    Route::get('store', 'StoreCtrl@index')->name('store');
+Route::group(['middleware' => ['web', 'auth', 'cekrole']], function () {
+    Route::get('dashboard', 'DashboardwebCtrl@dashboard')->name('dashboard');
+    //Route::get('store', 'StoreCtrl@index')->name('store');
 
-    Route::get('profile', 'ProfileCtrl@index')->name('profile');
+    Route::get('profile', 'ProfileCtrl@profile')->name('profile');
     Route::post('updateavatar', 'ProfileCtrl@update_avatar');
     Route::post('updateprofile', 'ProfileCtrl@update_profile');
 
-    Route::get('cryear', 'cryearCtrl@index')->name('cryear');
-    Route::get('pcsyear', 'pcsyearCtrl@index')->name('pcsyear');
-    Route::get('revenueyear', 'revenueyearCtrl@index')->name('revenueyear');
+    Route::get('cryear', 'cryearCtrl@cryear')->name('cryear');
+    Route::get('pcsyear', 'pcsyearCtrl@pcsyear')->name('pcsyear');
+    Route::get('revenueyear', 'revenueyearCtrl@revenueyear')->name('revenueyear');
 
-    Route::get('member', 'memberCtrl@index')->name('member');
+    Route::get('member', 'memberCtrl@member')->name('member');
     Route::get('membertrans/{bulan}', 'memberCtrl@trans')->name('membertrans');
 
-    Route::get('catalog', 'catalogCtrl@index')->name('catalog');
-    //Route::post('catalog', 'catalogCtrl@getitemAJAX');
+    Route::post('catalogview', 'catalogCtrl@catalogview')->name('catalogview');
+    Route::get('catalog', 'catalogCtrl@catalog');
+     //Route::post('catalog', 'catalogCtrl@getitemAJAX');
     Route::post('catalog', 'catalogCtrl@getitem');
     Route::get('catalog/{id}', 'catalogCtrl@getitemposisi')->name("catalogstore");
 
-    /* SALES */
+    // * SALES */
     Route::get('sales', 'salesCtrl@index')->name('sales');
 
-    //Route::get('salesfind', 'salesCtrl@sales');
-    //Route::post('salesfindview', 'salesCtrl@salesfindview');
+     //Route::get('salesfind', 'salesCtrl@sales');
+     //Route::post('salesfindview', 'salesCtrl@salesfindview');
 
     Route::get('salesperiode', 'salesCtrl@salesperiode');
     Route::post('salesperiodeview', 'salesCtrl@salesperiodeview');
@@ -70,13 +73,13 @@ Route::middleware('auth')->group(function () {
     Route::get('salesbycategory', 'salesCtrl@salesbycategory');
     Route::get('salesbycategory/{category}', 'salesCtrl@subcategory')->name('subcategory');
     Route::get('salesbycategory/{category}/{item}', 'salesCtrl@subcategoryitem')->name('subcategoryitem');
- 
+
     Route::get('salesbychannel', 'salesCtrl@salesbychannel')->name('salesbychannel');
     Route::post('salesbychannelview', 'salesCtrl@getsalesbychannel')->name('getsalesbychannel');
 
     Route::get('salesachievement', 'salesCtrl@salesachievement');
 
-    /* WAREHOUSE */
+     /* WAREHOUSE */
     Route::get('warehouse', 'warehouseCtrl@index')->name('warehouse');
     Route::post('mutasiperiodeview', 'warehouseCtrl@mutasiperiodeview');
     Route::get('mutasistore', 'warehouseCtrl@mutasistore')->name('mutasistore');
@@ -86,16 +89,23 @@ Route::middleware('auth')->group(function () {
     Route::get('mutasiclass', 'warehouseCtrl@mutasiclass')->name('mutasiclass');
     Route::post('mutasiclassview', 'warehouseCtrl@mutasiclassview')->name('mutasiclassview');
 
-    /* INVENTORY */
+     /* INVENTORY */
     Route::get('grn2sls', 'invCtrl@index')->name('grn2sls');
     Route::post('grn2slsview', 'invCtrl@grn2slsview')->name('grn2slsview');
     Route::get('grn2slsviewgrn/{barcode}', 'invCtrl@grn2slsview_grn')->name('grn2slsviewgrn');
     Route::get('grn2slsviewmutasi/{barcode}', 'invCtrl@grn2slsview_mutasi')->name('grn2slsviewmutasi');
     Route::get('grn2slsviewsales/{barcode}', 'invCtrl@grn2slsview_sales')->name('grn2slsviewsales');
 
-    /* CRM */
-    Route::get('membertrans', 'memberCtrl@membertrans')->name('membertrans');    
+     /* CRM */
+    Route::get('membertrans', 'memberCtrl@membertrans')->name('membertrans');
     Route::post('membertransview', 'memberCtrl@membertransview')->name('membertransview');
-    Route::get('membertransview/{idcust}', 'memberCtrl@membertransdetail')->name('membertransdetail');    
+    Route::get('membertransview/{idcust}', 'memberCtrl@membertransdetail')->name('membertransdetail');
 
-}); 
+    /** SETTING */
+    Route::get('userlist', 'Auth\settingCtrl@userlist')->name('userlist');
+    Route::get('userlist/{jenis}/{email}', 'Auth\settingCtrl@deactivateuser')->name('deactivateuser');
+    Route::get('userrole/{email}/{userid}', 'Auth\settingCtrl@userrole')->name('userrole');
+    Route::get('usermodule', 'Auth\settingCtrl@usermodule')->name('usermodule');
+    Route::get('addmodule/{email}/{id}/{userid}', 'Auth\settingCtrl@addmodule')->name('addmodule');
+    Route::get('removemodule/{email}/{userid}/{roleid}', 'Auth\settingCtrl@removemodule')->name('removemodule');
+});

@@ -9,14 +9,16 @@
     </li>
     <li class="active">Sales</li>
 </ol>
-@endsection() 
+@endsection()
 @section('content')
+<div class="callout callout-info">
+    <a href="javascript:history.go(-1)">
+        <button class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Back</button>
+    </a>
+</div>
 <div class="row">
     <div class="col-xs-12">
-        <a href="javascript:history.go(-1)">
-            <button class="btn btn-primary">
-                <i class="fa fa-arrow-left"></i> Back</button>
-        </a>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Sales Items</h3>
@@ -32,7 +34,7 @@
                             <th>DATE</th>
                             <th>QTY</th>
                             <th>TOTAL</th>
-                        </tr>    
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach($res as $rows)
@@ -45,7 +47,7 @@
                             <td>{{ number_format($rows->pcs,0) }}</td>
                             <td>{{ number_format($rows->rupiah,0) }}</td>
                         </tr>
-                        @endforeach    
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -56,7 +58,7 @@
                             <th></th>
                             <th>{{ number_format($tpcs,0) }}</th>
                             <th>{{ number_format($ttotal,0) }}</th>
-                        </tr>    
+                        </tr>
                     </tfoot>
                 </table>
             </div>
@@ -65,7 +67,7 @@
 </div>
 <script>
     $(function () {
-      $('#layout').DataTable()
+        $('#layout').DataTable()
     })
 </script>
 @endsection()

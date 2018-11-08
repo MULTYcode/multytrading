@@ -10,12 +10,14 @@
     <li class="active">GRN Periode</li>
 </ol>
 @endsection() @section('content')
+<div class="callout callout-info">
+    <a href="javascript:history.go(-1)">
+        <button class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Back</button>
+    </a>
+</div>
 <div class="row">
     <div class="col-xs-12">
-        <a href="javascript:history.go(-1)">
-            <button class="btn btn-primary">
-                <i class="fa fa-arrow-left"></i> Back</button>
-        </a>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">GRN items "{{$item}}" from "{{$datefrom}}" to "{{$dateto}}"</h3>
@@ -38,16 +40,19 @@
                     </thead>
                     <tbody>
                         @foreach($res as $rows)
-                        <tr style="font-weight: normal;">   
+                        <tr style="font-weight: normal;">
                             <td>{{ $rows->kode }}</td>
                             <td>{{ $rows->nama }}</td>
                             <td>{{ $rows->brand }}</td>
                             <td>{{ $rows->class }}</td>
                             <td>{{ $rows->ukuran }}</td>
                             <td>{{ $rows->warna }}</td>
-                            <td><a style="text-decoration:underline;" href="{{ route('grn2slsviewgrn',['barcode'=>$rows->kode]) }}">{{ number_format($rows->grn,0) }}</a></td>
-                            <td><a style="text-decoration:underline;" href="{{ route('grn2slsviewmutasi',['barcode'=>$rows->kode]) }}">{{ number_format($rows->mutasi,0) }}</a></td>
-                            <td><a style="text-decoration:underline;" href="{{ route('grn2slsviewsales',['barcode'=>$rows->kode]) }}">{{ number_format($rows->sls,0) }}</a></td>
+                            <td><a style="text-decoration:underline;" href="{{ route('grn2slsviewgrn',['barcode'=>$rows->kode]) }}">{{
+                                    number_format($rows->grn,0) }}</a></td>
+                            <td><a style="text-decoration:underline;" href="{{ route('grn2slsviewmutasi',['barcode'=>$rows->kode]) }}">{{
+                                    number_format($rows->mutasi,0) }}</a></td>
+                            <td><a style="text-decoration:underline;" href="{{ route('grn2slsviewsales',['barcode'=>$rows->kode]) }}">{{
+                                    number_format($rows->sls,0) }}</a></td>
                             <td>{{ number_format($rows->sisa,0) }}</td>
                         </tr>
                         @endforeach

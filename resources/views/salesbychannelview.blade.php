@@ -10,12 +10,14 @@
     <li class="active">Sales Channel</li>
 </ol>
 @endsection() @section('content')
+<div class="callout callout-info">
+    <a href="javascript:history.go(-1)">
+        <button class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Back</button>
+    </a>
+</div>
 <div class="row">
     <div class="col-xs-12">
-        <a href="javascript:history.go(-1)">
-            <button class="btn btn-primary">
-                <i class="fa fa-arrow-left"></i> Back</button>
-        </a>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Sales channel from "{{$datefrom}}" to "{{$dateto}}"</h3>
@@ -39,16 +41,20 @@
                                 <h5>{{ \Carbon\Carbon::parse($row->tanggal)->format('Y-m-d') }}</h5>
                             </td>
                             <td style="padding:0px 0px 0px 10px;">
-                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'offline','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{ number_format($row->offline,0) }}</a></h5>
+                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'offline','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{
+                                        number_format($row->offline,0) }}</a></h5>
                             </td>
                             <td style="padding:0px 0px 0px 10px;">
-                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'online','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{ number_format($row->online,0) }}</a></h5>
+                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'online','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{
+                                        number_format($row->online,0) }}</a></h5>
                             </td>
                             <td style="padding:0px 0px 0px 10px;">
-                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'konsinasi','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{ number_format($row->konsinasi,0) }}</a></h5>
+                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'konsinasi','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{
+                                        number_format($row->konsinasi,0) }}</a></h5>
                             </td>
                             <td style="padding:0px 0px 0px 10px;">
-                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'bazar','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{ number_format($row->bazar,0) }}</a></h5>
+                                <h5><a style="text-decoration:underline;" href="{{ route('getstore',['channel'=>'channel', 'brand'=>'bazar','tglfrom'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d'),'tglto'=>\Carbon\Carbon::parse($row->tanggal)->format('Y-m-d')]) }}">{{
+                                        number_format($row->bazar,0) }}</a></h5>
                             </td>
                             <td style="padding:0px 0px 0px 10px;">
                                 <h5>{{ number_format($row->total,0) }}</h5>

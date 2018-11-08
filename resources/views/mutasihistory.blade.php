@@ -10,12 +10,14 @@
     <li class="active">GRN Periode</li>
 </ol>
 @endsection() @section('content')
+<div class="callout callout-info">
+    <a href="javascript:history.go(-1)">
+        <button class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Back</button>
+    </a>
+</div>
 <div class="row">
     <div class="col-xs-12">
-        <a href="javascript:history.go(-1)">
-            <button class="btn btn-primary">
-                <i class="fa fa-arrow-left"></i> Back</button>
-        </a>
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">History For Mutasi / Distribution</h3>
@@ -31,7 +33,7 @@
                     </thead>
                     <tbody>
                         @foreach($res as $rows)
-                        <tr style="font-weight: normal;">   
+                        <tr style="font-weight: normal;">
                             <td>{{ $rows->notransaksi }}</td>
                             <td>{{ \Carbon\Carbon::parse($rows->tanggal)->format('Y-m-d') }}</td>
                             <td>{{ number_format($rows->mutasi,0) }}</td>
