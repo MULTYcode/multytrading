@@ -17,7 +17,7 @@
     </a>
 </div>
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-lg-6 col-xs-12">
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Aplication Modules</h3>
@@ -54,7 +54,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6 col-xs-12">
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">User Role</h3>
