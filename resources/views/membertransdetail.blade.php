@@ -116,8 +116,9 @@
                         <tr>
                             <th>MONTH</th>
                             <th>GROWTH</th>
-                            <th>VALUES</th>
+                            <th>REVENUE</th>
                         </tr>
+                    </thead>
                     <tbody>
                         @foreach ($grafik as $key => $item)
                         <tr style="font-weight: normal;">
@@ -127,7 +128,11 @@
                         </tr>
                         @endforeach
                     </tbody>
-                    </thead>
+                    <tfoot>
+                        <th>Total</th>
+                        <th></th>
+                        <th>{{number_format($total,0)}}</th>
+                    </tfoot>
                 </table>
             </div>
         </div>

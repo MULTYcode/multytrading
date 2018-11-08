@@ -147,9 +147,12 @@ class memberCtrl extends Controller
         $labels = [];
         $values = [];
 
+        $total = 0;
+
         foreach ($grafik as $key => $rows) {
             $labels[] = $grafik[$key]->namabulan;
             $values[] = $grafik[$key]->growth;
+            $total += $rows->revenue;
         }
 
         $chart = app()->chartjs
@@ -182,7 +185,7 @@ class memberCtrl extends Controller
                 ],
             ]);
 
-        return view('membertransdetail', ['res' => $res, 'grafik' => $grafik, 'chart' => $chart]);
+        return view('membertransdetail', ['res' => $res, 'grafik' => $grafik, 'chart' => $chart, 'total' => $total]);
     }
 
 }

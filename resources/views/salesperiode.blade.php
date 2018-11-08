@@ -12,7 +12,9 @@
 @endsection() @section('content')
 <div class="callout callout-info">
     <h4>Information!</h4>
-    <i class="fa fa-hand-o-right"></i> Find item base on their descriptions, descriptions can be contains word or leave it empty
+    <i class="fa fa-hand-o-right"></i> Find item base on their descriptions, descriptions can be contains word or leave it empty </br>
+    <i class="fa fa-check-square-o"></i> <span style="color:red;">Use date range </span> [ mencari data berdasarkan periode tanggal ] </br>
+    <i class="fa fa-check-square-o"></i> <span style="color:red;">Result as summary </span> [ menjumlahkan data berdasarkan kode barang terjual ) </br>
 </div>
 <div class="row">
     <div class="col-xs-12">
@@ -28,14 +30,16 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input data-date-format="yyyy-mm-dd" type="text" class="form-control pull-right" id="datefrom" name="datefrom">
+                            <input data-date-format="yyyy-mm-dd" type="text" class="form-control pull-right" id="datefrom"
+                                name="datefrom">
                         </div>
                         <label>To Date :</label>
                         <div class="input-group date">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input data-date-format="yyyy-mm-dd" type="text" class="form-control pull-right" id="dateto" name="dateto">
+                            <input data-date-format="yyyy-mm-dd" type="text" class="form-control pull-right" id="dateto"
+                                name="dateto">
                         </div>
                     </div>
                     <div class="form-group">
