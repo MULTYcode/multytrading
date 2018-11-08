@@ -48,7 +48,7 @@ class settingCtrl extends Controller
     {
         $res = DB::connection('mysql')->select("select id, main as menu, description,rt.route_id as ada
                                                 from dt_routes 
-                                                left join dt_auth rt on dt_routes.id = rt.route_id and rt.user_id=68
+                                                left join dt_auth rt on dt_routes.id = rt.route_id and rt.user_id = " . $userid . "
                                                 order by id");
 
         $role = DB::connection('mysql')->select("select users.id, dt_routes.id, dt_routes.main as menu, dt_routes.description from dt_routes
