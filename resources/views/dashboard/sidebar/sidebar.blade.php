@@ -2,10 +2,18 @@
     <section class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
+                @if(Auth::user())
                 <img src="/uploads/avatars/{{ Auth::user()->image }}" class="img-circle" alt="User Image">
+                @else
+                <img src="{{URL::asset('/images/images.png')}}" class="img-circle" alt="User Image">
+                @endif
             </div>
             <div class="pull-left info">
+                @if(Auth::user())
                 <p>{{ Auth::user()->name }}</p>
+                @else
+                <p>Guest</p>
+                @endif
                 <a href="#">
                 <i class="fa fa-circle text-success"></i>Online</a>
             </div>
@@ -17,7 +25,7 @@
                     <li class="header">{{ $menu->main }}</li>
                 @else
                     @if($menu->sub_type == -1)                                
-                        <li><a href={{ $menu->route }}><i class="{{$menu->icon}}"></i> {{ $menu->main }}</a></li>
+                        <li><a href={{ $menu->route }}><i class="{{$menu->icon}}"></i> <span>{{ $menu->main }}</span></a></li>
                     @else
                         @if($menu->sub_type == "0")
                             <li class="treeview">

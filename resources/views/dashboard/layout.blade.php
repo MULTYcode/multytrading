@@ -21,20 +21,22 @@
         }
     </style>
 
-    <title>{{ config('app.name', 'L.tru') }} | Dashboard</title>
+    <title>{{ config('app.name', 'WSM') }} | We Smart Module</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{asset( 'bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset( 'bower_components/font-awesome/css/font-awesome.min.css')}}">
+    <link rel='stylesheet' id='theme-style-css' href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}" type='text/css' media='all' />
+    {{--  <link rel="stylesheet" href="{{asset( 'bower_components/font-awesome/css/font-awesome.min.css')}}">  --}}
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{asset( 'bower_components/Ionicons/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset( 'dist/css/AdminLTE.min.css')}}">
+    <link rel='stylesheet' id='theme-style-css' href="{{asset('dist/css/AdminLTE.min.css')}}" type='text/css' media='all' />
+    {{--  <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">  --}}
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="{{asset( 'dist/css/skins/_all-skins.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
     <!-- Morris chart -->
     <link rel="stylesheet" href="{{asset('bower_components/morris.js/morris.css')}}">
     <!-- jvectormap -->
@@ -52,16 +54,16 @@
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{asset('plugins/iCheck/all.css')}}">
 
-    <!-- jQuery 3 -->
-    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+    {{-- <!-- jQuery 3 -->
+    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script> --}}
     
-    <!--[if lt IE 9]>-->
+    {{-- <!--[if lt IE 9]>-->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif]--> --}}
 
-    <!-- chart.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    {{-- <!-- chart.js charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> --}}
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

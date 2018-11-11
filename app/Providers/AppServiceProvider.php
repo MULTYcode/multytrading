@@ -22,8 +22,10 @@ class AppServiceProvider extends ServiceProvider
                 $daftarmenu = DB::connection('mysql')->select("select * from dt_routes 
                                                             join dt_auth on dt_auth.route_id = dt_routes.id
                                                             where dt_auth.user_id = " . Auth::id() . " and sub_order is not null order by sub_order");
-                view()->share('daftarmenu', $daftarmenu);
+            } else {
+                $daftarmenu = DB::connection('mysql')->select("select * from dt_routes where sub_order is not null order by sub_order");
             }
+            view()->share('daftarmenu', $daftarmenu);
         });
     }
 

@@ -1,13 +1,13 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{route('dashboard')}}" class="logo">
+    <a href="{{route('home')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
-            <b>L.tru</b>
+            <b>WSM</b>
         </span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
-            <b>Truwear Asa Link</span>
+            <b>We Smart Module</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -18,77 +18,53 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <!-- Notifications: style can be found in dropdown.less -->
-{{--                 <li class="dropdown notifications-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">You have 10 notifications</li>
-                        <li>
-                            <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design
-                                        problems
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-users text-red"></i> 5 new members joined
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-user text-red"></i> You changed your username
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="footer">
-                            <a href="#">View all</a>
-                        </li>
-                    </ul>
-                </li> --}}
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        @if(Auth::user())
                         <img src="/uploads/avatars/{{ Auth::user()->image }}" class="user-image" alt="User Image">
                         <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                        @else
+                        <img src="{{URL::asset('/images/images.png')}}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">Guest </span>
+                        @endif
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
+                            @if(Auth::user())
                             <img src="/uploads/avatars/{{ Auth::user()->image }}" class="img-circle" alt="User Image">
                             <p>
                                 {{ Auth::user()->name }} - {{ Auth::user()->skill }}
                                 <small>{{ Auth::user()->info }}</small>
                             </p>
+                            @else
+                            <img src="{{URL::asset('/images/images.png')}}" class="img-circle" alt="User Image">
+                            <span class="hidden-xs">Guest</span>
+                            @endif
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
+                            @if(Auth::user())
                             <div class="pull-left">
                                 <a href="{{ route('profile') }}" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">Sign out</a>
+                                document.getElementById('logout-form').submit();">Sign
+                                    out</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </div>
+                            @else
+                            <div class="pull-left">
+                                <a href="{{ route('login') }}" class="btn btn-default btn-flat">{{Auth::check()}} Login</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="{{ route('register') }}" class="btn btn-default btn-flat">Register</a>
+                            </div>
+                            @endif
                         </li>
                     </ul>
                 </li>
