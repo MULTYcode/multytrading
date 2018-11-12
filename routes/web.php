@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+//\Debugbar::info(asset("bower_components/jquery/dist/jquery.min.js"));
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');

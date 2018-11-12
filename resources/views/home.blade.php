@@ -1,8 +1,20 @@
 @extends('dashboard.layout')
-<html>
 
-<body>
-    @section('content')
+@section('content-header')
+<section class="content-header">
+    <h1>
+        PORTAL
+        <small>Optional description</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+    </ol>
+</section>
+@endsection
+
+@section('content')
+<section class="content">
     <div class="row">
         <div class="col-xs-12">
             <!-- Box Comment -->
@@ -80,7 +92,5 @@
             <!-- /.box -->
         </div>
     </div>
-    @endsection()
-</body>
-
-</html>
+</section>
+@endsection

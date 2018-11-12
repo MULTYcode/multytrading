@@ -25,7 +25,7 @@ class cekrole
             $route = explode('@', Route::getCurrentRoute()->getActionName())[0];
             $route = preg_replace('/[\W\s\/]+/', '.', $route);
 
-            //\Debugbar::info(preg_replace('/[\W\s\/]+/', '.', $route));
+            //\Debugbar::info(asset("bower_components/jquery/dist/jquery.min.js"));
             //\Debugbar::info($route);
             //\Debugbar::info(explode('@', Route::getCurrentRoute()->getActionName()))[1];
             //\Debugbar::info(Route::currentRouteName());
