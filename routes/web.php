@@ -12,8 +12,8 @@
  */
 
 Route::get('/', function () {
-    return view('home');
-})->name('home');
+    return view('welcome');
+});
 
 //\Debugbar::info(asset("bower_components/jquery/dist/jquery.min.js"));
 
