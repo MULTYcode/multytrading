@@ -15,12 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//\Debugbar::info(asset("bower_components/jquery/dist/jquery.min.js"));
-
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
-
 //Route::get('register', 'Auth\RegisterController@create')->name('register');
 Route::get('verifyEmailFirst', 'Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');
 Route::get('verify/{email}/{verifytoken}', 'Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
