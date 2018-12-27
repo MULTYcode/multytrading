@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //update
         return view('home',['routes'=>dt_routes::all()]);
     }
 
