@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('register', 'Auth\RegisterController@create')->name('register');
 Route::get('verifyEmailFirst', 'Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');
 Route::get('verify/{email}/{verifytoken}', 'Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
@@ -28,19 +28,19 @@ Route::get('noaccess', function () {
 })->name('noaccess');
 
 Route::group(['middleware' => ['web', 'auth', 'cekrole']], function () {
-    Route::get('profile', 'ProfileCtrl@profile')->name('profile');
-    Route::post('updateavatar', 'ProfileCtrl@update_avatar');
-    Route::post('updateprofile', 'ProfileCtrl@update_profile');
+Route::get('profile', 'ProfileCtrl@profile')->name('profile');
+Route::post('updateavatar', 'ProfileCtrl@update_avatar');
+Route::post('updateprofile', 'ProfileCtrl@update_profile');
 
-    /** SETTING */
-    Route::get('userlist', 'Auth\settingCtrl@userlist')->name('userlist');
-    Route::get('userlist/{jenis}/{email}', 'Auth\settingCtrl@deactivateuser')->name('deactivateuser');
-    Route::get('userrole/{email}/{userid}', 'Auth\settingCtrl@userrole')->name('userrole');
-    Route::get('usermodule', 'Auth\settingCtrl@usermodule')->name('usermodule');
-    Route::get('addmodule/{email}/{id}/{userid}', 'Auth\settingCtrl@addmodule')->name('addmodule');
-    Route::get('removemodule/{email}/{userid}/{roleid}', 'Auth\settingCtrl@removemodule')->name('removemodule');
+/** SETTING */
+Route::get('userlist', 'Auth\settingCtrl@userlist')->name('userlist');
+Route::get('userlist/{jenis}/{email}', 'Auth\settingCtrl@deactivateuser')->name('deactivateuser');
+Route::get('userrole/{email}/{userid}', 'Auth\settingCtrl@userrole')->name('userrole');
+Route::get('usermodule', 'Auth\settingCtrl@usermodule')->name('usermodule');
+Route::get('addmodule/{email}/{id}/{userid}', 'Auth\settingCtrl@addmodule')->name('addmodule');
+Route::get('removemodule/{email}/{userid}/{roleid}', 'Auth\settingCtrl@removemodule')->name('removemodule');
 
-    /* PORTAL */
-    Route::get('portal', 'portalctrl@index')->name('portal');
+/* PORTAL */
+Route::get('portal', 'portalctrl@index')->name('portal');
 
 });
