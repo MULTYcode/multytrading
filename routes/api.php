@@ -21,7 +21,7 @@ Route::namespace('Api')->group(function () {
 
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
-    Route::post('/tes', 'UserController@tes');
+    Route::get('/tes', 'UserController@tes');
 
     Route::middleware('auth:api')->group(function(){
         Route::post('/newtoken', 'UserController@newtoken');
