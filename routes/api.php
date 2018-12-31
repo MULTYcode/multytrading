@@ -26,7 +26,7 @@ Route::group(
         'prefix' => 'Api',
     ], function(){
 
-        Route::post('/newtoken', 'UserController@newtoken');
+        Route::post('/newtoken', 'Api\UserController@newtoken');
 
 });
 
