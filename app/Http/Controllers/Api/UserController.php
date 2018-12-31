@@ -79,15 +79,19 @@ class UserController extends Controller
     }
 
     protected function newtoken(Request $request){
-        $email = $request->input('email');
-        $login = User::where('email', $email)->first();
-        if (!$login) {
-            $res['status'] = 'error';
-            $res['msg'] = 'Your session is expired';
-            return response($res);
-        }
-        else {
-            return response()->json(['token'=>$login->api_token]);
+        try{
+            $email = $request->input('email');
+            $login = User::where('email', $email)->first();
+            if (!$login) {
+                $res['status'] = 'error';
+                $res['msg'] = 'Your session is expired';
+                return response($res);
+            }
+            else {
+                return response()->json(['token'=>$login->api_token]);
+            }    
+        }catch(\Illuminate\Database\QueryException $ex){
+            return response($ex->getMessage());
         }
     }
 
