@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\User;
-//use Illuminate\Support\Facades\DB;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 
-class UserController extends Controller
+class UserCtrl extends Controller
 {
     protected function register(Request $request){
         try{
@@ -199,5 +198,4 @@ class UserController extends Controller
             return response($e->getmessage());
         }
     }
-
 }
