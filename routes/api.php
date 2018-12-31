@@ -23,7 +23,7 @@ use Egulias\EmailValidator\Validation\RFCValidation;
         'prefix' => 'Api',
     ], function(){
 
-        Route::post('/newtoken', 'Api\UserController@newtoken')->middleware('auth:api');
+        Route::post('/newtoken', 'UserController@newtoken')->middleware('auth:api');
 }); 
 
 Route::post('/register', 'UserController@register');
