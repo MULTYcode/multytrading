@@ -17,15 +17,6 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 |
 */
 
- Route::group(
-    [           
-        'namespace' => 'Api',
-        'prefix' => 'Api',
-    ], function(){
-
-        Route::post('/newtoken', 'UserController@newtoken')->middleware('auth:api');
-}); 
-
 Route::post('/register', 'UserController@register');
 Route::post('/login', 'UserController@login');
 
