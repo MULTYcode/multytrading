@@ -17,7 +17,7 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 |
 */
 
-Route::namespace('Api')->group(function () {
+//Route::namespace('Api')->group(function () {
 
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
@@ -30,7 +30,7 @@ Route::namespace('Api')->group(function () {
         Route::post('/picuser', 'UserController@picuser');
         Route::get('/getpicuser', 'UserController@getpicuser');
     });
-    
-});
+
+//});
 
 
