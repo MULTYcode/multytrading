@@ -78,10 +78,6 @@ class UserController extends Controller
         }
     }
 
-    public function tes(){
-        return response()->json('OK', 200);
-    }
-
     protected function newtoken(Request $request){
         try{
             $email = $request->input('email');
