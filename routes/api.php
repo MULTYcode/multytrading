@@ -23,7 +23,7 @@ Route::namespace('Api')->group(function () {
     Route::post('/login', 'UserController@login');
 
     Route::middleware('auth:api')->group(function(){
-        Route::post('/newtoken', 'Api\UserController@newtoken'); 
+        Route::post('/newtoken', 'UserController@newtoken'); 
         Route::get('/getuser', 'UserController@getuser');
         Route::post('/updateuser', 'UserController@updateuser');
         Route::post('/gantipwduser', 'UserController@gantipwduser');
