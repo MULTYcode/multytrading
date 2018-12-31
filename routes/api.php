@@ -17,21 +17,18 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 |
 */
 
-Route::namespace('Api')->group(function () {
+Route::post('/register', 'UserController@register');
+Route::post('/login', 'UserController@login');
 
-    Route::post('/register', 'UserController@register');
-    Route::post('/login', 'UserController@login');
+Route::middleware('auth:api')->group(function(){
     Route::get('/tes', 'UserController@tes');
-
-    Route::middleware('auth:api')->group(function(){
-        Route::post('/newtoken', 'UserController@newtoken');
-        Route::get('/getuser', 'UserController@getuser');
-        Route::post('/updateuser', 'UserController@updateuser');
-        Route::post('/gantipwduser', 'UserController@gantipwduser');
-        Route::post('/picuser', 'UserController@picuser');
-        Route::get('/getpicuser', 'UserController@getpicuser');
-    });
-
+    Route::post('/newtoken', 'UserController@newtoken');
+    Route::get('/getuser', 'UserController@getuser');
+    Route::post('/updateuser', 'UserController@updateuser');
+    Route::post('/gantipwduser', 'UserController@gantipwduser');
+    Route::post('/picuser', 'UserController@picuser');
+    Route::get('/getpicuser', 'UserController@getpicuser');
 });
+
 
 
