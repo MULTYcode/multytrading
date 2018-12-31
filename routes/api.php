@@ -21,6 +21,7 @@ Route::namespace('Api')->group(function () {
 
     Route::post('/register', 'UserCtrl@register');
     Route::post('/login', 'UserCtrl@login');      
+    Route::get('/ambil', 'UserCtrl@ambil');
 
     Route::middleware('auth:api')->group(function(){
         Route::post('/newtoken', 'UserCtrl@newtoken');
@@ -33,7 +34,5 @@ Route::namespace('Api')->group(function () {
 
 });
 
-
-//});
 
 

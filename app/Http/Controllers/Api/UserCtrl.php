@@ -77,6 +77,10 @@ class UserCtrl extends Controller
         }
     }
 
+    protected function ambil(){
+        return response()->json('Ok', 200);
+    }
+
     protected function newtoken(Request $request){
         try{
             $email = $request->input('email');
