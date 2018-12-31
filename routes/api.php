@@ -31,7 +31,7 @@ Route::namespace('Api')->group(function () {
         Route::get('/getpicuser', 'UserCtrl@getpicuser'); 
     });          
 
-    });
+});
 
 
 //});
