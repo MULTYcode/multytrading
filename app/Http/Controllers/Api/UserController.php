@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 //use Illuminate\Support\Facades\DB;
@@ -77,13 +78,26 @@ class UserController extends Controller
         }
     }
 
+    protected function newtoken(Request $request){
+        $email = $request->input('email');
+        $login = User::where('email', $email)->first();
+        if (!$login) {
+            $res['status'] = 'error';
+            $res['msg'] = 'Your session is expired';
+            return response($res);
+        }
+        else {
+            return response()->json([ 'token'=>$login->api_token], 200);
+        }
+    }
+
     protected function login(Request $request){
         $hasher = app()->make('hash');
         $email = $request->input('email');
         $password = $request->input('password');
         $login = User::where('email', $email)->first();
         if (!$login) {
-            $res['error'] = true;
+            $res['status'] = 'error';
             $res['msg'] = 'Your email or password incorrect!';
             return response($res);
         }else{
@@ -96,13 +110,13 @@ class UserController extends Controller
                 $api_token = sha1(time());
                 $create_token = User::where('id', $login->id)->update(['api_token' => $api_token]);
                 if ($create_token) {
-                    $res['error'] = false;
+                    $res['status'] = 'success';
                     $res['api_token'] = $api_token;
-                    $res['msg'] = $login;
+                    $res['user'] = $login;
                     return response($res);
                 }
             }else{
-                $res['error'] = true;
+                $res['status'] = 'error';
                 $res['msg'] = 'You email or password incorrect!';
                 return response($res);
             }
