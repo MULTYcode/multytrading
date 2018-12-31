@@ -17,22 +17,20 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 |
 */
 
-/* Route::group(
+ Route::group(
     [           
         'namespace' => 'Api',
         'prefix' => 'Api',
     ], function(){
 
-        Route::get('posts', ['uses'=>'PostsApiController@index']);
-        Route::get('posts/{id}', ['uses'=>'PostssAPIController@show']);
-
-}); */
+        Route::post('/newtoken', 'Api\UserController@newtoken')->middleware('auth:api');
+}); 
 
 Route::post('/register', 'UserController@register');
 Route::post('/login', 'UserController@login');
 
 Route::middleware('auth:api')->group(function(){
-    Route::post('/newtoken', 'Api\UserController@newtoken');
+
     Route::get('/getuser', 'UserController@getuser');
     Route::post('/updateuser', 'UserController@updateuser');
     Route::post('/gantipwduser', 'UserController@gantipwduser');
