@@ -87,7 +87,7 @@ class UserController extends Controller
             return response($res);
         }
         else {
-            return response()->json([ 'token'=>$login->api_token]);
+            return response()->json(['token'=>$login->api_token]);
         }
     }
 

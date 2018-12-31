@@ -22,8 +22,9 @@ Route::namespace('Api')->group(function () {
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
 
+    Route::post('/newtoken', 'UserController@newtoken')->middleware('auth:api'); 
+
     Route::middleware('auth:api')->group(function(){
-        Route::post('/newtoken', 'UserController@newtoken'); 
         Route::get('/getuser', 'UserController@getuser');
         Route::post('/updateuser', 'UserController@updateuser');
         Route::post('/gantipwduser', 'UserController@gantipwduser');
