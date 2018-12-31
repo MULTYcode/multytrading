@@ -82,7 +82,6 @@ class UserCtrl extends Controller
     }
 
     protected function newtoken(Request $request){
-        try{
             $email = $request->input('email');
             $login = User::where('email', $email)->first();
             if (!$login) {
@@ -93,9 +92,6 @@ class UserCtrl extends Controller
             else {
                 return response()->json(['token'=>$login->api_token]);
             }    
-        }catch(\Illuminate\Database\QueryException $ex){
-            return response($ex->getMessage());
-        }
     }
 
     protected function login(Request $request){
