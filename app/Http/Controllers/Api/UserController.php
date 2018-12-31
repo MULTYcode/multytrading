@@ -79,7 +79,7 @@ class UserController extends Controller
     }
 
     protected function tes(){
-        return response()->json('Ok', 200);
+        return response('OK');
     }
 
     protected function newtoken(Request $request){
