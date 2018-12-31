@@ -17,6 +17,17 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 |
 */
 
+/* Route::group(
+    [           
+        'namespace' => 'Api',
+        'prefix' => 'Api',
+    ], function(){
+
+        Route::get('posts', ['uses'=>'PostsApiController@index']);
+        Route::get('posts/{id}', ['uses'=>'PostssAPIController@show']);
+
+}); */
+
 Route::post('/register', 'UserController@register');
 Route::post('/login', 'UserController@login');
 
