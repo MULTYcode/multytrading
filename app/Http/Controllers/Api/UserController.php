@@ -78,7 +78,7 @@ class UserController extends Controller
         }
     }
 
-    protected function tes(){
+    public function tes(){
         return response()->json('OK', 200);
     }
 
