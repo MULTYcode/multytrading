@@ -90,7 +90,7 @@ class UserCtrl extends Controller
             if (!$login) {
                 $res['status'] = 'error';
                 $res['msg'] = 'Your session is expired';
-                return response($res);
+                return response()->json($res,200);
             }
             else {
                 return response()->json(['token'=>$login->api_token], 200);
