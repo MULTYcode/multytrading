@@ -79,8 +79,12 @@ class UserCtrl extends Controller
     }
 
     protected function ambil(){
-        $res = 'Done';
-        return response()->json(['result'=>$res], 200);
+        try{
+            $res = 'Done';
+            return response()->json(['result'=>$res], 200);
+        }catch(Exception $e){
+            return response($e->getMessage());
+        }        
     }
 
     protected function cektoken(Request $request){
