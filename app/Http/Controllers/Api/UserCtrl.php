@@ -83,7 +83,7 @@ class UserCtrl extends Controller
         return response()->json(['result'=>$res], 200);
     }
 
-    protected function newtoken(Request $request){
+    protected function cektoken(Request $request){
         try{
             $email = $request->input('email');
             $login = User::where('email', $email)->first();
