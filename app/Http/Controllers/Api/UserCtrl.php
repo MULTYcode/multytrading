@@ -94,13 +94,13 @@ class UserCtrl extends Controller
             if (!$login) {
                 $res['status'] = 'error';
                 $res['msg'] = 'Your session is expired';
-                return response()->json($res,200);
+                return response()->json($res);
             }
             else {
-                return response()->json(['token'=>$login->api_token], 200);
+                return response()->json(['token'=>$login->api_token]);
             }    
         }catch(\Illuminate\Database\QueryException $ex){
-            return response()->json($ex->getMessage(), 200);
+            return response()->json($ex->getMessage());
         }
     }
 
