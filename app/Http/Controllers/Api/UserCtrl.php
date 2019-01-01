@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
+use Illuminate\Support\Facades\Response;
 
 class UserCtrl extends Controller
 {
