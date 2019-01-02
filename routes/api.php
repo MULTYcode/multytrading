@@ -24,7 +24,7 @@ Route::group([
 
     Route::post('/register', 'UserCtrl@register');
     Route::post('/login', 'UserCtrl@login');
-    Route::ambil('/ambil', 'UserCtrl@ambil');
+    Route::get('/ambil', 'UserCtrl@ambil');
 
     Route::middleware('auth:api') -> group(function () {
         Route::post('/cektoken', 'UserCtrl@cektoken');
@@ -34,7 +34,7 @@ Route::group([
         Route::post('/picuser', 'UserCtrl@picuser');
         Route::get('/getpicuser', 'UserCtrl@getpicuser');
     });
-    
+
 });
 
 
