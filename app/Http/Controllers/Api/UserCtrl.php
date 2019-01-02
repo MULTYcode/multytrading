@@ -57,7 +57,7 @@ class UserCtrl extends Controller
             }
             */
 
-            $checkEmail = User::where('email',$email)->count();
+            $checkEmail = User::where('email',$request('email'))->count();
             if($checkEmail > 0){
                 $return = array(
                     "error" => true,
@@ -77,14 +77,14 @@ class UserCtrl extends Controller
 
             $hasher = app()->make('hash');
             User::create([
-                'first_name'    => $firstname,
-                'last_name'     => $lastname,
-                'birth'         => $birth,
-                'address'       => $address,
-                'gender'        => $gender,
-                'phone'         => $phone,
-                'email'         => $email,
-                'password'      => $hasher->make($password),
+                'first_name'    => $request['firstname'],
+                'last_name'     => $request['lastname'],
+                'birth'         => $request['birth'],
+                'address'       => $request['address'],
+                'gender'        => $request['gender'],
+                'phone'         => $request['phone'],
+                'email'         => $request['email'],
+                'password'      => $hasher->make($request['password']),
             ]);
 
             return response()->json(['error'=>false,'msg'=>'Success']);
