@@ -78,10 +78,9 @@ class UserCtrl extends Controller
         }
     }
 
-    protected function ambil(){
+    protected function ambil(Request $request){
         try{
-            $res = 'Done';
-            return response()->json(['result'=>$res], 200);
+            return response()->json($request->input('kirim'), 200);
         }catch(Exception $e){
             return response($e->getMessage());
         }        
