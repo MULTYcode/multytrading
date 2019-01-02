@@ -78,14 +78,6 @@ class UserCtrl extends Controller
         }
     }
 
-    protected function ambil(){
-        try{
-            return response()->json('Berhasil dari folder api', 200);
-        }catch(Exception $e){
-            return response($e->getMessage());
-        }        
-    }
-
     protected function cektoken(Request $request){
         try{
             $email = $request->input('email');
