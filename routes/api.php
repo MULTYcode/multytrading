@@ -26,7 +26,7 @@ Route::group([
 
         Route::post('/register', 'UserCtrl@register');
         Route::post('/login', 'UserCtrl@login');
-        Route::post('/ambil', 'UserCtrl@UserCtrl');
+        Route::post('/ambil', 'UserCtrl@ambil');
 
         Route::middleware('auth:api') -> group(function () {
             Route::post('/cektoken', 'UserCtrl@cektoken');
