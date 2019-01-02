@@ -80,7 +80,7 @@ class UserCtrl extends Controller
 
     protected function ambil(){
         try{
-            return response()->json('Berhasil', 200);
+            return response()->json('Berhasil dari folder api', 200);
         }catch(Exception $e){
             return response($e->getMessage());
         }        
