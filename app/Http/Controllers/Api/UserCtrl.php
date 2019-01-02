@@ -15,9 +15,14 @@ class UserCtrl extends Controller
         try{
             $activation_code = str_random(60);
     
-            $email      = isset($request->email);
-            $name       = isset($request->name);
-            $password   = isset($request->password);
+            $firstname      = isset($request->firstname);
+            $lastname       = isset($request->lastname);
+            $birth          = isset($request->birth);
+            $address        = isset($request->address);
+            $gender         = isset($request->gender);
+            $phone          = isset($request->phone);
+            $email          = isset($request->email);
+            $password       = isset($request->password);
     
             if(!isset($email)){
                 return response()->json(['error'=>true,'msg'=>'Email tidak boleh kosong']);
@@ -57,7 +62,12 @@ class UserCtrl extends Controller
 
             $hasher = app()->make('hash');
             User::create([
-                'name' => $request['name'],
+                'first_name' => $request['firstname'],
+                'last_name' => $request['lastname'],
+                'birth' => $request['birth'],
+                'address' => $request['address'],
+                'gender' => $request['gender'],
+                'phone' => $request['phone'],
                 'email' => $request['email'],
                 'password' => $hasher->make($request['password']),
             ]);
