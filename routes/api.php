@@ -17,6 +17,8 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 |
 */
 
+Route::get('/tesambil', 'api_userctrl@ambil');
+
 Route::namespace('Api')->group(function () {
 
     Route::post('/register', 'UserCtrl@register');
