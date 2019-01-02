@@ -24,11 +24,26 @@ class UserCtrl extends Controller
             $email          = isset($request->email);
             $password       = isset($request->password);
     
+            if(!isset($firstname)){
+                return response()->json(['error'=>true,'msg'=>'First name is empty']);
+            }
+            if(!isset($lastname)){
+                return response()->json(['error'=>true,'msg'=>'Last name is empty']);
+            }
+            if(!isset($birth)){
+                return response()->json(['error'=>true,'msg'=>'Birth date is empty']);
+            }
+            if(!isset($address)){
+                return response()->json(['error'=>true,'msg'=>'Address is empty']);
+            }
+            if(!isset($gender)){
+                return response()->json(['error'=>true,'msg'=>'Gender is empty']);
+            }
+            if(!isset($phone)){
+                return response()->json(['error'=>true,'msg'=>'phone is empty']);
+            }
             if(!isset($email)){
                 return response()->json(['error'=>true,'msg'=>'Email tidak boleh kosong']);
-            }
-            if(!isset($name)){
-                return response()->json(['error'=>true,'msg'=>'Nama tidak boleh kosong']);
             }
             if(!isset($password)){
                 return response()->json(['error'=>true,'msg'=>'Password tidak boleh kosong']);
@@ -42,7 +57,7 @@ class UserCtrl extends Controller
             }
             */
 
-            $checkEmail = User::where('email',$request['email'])->count();
+            $checkEmail = User::where('email',$email)->count();
             if($checkEmail > 0){
                 $return = array(
                     "error" => true,
@@ -51,14 +66,14 @@ class UserCtrl extends Controller
                 return response()->json($return);
             }
     
-            $checkName = User::where('name',$request['name'])->count();
+/*             $checkName = User::where('name',$request['name'])->count();
             if($checkName > 0){
                 $return = array(
                     "error" => true,
                     "msg" => "Nama sudah digunakan"
                 );
                 return response()->json($return);
-            }
+            } */
 
             $hasher = app()->make('hash');
             User::create([
