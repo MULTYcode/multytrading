@@ -17,10 +17,9 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 |
 */
 
-//Route::get('/tesambil', 'api_userctrl@tesambil');
-
-Route::group(['prefix' => 'v1', 'namespace' => 'Apis'], function(){
-    Route::get('/ambil', 'myApi@ambil');
+Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function(){
+    Route::get('/ambil', 'UserCtrl@ambil');
+    //Route::get('/ambil', 'myApi@ambil');
 });
 
 /* Route::namespace('Api')->group(function () {
