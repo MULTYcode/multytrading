@@ -24,9 +24,9 @@ Route::group([
 
     Route::post('/register', 'UserCtrl@register');
     Route::post('/login', 'UserCtrl@login');
-    Route::get('/ambil', 'UserCtrl@ambil');
 
     Route::middleware('auth:api') -> group(function () {
+        Route::get('/ambil', 'UserCtrl@ambil');
         Route::post('/cektoken', 'UserCtrl@cektoken');
         Route::get('/getuser', 'UserCtrl@getuser');
         Route::post('/updateuser', 'UserCtrl@updateuser');
