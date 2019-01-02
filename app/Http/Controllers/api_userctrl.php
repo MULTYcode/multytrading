@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class api_userctrl extends Controller
 {
-    protected function ambil(){
+    protected function tesambil(){
         try{
             return response()->json('Berhasil', 200);
         }catch(Exception $e){
