@@ -77,14 +77,14 @@ class UserCtrl extends Controller
 
             $hasher = app()->make('hash');
             User::create([
-                'first_name'    => $request['firstname'],
-                'last_name'     => $request['lastname'],
-                'birth'         => $request['birth'],
-                'address'       => $request['address'],
-                'gender'        => $request['gender'],
-                'phone'         => $request['phone'],
-                'email'         => $request['email'],
-                'password'      => $hasher->make($request['password']),
+                'first_name'    => $request->input('firstname'),
+                'last_name'     => $request->input('lastname'),
+                'birth'         => $request->input('birth'),
+                'address'       => $request->input('address'),
+                'gender'        => $request->input('gender'),
+                'phone'         => $request->input('phone'),
+                'email'         => $request->input('email'),
+                'password'      => $hasher->make($request->input('password')),
             ]);
 
             return response()->json(['error'=>false,'msg'=>'Success']);
