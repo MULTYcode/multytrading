@@ -23,7 +23,7 @@ Route::namespace('Api')->group(function () {
     Route::post('/login', 'UserCtrl@login');   
 
     Route::middleware('auth:api')->group(function(){
-        Route::get('/ambil', 'UserCtrl@UserCtrl');
+        Route::post('/ambil', 'UserCtrl@UserCtrl');
         Route::post('/cektoken', 'UserCtrl@cektoken');
         Route::get('/getuser', 'UserCtrl@getuser');
         Route::post('/updateuser', 'UserCtrl@updateuser');
