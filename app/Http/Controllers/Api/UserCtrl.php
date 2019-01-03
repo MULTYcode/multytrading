@@ -41,7 +41,7 @@ class UserCtrl extends Controller
  */
 
                 $email = $request->input('email');
-            $this->sendEmail($email);
+                Mail::to($email)->send(new verifyEmail($email));
 
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 /*             Mail::raw(["HTML","<body><h2>Welcome</h2><p>Activations link</p></body>"], function ($message) {
