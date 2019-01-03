@@ -38,8 +38,8 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]);
 
-            $this->sendEmail($request->input('email'));
-            return response()->json(['error'=>false,'msg'=>'Success']); 
+            return $this->sendEmail($request->input('email'));
+            //return response()->json(['error'=>false,'msg'=>'Success']); 
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
