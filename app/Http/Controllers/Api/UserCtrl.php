@@ -9,57 +9,20 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Illuminate\Support\Facades\Response;
 
+use Illuminate\Support\Str;
+use Mail;
+use Illuminate\Support\Facades\Validator;
+
 class UserCtrl extends Controller
 {
     protected function register(Request $request){
         try{
 
-           // return response()->json('Berhasil', 200);
-            //dd();
-
-            //$activation_code = str_random(60);
-    
-            $firstname      = isset($request->firstname);
-            $lastname       = isset($request->lastname);
-            $birth          = isset($request->birth);
-            $address        = isset($request->address);
-            $gender         = isset($request->gender);
-            $phone          = isset($request->phone);
-            $email          = isset($request->email);
-            $password       = isset($request->password);
-    
-            if(!isset($firstname)){
-                return response()->json(['error'=>true,'msg'=>'First name is empty']);
-            }
-            if(!isset($lastname)){
-                return response()->json(['error'=>true,'msg'=>'Last name is empty']);
-            }
-            if(!isset($birth)){
-                return response()->json(['error'=>true,'msg'=>'Birth date is empty']);
-            }
-            if(!isset($address)){
-                return response()->json(['error'=>true,'msg'=>'Address is empty']);
-            }
-            if(!isset($gender)){
-                return response()->json(['error'=>true,'msg'=>'Gender is empty']);
-            }
-            if(!isset($phone)){
-                return response()->json(['error'=>true,'msg'=>'phone is empty']);
-            }
-            if(!isset($email)){
-                return response()->json(['error'=>true,'msg'=>'Email tidak boleh kosong']);
-            }
-            if(!isset($password)){
-                return response()->json(['error'=>true,'msg'=>'Password tidak boleh kosong']);
-            } 
-            
-            /*
-            $validator = new EmailValidator();
-            $isValid = $validator->isValid($email, new RFCValidation());
-            if(!$isValid){
-                return response()->json(['error'=>true,'msg'=>'Email tidak benar. silahkan cek kembali']);
-            }
-            */
+            return Validator::make($data, [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
 
             $checkEmail = User::where('email',$request->input('email'))->count();
             if($checkEmail > 0){
@@ -69,15 +32,6 @@ class UserCtrl extends Controller
                 );
                 return response()->json($return);
             }
-    
-/*             $checkName = User::where('name',$request['name'])->count();
-            if($checkName > 0){
-                $return = array(
-                    "error" => true,
-                    "msg" => "Nama sudah digunakan"
-                );
-                return response()->json($return);
-            } */
 
             $hasher = app()->make('hash');
             User::create([
@@ -92,15 +46,6 @@ class UserCtrl extends Controller
             ]);
 
             return response()->json(['error'=>false,'msg'=>'Success']);
-            
-            /*
-            $send = [
-                'name' => $request->name,
-                'link' => $activation_code,
-                'email'=> $request->email
-             ];
-             $this->sendEmail($send, $user);
-            */ 
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
