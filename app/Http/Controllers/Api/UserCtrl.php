@@ -39,35 +39,15 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]); */
 
-            //$this->sendEmail($request->input('email'));
+            $this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 
-$emailhtml = "<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-    <title>Document</title>
-</head>
-<body>
-Thanks for using MyErp Dashboard! Please confirm your email address by clicking on the link below.<br><br>
-
-<a href=''>Verified Email</a></p><br><br>
-
-If you did not sign up for a MyErp Dashboard account please disregard this email.</p><br><br>
-
-Happy monitoring! <br>
-The WSM Team
-</body>
-</html>";
-
-             Mail::raw($emailhtml, function($message)
+/*              Mail::raw($emailhtml, function($message)
             {
                 $message->subject('Hi There!!');
                 $message->from("noreply@wesmartmodule.com", "Test Email");
                 $message->to('mhdwasiman@gmail.com');
-            }); 
+            });  */
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
@@ -76,7 +56,8 @@ The WSM Team
 
     public function sendEmail($thisUser)
     {
-        Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
+        //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
+        Mail::to($thisUser['email'])->send(['html'=>'email.sendView']);
     }
 
     protected function cektoken(Request $request){
