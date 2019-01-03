@@ -46,7 +46,7 @@ class UserCtrl extends Controller
                 $message->to('mhdwasiman@gmail.com');
                 $message->subject('Multy Trading Email Verification');
             }); */
-            Mail::to($request->input('email'))->send(new verifyEmail($thisUser));
+            Mail::to($request->input('email'))->send(new verifyEmail($request->input('email')));
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
