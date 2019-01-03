@@ -42,16 +42,27 @@ class UserCtrl extends Controller
             //$this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 
-             Mail::raw(
-                 "Thanks for using MyErp Dashboard! Please confirm your email address by clicking on the link below.<br><br>
+$emailhtml = "<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+<body>
+Thanks for using MyErp Dashboard! Please confirm your email address by clicking on the link below.<br><br>
 
-                    <a href=''>Verified Email</a></p><br><br>
+<a href=''>Verified Email</a></p><br><br>
 
-                    If you did not sign up for a MyErp Dashboard account please disregard this email.</p><br><br>
+If you did not sign up for a MyErp Dashboard account please disregard this email.</p><br><br>
 
-                    Happy monitoring! <br>
-                    The WSM Team"
-             , function($message)
+Happy monitoring! <br>
+The WSM Team
+</body>
+</html>";
+
+             Mail::raw($emailhtml, function($message)
             {
                 $message->subject('Hi There!!');
                 $message->from("noreply@wesmartmodule.com", "Test Email");
