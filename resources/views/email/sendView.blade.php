@@ -257,7 +257,6 @@
                                             <td>
                                                 <p><center><h1 style="font-weight: 400;"> Multy Trading </h1></center></p>
                                                 <hr>
-                                                <p><center>Assalamualaikum Wr Wb</center></p>
                                                 <p>
                                                     Silahkan konfirmasi akun email kamu untuk mengaktifkan dengan menekan link dibawah ini.
                                                 </p>

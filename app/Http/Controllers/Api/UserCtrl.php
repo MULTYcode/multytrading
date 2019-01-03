@@ -15,40 +15,38 @@ use App\Mail\verifyEmail;
 
 class UserCtrl extends Controller
 {
-    protected function register(Request $request){
-        try{
+    protected function register(Request $request) {
+        try {
 
-/*              $checkEmail = User::where('email',$request->input('email'))->count();
-            if($checkEmail > 0){
-                $return = array(
-                    "error" => true,
-                    "msg" => "Email sudah terdaftar"
-                );
+            $checkEmail = User::where('email', $request->input('email'))->count();
+            if ($checkEmail > 0) {
+                $return = array("error"=>true, "msg"=>"Email sudah terdaftar");
                 return response()->json($return);
-            } 
+            }
 
-             $hasher = app()->make('hash');
+            $hasher = app()->make('hash');
             User::create([
-                'first_name'    => $request->input('firstname'),
-                'last_name'     => $request->input('lastname'),
-                'birth'         => $request->input('birth'),
-                'address'       => $request->input('address'),
-                'gender'        => $request->input('gender'),
-                'phone'         => $request->input('phone'),
-                'email'         => $request->input('email'),
-                'password'      => $hasher->make($request->input('password')),
-            ]); 
- */
+                'first_name'=>$request->input('firstname'),
+                'last_name'=>$request->input('lastname'),
+                'birth'=>$request->input('birth'),
+                'address'=>$request->input('address'),
+                'gender'=>$request->input('gender'),
+                'phone'=>$request->input('phone'),
+                'email'=>$request->input('email'),
+                'password'=>$hasher->make($request->input('password'))
+            ]);
+
+            $activation_code = str_random(60).$request->email;
 
             $send = [
-                'name' => $request->firstname,
-                'link' => '$activation_code',
-                'email'=> $request->email
+                'name'=>$request->firstname,
+                'link'=>$activation_code,
+                'email'=>$request->email
             ];
             $this->sendEmail($send);
-    
-        }catch(\Illuminate\Database\QueryException $ex){
-            return response($ex->getMessage());
+
+        } catch (\Illuminate\Database\QueryException $ex) {
+            return response($ex -> getMessage());
         }
     }
 
