@@ -42,12 +42,20 @@ class UserCtrl extends Controller
             //$this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 
-             Mail::raw('Now I know how to send emails with Laravel', function($message)
+             Mail::raw(
+                 "Thanks for using MyErp Dashboard! Please confirm your email address by clicking on the link below.<br><br>
+
+                    <a href=''>Verified Email</a></p><br><br>
+
+                    If you did not sign up for a MyErp Dashboard account please disregard this email.</p><br><br>
+
+                    Happy monitoring! <br>
+                    The WSM Team"
+             , function($message)
             {
                 $message->subject('Hi There!!');
                 $message->from("noreply@wesmartmodule.com", "Test Email");
                 $message->to('mhdwasiman@gmail.com');
-                $message->body('dasdsadsdsdsd');
             }); 
     
         }catch(\Illuminate\Database\QueryException $ex){
