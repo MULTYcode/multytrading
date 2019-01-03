@@ -18,7 +18,7 @@ class UserCtrl extends Controller
     protected function register(Request $request){
         try{
 
-             $checkEmail = User::where('email',$request->input('email'))->count();
+/*              $checkEmail = User::where('email',$request->input('email'))->count();
             if($checkEmail > 0){
                 $return = array(
                     "error" => true,
@@ -38,7 +38,7 @@ class UserCtrl extends Controller
                 'email'         => $request->input('email'),
                 'password'      => $hasher->make($request->input('password')),
             ]); 
-
+ */
             $this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 /*             Mail::raw(["HTML","<body><h2>Welcome</h2><p>Activations link</p></body>"], function ($message) {
@@ -52,7 +52,7 @@ class UserCtrl extends Controller
         }
     }
 
-    public function sendEmail($thisUser)
+    protected function sendEmail($thisUser)
     {
         return response()->json($thisuser, 200);
         //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
