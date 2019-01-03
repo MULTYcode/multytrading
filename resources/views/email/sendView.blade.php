@@ -255,12 +255,11 @@
                                     <table border="0" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td>
-                                                <p><center><img src="http://www.ubtransaction.com/web/applogo.png" style="width: 160px;"></center></p>
-                                                <p><center><h1 style="font-weight: 400;"> Muslim Loyalty </h1></center></p>
+                                                <p><center><h1 style="font-weight: 400;"> Multy Trading </h1></center></p>
                                                 <hr>
                                                 <p><center>Assalamualaikum Wr Wb</center></p>
                                                 <p>
-                                                    Silahkan konfirmasi akun email kamu untuk mengaktifkan akun sahabat Muslim Loyalty, dengan menekan link dibawah ini.
+                                                    Silahkan konfirmasi akun email kamu untuk mengaktifkan dengan menekan link dibawah ini.
                                                 </p>
                                                 <center>
                                                     <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
@@ -283,8 +282,6 @@
                                                         </tbody>
                                                     </table>
                                                 </center>
-                                                <p>Jika ada pertanyaan silahkan hubungi kami di wakafpersaudaraanmuslim@gmail.com</a>  / Only Whatsapp : 0819662288 dari pukul 08.00 WIB sampai pukul 17.00 WIB. </p>
-                                                {{--  <p><center>Wassalamualaikum Wr. Wb.</center></p>  --}}
                                             </td>
                                         </tr>
                                     </table>
@@ -297,7 +294,7 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-block">
-                                        <span class="apple-link">Muslim Loyalty</span>
+                                        <span class="apple-link">Copyright@WeSmartModule,2019</span>
                                     </td>
                                 </tr>
                             </table>
