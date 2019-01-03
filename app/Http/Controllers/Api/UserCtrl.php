@@ -50,7 +50,7 @@ class UserCtrl extends Controller
     public function sendEmail($thisUser)
     {
         //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
-        Mail::raw('<body><h2>Welcome</h2><p>Click this link to activated your account</p></body>', function ($message) {
+        Mail::raw('Au ah gelap', function ($message) {
             $message->from('noreply@wesmartmodule.com', 'wsm');
             $message->to($thisUser['email']);
             $message->subject('Multy Trading Email Verification');
