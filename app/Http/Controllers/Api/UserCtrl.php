@@ -41,13 +41,6 @@ class UserCtrl extends Controller
 
             $this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
-
-/*              Mail::raw($emailhtml, function($message)
-            {
-                $message->subject('Hi There!!');
-                $message->from("noreply@wesmartmodule.com", "Test Email");
-                $message->to('mhdwasiman@gmail.com');
-            });  */
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
@@ -57,7 +50,11 @@ class UserCtrl extends Controller
     public function sendEmail($thisUser)
     {
         //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
-        Mail::to($thisUser['email'])->send(['html'=>'email.sendView']);
+        Mail::raw('<body><h2>Welcome</h2><p>Click this link to activated your account</p></body>', function ($message) {
+            $message->from('noreply@wesmartmodule.com', 'wsm');
+            $message->to($thisUser['email'], $thisUser['email']);
+            $message->subject('Multy Trading Email Verification');
+        });
     }
 
     protected function cektoken(Request $request){
