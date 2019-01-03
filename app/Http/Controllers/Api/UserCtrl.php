@@ -15,14 +15,14 @@ class UserCtrl extends Controller
         try{
             $activation_code = str_random(60);
     
-            $firstname      = isset($request->firstname);
-            $lastname       = isset($request->lastname);
-            $birth          = isset($request->birth);
-            $address        = isset($request->address);
-            $gender         = isset($request->gender);
-            $phone          = isset($request->phone);
-            $email          = isset($request->email);
-            $password       = isset($request->password);
+            $firstname      = isset($request->input('firstname'));
+            $lastname       = isset($request->input('lastname'));
+            $birth          = isset($request->input('birth'));
+            $address        = isset($request->input('address'));
+            $gender         = isset($request->input('gender'));
+            $phone          = isset($request->input('phone'));
+            $email          = isset($request->input('email'));
+            $password       = isset($request->input('password'));
     
             if(!isset($firstname)){
                 return response()->json(['error'=>true,'msg'=>'First name is empty']);
