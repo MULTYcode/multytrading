@@ -41,12 +41,11 @@ class UserCtrl extends Controller
 
             //$this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
-/*             Mail::raw('Au ah gelap', function ($message) {
+            Mail::raw("<body><h2>Welcome</h2><p>Activations link</p></body>", function ($message) {
                 $message->from('noreply@wesmartmodule.com', 'wsm');
                 $message->to('mhdwasiman@gmail.com');
                 $message->subject('Multy Trading Email Verification');
-            }); */
-            Mail::to($request->input('email'))->send(new verifyEmail($request->input('email')));
+            }); 
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
