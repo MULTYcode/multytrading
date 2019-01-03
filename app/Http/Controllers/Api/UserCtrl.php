@@ -18,13 +18,7 @@ class UserCtrl extends Controller
     protected function register(Request $request){
         try{
 
-            return Validator::make($data, [
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-            ]);
-
-/*             $checkEmail = User::where('email',$request->input('email'))->count();
+            $checkEmail = User::where('email',$request->input('email'))->count();
             if($checkEmail > 0){
                 $return = array(
                     "error" => true,
@@ -45,7 +39,7 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]);
 
-            return response()->json(['error'=>false,'msg'=>'Success']); */
+            return response()->json(['error'=>false,'msg'=>'Success']); 
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
