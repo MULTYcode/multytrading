@@ -39,7 +39,7 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]); */
 
-            //$this->sendEmail($request->input('email'));
+            $this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 /*             Mail::raw(["HTML","<body><h2>Welcome</h2><p>Activations link</p></body>"], function ($message) {
                 $message->from('noreply@wesmartmodule.com', 'wsm');
