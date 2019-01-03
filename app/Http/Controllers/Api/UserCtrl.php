@@ -39,13 +39,13 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]); */
 
-            //$this->sendEmail($request->input('email'));
+            $this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
-            Mail::raw('Au ah gelap', function ($message) {
+/*             Mail::raw('Au ah gelap', function ($message) {
                 $message->from('noreply@wesmartmodule.com', 'wsm');
                 $message->to('mhdwasiman@gmail.com');
                 $message->subject('Multy Trading Email Verification');
-            });
+            }); */
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
@@ -54,12 +54,8 @@ class UserCtrl extends Controller
 
     public function sendEmail($thisUser)
     {
-        //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
-        Mail::raw('Au ah gelap', function ($message) {
-            $message->from('noreply@wesmartmodule.com', 'wsm');
-            $message->to($thisUser['email']);
-            $message->subject('Multy Trading Email Verification');
-        });
+        //return response()->json($thisuser, 200);
+        Mail::to($thisUser)->send(new verifyEmail($thisUser));
     }
 
     protected function cektoken(Request $request){
