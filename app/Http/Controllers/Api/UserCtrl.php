@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-use Egulias\EmailValidator\EmailValidator;
-use Egulias\EmailValidator\Validation\RFCValidation;
+//use Egulias\EmailValidator\EmailValidator;
+//use Egulias\EmailValidator\Validation\RFCValidation;
 use Illuminate\Support\Facades\Response;
 
-use Illuminate\Support\Str;
+//use Illuminate\Support\Str;
 use Mail;
+use App\Mail\verifyEmail;
 
 class UserCtrl extends Controller
 {
@@ -38,7 +39,7 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]);
 
-            return $this->sendEmail($request->input('email'));
+            $this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
     
         }catch(\Illuminate\Database\QueryException $ex){
