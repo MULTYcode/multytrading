@@ -13,7 +13,11 @@ class UserCtrl extends Controller
 {
     protected function register(Request $request){
         try{
-            $activation_code = str_random(60);
+
+            return response()->json('Berhasil', 200);
+            dd();
+
+            //$activation_code = str_random(60);
     
 /*             $firstname      = isset($request->input('firstname'));
             $lastname       = isset($request->input('lastname'));
