@@ -290,13 +290,15 @@
                         </table>
                         <!-- START FOOTER -->
                         <div class="footer">
-                            <table border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td class="content-block">
-                                        <span class="apple-link">Copyright@WeSmartModule,2019</span>
-                                    </td>
-                                </tr>
-                            </table>
+                            <center>
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td class="content-block">
+                                            <span class="apple-link">Copyright@WeSmartModule,2019</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
                         </div>
                         <!-- END FOOTER -->
                         <!-- END CENTERED WHITE CONTAINER -->

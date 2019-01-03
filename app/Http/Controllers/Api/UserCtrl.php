@@ -36,15 +36,16 @@ class UserCtrl extends Controller
                 'password'=>$hasher->make($request->input('password'))
             ]);
 
+            /*
             $activation_code = str_random(60).$request->email;
-
             $send = [
                 'name'=>$request->firstname,
                 'link'=>$activation_code,
                 'email'=>$request->email
             ];
             $this->sendEmail($send);
-
+            */
+            
         } catch (\Illuminate\Database\QueryException $ex) {
             return response($ex -> getMessage());
         }

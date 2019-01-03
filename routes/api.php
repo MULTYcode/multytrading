@@ -22,6 +22,7 @@ Route::group([
     'namespace' => 'Api'
 ], function () {
 
+    /*     
     Route::post('/register', 'UserCtrl@register');
     Route::post('/login', 'UserCtrl@login');
 
@@ -32,6 +33,22 @@ Route::group([
         Route::post('/gantipwduser', 'UserCtrl@gantipwduser');
         Route::post('/picuser', 'UserCtrl@picuser');
         Route::get('/getpicuser', 'UserCtrl@getpicuser');
+    }); 
+    */
+
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::post('recover', 'AuthController@recover');
+
+    //Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
+    //Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+    //Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
+
+    Route::group(['middleware' => ['jwt.auth']], function() {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('test', function(){
+            return response()->json(['foo'=>'bar']);
+        });
     });
 
 });
