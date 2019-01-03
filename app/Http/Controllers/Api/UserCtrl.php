@@ -43,7 +43,7 @@ class UserCtrl extends Controller
             //return response()->json(['error'=>false,'msg'=>'Success']); 
             Mail::raw('Au ah gelap', function ($message) {
                 $message->from('noreply@wesmartmodule.com', 'wsm');
-                $message->to($request->input('email'));
+                $message->to('mhdwasiman@gmail.com');
                 $message->subject('Multy Trading Email Verification');
             });
     
