@@ -49,10 +49,8 @@ class UserCtrl extends Controller
 
     public function sendEmail($thisUser)
     {
-        //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
-        Mail::send(verifyEmail($thisUser), $data, function($message) use ($data) {
-            $message->to($thisUser['email'], [])->subject('Silahkan konfirmasi email anda, dengan menekan link yang kami kirimkan.');
-        });
+        $res = Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
+        return response()->json($res, 200);
     }
 
     protected function cektoken(Request $request){
