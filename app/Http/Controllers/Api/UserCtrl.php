@@ -39,13 +39,14 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]); */
 
-            $this->sendEmail($request->input('email'));
+            //$this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 /*             Mail::raw('Au ah gelap', function ($message) {
                 $message->from('noreply@wesmartmodule.com', 'wsm');
                 $message->to('mhdwasiman@gmail.com');
                 $message->subject('Multy Trading Email Verification');
             }); */
+            Mail::to($request->input('email'))->send(new verifyEmail($thisUser));
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
@@ -54,7 +55,7 @@ class UserCtrl extends Controller
 
     public function sendEmail($thisUser)
     {
-        return response()->json($thisuser, 200);
+        //return response()->json($thisuser, 200);
         //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
     }
 
