@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Response;
 
 use Illuminate\Support\Str;
 use Mail;
-use Illuminate\Support\Facades\Validator;
 
 class UserCtrl extends Controller
 {
@@ -39,11 +38,17 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]);
 
+            $this->sendEmail($request->input('email'));
             return response()->json(['error'=>false,'msg'=>'Success']); 
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
         }
+    }
+
+    public function sendEmail($thisUser)
+    {
+        Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
     }
 
     protected function cektoken(Request $request){
