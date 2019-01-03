@@ -40,8 +40,8 @@ class UserCtrl extends Controller
             ]); 
  */
 
-            //$this->sendEmail($request->input('email'));
-                return response()->json($request->input('email'), 200);
+                $email = $request->input('email');
+            $this->sendEmail($email);
 
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 /*             Mail::raw(["HTML","<body><h2>Welcome</h2><p>Activations link</p></body>"], function ($message) {
