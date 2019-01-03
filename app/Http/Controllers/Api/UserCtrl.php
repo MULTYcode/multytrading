@@ -39,15 +39,16 @@ class UserCtrl extends Controller
                 'password'      => $hasher->make($request->input('password')),
             ]); */
 
-            $this->sendEmail($request->input('email'));
+            //$this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
 
-/*             Mail::raw('Now I know how to send emails with Laravel', function($message)
+             Mail::raw('Now I know how to send emails with Laravel', function($message)
             {
                 $message->subject('Hi There!!');
                 $message->from("noreply@wesmartmodule.com", "Test Email");
                 $message->to('mhdwasiman@gmail.com');
-            }); */
+                $message->body('dasdsadsdsdsd');
+            }); 
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
