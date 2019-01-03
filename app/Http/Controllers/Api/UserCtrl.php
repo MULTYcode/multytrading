@@ -18,16 +18,16 @@ class UserCtrl extends Controller
     protected function register(Request $request){
         try{
 
-            $checkEmail = User::where('email',$request->input('email'))->count();
+/*             $checkEmail = User::where('email',$request->input('email'))->count();
             if($checkEmail > 0){
                 $return = array(
                     "error" => true,
                     "msg" => "Email sudah terdaftar"
                 );
                 return response()->json($return);
-            }
+            } */
 
-            $hasher = app()->make('hash');
+/*             $hasher = app()->make('hash');
             User::create([
                 'first_name'    => $request->input('firstname'),
                 'last_name'     => $request->input('lastname'),
@@ -37,7 +37,7 @@ class UserCtrl extends Controller
                 'phone'         => $request->input('phone'),
                 'email'         => $request->input('email'),
                 'password'      => $hasher->make($request->input('password')),
-            ]);
+            ]); */
 
             $this->sendEmail($request->input('email'));
             //return response()->json(['error'=>false,'msg'=>'Success']); 
