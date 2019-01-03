@@ -15,7 +15,7 @@ class UserCtrl extends Controller
         try{
             $activation_code = str_random(60);
     
-            $firstname      = isset($request->input('firstname'));
+/*             $firstname      = isset($request->input('firstname'));
             $lastname       = isset($request->input('lastname'));
             $birth          = isset($request->input('birth'));
             $address        = isset($request->input('address'));
@@ -47,7 +47,7 @@ class UserCtrl extends Controller
             }
             if(!isset($password)){
                 return response()->json(['error'=>true,'msg'=>'Password tidak boleh kosong']);
-            }
+            } */
             
             /*
             $validator = new EmailValidator();
