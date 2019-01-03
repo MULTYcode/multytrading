@@ -14,8 +14,8 @@ class UserCtrl extends Controller
     protected function register(Request $request){
         try{
 
-            return response()->json('Berhasil', 200);
-            dd();
+           // return response()->json('Berhasil', 200);
+            //dd();
 
             //$activation_code = str_random(60);
     
@@ -61,7 +61,7 @@ class UserCtrl extends Controller
             }
             */
 
-            $checkEmail = User::where('email',$request('email'))->count();
+            $checkEmail = User::where('email',$request->input('email'))->count();
             if($checkEmail > 0){
                 $return = array(
                     "error" => true,
