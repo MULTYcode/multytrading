@@ -46,14 +46,6 @@ class UserCtrl extends Controller
                 'email'=> $request->email
             ];
             $this->sendEmail($send);
-            //$this->sendEmail($request->input('email'));
-
-            //return response()->json(['error'=>false,'msg'=>'Success']); 
-/*             Mail::raw("<body><h2>Welcome</h2><p>Activations link</p></body>", function ($message) {
-                $message->from('noreply@wesmartmodule.com', 'wsm');
-                $message->to($email);
-                $message->subject('Multy Trading');
-            });   */
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
@@ -63,10 +55,8 @@ class UserCtrl extends Controller
     protected function sendEmail($data)
     {
         Mail::send('email.sendView', $data, function($message) use ($data) {
-            $message->to($data['email'], $data['name'])->subject('Silahkan konfirmasi email anda, dengan menekan link yang kami kirimkan.');
+            $message->to($data['email'], $data['name'])->subject('Multy Trading');
         });
-        //return response()->json($thisuser, 200);
-        //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
     }
 
     protected function cektoken(Request $request){
