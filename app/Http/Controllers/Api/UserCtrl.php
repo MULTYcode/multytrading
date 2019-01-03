@@ -40,23 +40,32 @@ class UserCtrl extends Controller
             ]); 
  */
 
-                $email = $request->input('email');
+            $send = [
+                'name' => $request->firstname,
+                'link' => '$activation_code',
+                'email'=> $request->email
+            ];
+            $this->sendEmail($send);
+            //$this->sendEmail($request->input('email'));
 
             //return response()->json(['error'=>false,'msg'=>'Success']); 
-            Mail::raw("<body><h2>Welcome</h2><p>Activations link</p></body>", function ($message) {
+/*             Mail::raw("<body><h2>Welcome</h2><p>Activations link</p></body>", function ($message) {
                 $message->from('noreply@wesmartmodule.com', 'wsm');
-                $message->to([$email]);
-                $message->subject('Multy Trading Email Verification');
-            });  
+                $message->to($email);
+                $message->subject('Multy Trading');
+            });   */
     
         }catch(\Illuminate\Database\QueryException $ex){
             return response($ex->getMessage());
         }
     }
 
-    protected function sendEmail($thisUser)
+    protected function sendEmail($data)
     {
-        return response()->json($thisuser, 200);
+        Mail::send('email.sendView', $data, function($message) use ($data) {
+            $message->to($data['email'], $data['name'])->subject('Silahkan konfirmasi email anda, dengan menekan link yang kami kirimkan.');
+        });
+        //return response()->json($thisuser, 200);
         //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
     }
 
