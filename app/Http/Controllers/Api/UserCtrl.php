@@ -54,8 +54,8 @@ class UserCtrl extends Controller
 
     public function sendEmail($thisUser)
     {
-        //return response()->json($thisuser, 200);
-        Mail::to($thisUser)->send(new verifyEmail($thisUser));
+        return response()->json($thisuser, 200);
+        //Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
     }
 
     protected function cektoken(Request $request){
