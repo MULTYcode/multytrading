@@ -6,7 +6,7 @@
 <body>
 
 <div>
-    Hi {{ $first_name }},
+    Hi {{ $name }},
     <br>
     Thank you for creating an account with us. Don't forget to complete your registration!
     <br>
