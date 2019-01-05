@@ -30,8 +30,8 @@ class AuthController extends Controller
     );
         
         $rules = [
-            'firstname' => 'required|max:10',
-            'lastname' => 'required|max:10',
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required',
         ];
