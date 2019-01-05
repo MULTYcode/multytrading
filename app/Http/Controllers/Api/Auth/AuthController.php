@@ -73,7 +73,7 @@ class AuthController extends Controller
         $subject = "Please verify your email address.";
         Mail::send('email.verify', ['firstname' => $firstname, 'verification_code' => $verification_code],
             function($mail) use ($email, $name, $subject){
-                //$mail->from('noreply@wesmartmodule.com', 'Multy Trading');
+                $mail->from('noreply@wesmartmodule.com', 'Multy Trading');
                 $mail->to($email, $name);
                 $mail->subject($subject);
             });
