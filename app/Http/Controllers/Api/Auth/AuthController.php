@@ -22,11 +22,26 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $credentials = $request->only('name', 'email', 'password');
+        $credentials = $request->only(
+        'firstname', 
+        'lastname', 
+        'birth', 
+        'address', 
+        'gender', 
+        'phone', 
+        'email', 
+        'password'
+    );
         
         $rules = [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users'
+            'firstname' => 'required|max:10',
+            'lastname' => 'required|max:10',
+            'birth' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required',
         ];
 
         $validator = Validator::make($credentials, $rules);
@@ -34,17 +49,31 @@ class AuthController extends Controller
             return response()->json(['success'=> false, 'error'=> $validator->messages()]);
         }
 
-        $name = $request->firstname;
+        $firstname = $request->firstname;
+        $lastname = $request->lastname;
+        $birth = $request->birth;
+        $address = $request->address;
+        $gender = $request->gender;
+        $phone = $request->phone;
         $email = $request->email;
         $password = $request->password;
         
-        $user = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
+        $user = User::create([
+            'firstname' => $firstname, 
+            'lastname' => $lastname, 
+            'birth' => $birth, 
+            'address' => $address, 
+            'gender' => $gender, 
+            'phone' => $phone, 
+            'email' => $email, 
+            'password' => Hash::make($password)
+            ]);
         $verification_code = str_random(30); //Generate verification code
         //DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
         $subject = "Please verify your email address.";
-        Mail::send('email.verify', ['name' => $name, 'verification_code' => $verification_code],
+        Mail::send('email.verify', ['firstname' => $firstname, 'verification_code' => $verification_code],
             function($mail) use ($email, $name, $subject){
-                $mail->from('noreply@wesmartmodule.com', 'Multy Trading');
+                //$mail->from('noreply@wesmartmodule.com', 'Multy Trading');
                 $mail->to($email, $name);
                 $mail->subject($subject);
             });
