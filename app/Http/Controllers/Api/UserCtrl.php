@@ -5,108 +5,13 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-//use Egulias\EmailValidator\EmailValidator;
-//use Egulias\EmailValidator\Validation\RFCValidation;
 use Illuminate\Support\Facades\Response;
 
-//use Illuminate\Support\Str;
-use Mail;
+use Validator, Mail;
 use App\Mail\verifyEmail;
 
 class UserCtrl extends Controller
 {
-    protected function register(Request $request) {
-        try {
-
-            $checkEmail = User::where('email', $request->input('email'))->count();
-            if ($checkEmail > 0) {
-                $return = array("error"=>true, "msg"=>"Email sudah terdaftar");
-                return response()->json($return);
-            }
-
-            $hasher = app()->make('hash');
-            User::create([
-                'first_name'=>$request->input('firstname'),
-                'last_name'=>$request->input('lastname'),
-                'birth'=>$request->input('birth'),
-                'address'=>$request->input('address'),
-                'gender'=>$request->input('gender'),
-                'phone'=>$request->input('phone'),
-                'email'=>$request->input('email'),
-                'password'=>$hasher->make($request->input('password'))
-            ]);
-
-            /*
-            $activation_code = str_random(60).$request->email;
-            $send = [
-                'name'=>$request->firstname,
-                'link'=>$activation_code,
-                'email'=>$request->email
-            ];
-            $this->sendEmail($send);
-            */
-            
-        } catch (\Illuminate\Database\QueryException $ex) {
-            return response($ex -> getMessage());
-        }
-    }
-
-    protected function sendEmail($data)
-    {
-        Mail::send('email.sendView', $data, function($message) use ($data) {
-            $message->to($data['email'], $data['name'])->subject('Multy Trading');
-        });
-    }
-
-    protected function cektoken(Request $request){
-        try{
-            $email = $request->input('email');
-            $login = User::where('email', $email)->first();
-            if (!$login) {
-                $res['status'] = 'error';
-                $res['msg'] = 'Your session is expired';
-                return response()->json($res);
-            }
-            else {
-                return response()->json(['token'=>$login->api_token]);
-            }    
-        }catch(\Illuminate\Database\QueryException $ex){
-            return response()->json($ex->getMessage());
-        }
-    }
-
-    protected function login(Request $request){
-        $hasher = app()->make('hash');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $login = User::where('email', $email)->first();
-        if (!$login) {
-            $res['status'] = 'error';
-            $res['msg'] = 'Your email or password incorrect!';
-            return response($res);
-        }else{
-            if($login->activated != 1 || $login->activated == null){
-                return response()->json(['error'=>true,'msg' => 'Silahkan anda klik link verifikasi yang kami kirim ke email anda'], 200);
-            }elseif($login->activated != 1 || $login->activated == null){
-                return response()->json(['error'=>true,'msg' => 'Maaf, akun anda belum aktif, silahkan menghubungi administrator'], 200);
-            }
-            if ($hasher->check($password, $login->password)) {
-                $api_token = sha1(time());
-                $create_token = User::where('id', $login->id)->update(['api_token' => $api_token]);
-                if ($create_token) {
-                    $res['status'] = 'success';
-                    $res['api_token'] = $api_token;
-                    $res['user'] = $login;
-                    return response($res);
-                }
-            }else{
-                $res['status'] = 'error';
-                $res['msg'] = 'You email or password incorrect!';
-                return response($res);
-            }
-        }
-    }
-
     protected function getuser(Request $request)
     {
         try{

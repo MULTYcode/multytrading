@@ -36,16 +36,16 @@ Route::group([
     }); 
     */
 
-    Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
-    Route::post('recover', 'AuthController@recover');
+    Route::post('register', 'Auth\AuthController@register');
+    Route::post('login', 'Auth\AuthController@login');
+    Route::post('recover', 'Auth\AuthController@recover');
 
     //Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
     //Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
     //Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
     Route::group(['middleware' => ['jwt.auth']], function() {
-        Route::get('logout', 'AuthController@logout');
+        Route::get('logout', 'Auth\AuthController@logout');
         Route::get('test', function(){
             return response()->json(['foo'=>'bar']);
         });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,30 +22,33 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $credentials = $request->only('firstname', 'email', 'password');
+        $credentials = $request->only('name', 'email', 'password');
         
         $rules = [
-            'firstname' => 'required|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users'
         ];
+
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
             return response()->json(['success'=> false, 'error'=> $validator->messages()]);
         }
+
         $name = $request->firstname;
         $email = $request->email;
         $password = $request->password;
         
         $user = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
         $verification_code = str_random(30); //Generate verification code
-        DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
+        //DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
         $subject = "Please verify your email address.";
         Mail::send('email.verify', ['name' => $name, 'verification_code' => $verification_code],
             function($mail) use ($email, $name, $subject){
-                $mail->from(getenv('FROM_EMAIL_ADDRESS'), "Multy Trading");
+                $mail->from('noreply@wesmartmodule.com', 'Multy Trading');
                 $mail->to($email, $name);
                 $mail->subject($subject);
             });
+
         return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.']);
     }
 
@@ -90,11 +93,13 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ];
+
+        $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
             return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
         }
         
-        $credentials['is_verified'] = 1;
+        $credentials['verified'] = 1;
         
         try {
             // attempt to verify the credentials and create a token for the user
