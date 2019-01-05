@@ -40,13 +40,13 @@ class AuthController extends Controller
             'address' => 'required',
             'gender' => 'required',
             'phone' => 'required',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:50|unique:users',
             'password' => 'required|min:6',
         ];
 
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
-            return response()->json(['success'=> false, 'error'=> $validator->messages()]);
+            return response()->json(['success'=> false, 'message'=> $validator->messages()]);
         }
 
         $first_name = $request->first_name;
