@@ -23,13 +23,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $credentials = $request->only(
-        'name', 
+        'first_name', 
+        'last_name',
         'email', 
         'password'
     );
         
         $rules = [
-            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
         ];
@@ -39,7 +41,8 @@ class AuthController extends Controller
             return response()->json(['success'=> false, 'error'=> $validator->messages()]);
         }
 
-        $name = $request->name;
+        $first_name = $request->first_name;
+        $last_name = $request->last_name;
         $email = $request->email;
         $password = $request->password;
 
@@ -55,9 +58,9 @@ class AuthController extends Controller
 
         //DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
         $subject = "Please verify your email address.";
-        Mail::send('email.verify', ['name' => $name, 'verification_code' => $verification_code],
-            function($mail) use ($email, $name, $subject){
-                $mail->to($email, $name);
+        Mail::send('email.verify', ['name' => $first_name, 'verification_code' => $verification_code],
+            function($mail) use ($email, $first_name, $subject){
+                $mail->to($email, $first_name);
                 $mail->subject($subject);
             });
 
