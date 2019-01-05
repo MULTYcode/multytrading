@@ -45,14 +45,17 @@ class AuthController extends Controller
         $last_name = $request->last_name;
         $email = $request->email;
         $password = $request->password;
-        
+
+        $verification_code = str_random(30); //Generate verification code
+
         $user = User::create([
             'first_name' => $first_name, 
             'last_name' => $last_name, 
             'email' => $email, 
-            'password' => Hash::make($password)
+            'password' => Hash::make($password),
+            'verifytoken' => $verification_code
             ]);
-        $verification_code = str_random(30); //Generate verification code
+
         //DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
         $subject = "Please verify your email address.";
         Mail::send('email.verify', ['name' => $first_name, 'verification_code' => $verification_code],
