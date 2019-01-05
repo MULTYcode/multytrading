@@ -56,7 +56,7 @@ class AuthController extends Controller
         //DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
         $subject = "Please verify your email address.";
         Mail::send('email.verify', ['name' => $firstname, 'verification_code' => $verification_code],
-            function($mail) use ($email, $name, $subject){
+            function($mail) use ($email, $firstname, $subject){
                 //$mail->from('noreply@wesmartmodule.com', 'Multy Trading');
                 $mail->to($email, $name);
                 $mail->subject($subject);
