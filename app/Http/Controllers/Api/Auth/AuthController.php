@@ -25,13 +25,21 @@ class AuthController extends Controller
         $credentials = $request->only(
         'first_name', 
         'last_name',
+        'birth',
+        'address',
+        'gender',
+        'phone',
         'email', 
         'password'
     );
         
         $rules = [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
+            'first_name' => 'required|max:10',
+            'last_name' => 'required|max:10',
+            'birth' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
         ];
@@ -43,18 +51,26 @@ class AuthController extends Controller
 
         $first_name = $request->first_name;
         $last_name = $request->last_name;
+        $birth = $request->birth;
+        $address = $request->address;
+        $gender = $request->gender;
+        $phone = $request->phone;
         $email = $request->email;
         $password = $request->password;
 
-        $verification_code = str_random(30); //Generate verification code
+        $verification_code = str_random(60).$email; //Generate verification code
 
-/*         $user = User::create([
+         $user = User::create([
             'first_name' => $first_name, 
             'last_name' => $last_name, 
+            'birth' => $birth,
+            'address' => $address,
+            'gender' => $gender,
+            'phone' => $phone,
             'email' => $email, 
             'password' => Hash::make($password),
             'verifytoken' => $verification_code
-            ]); */
+            ]); 
 
         //DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
         $subject = "Please verify your email address.";
