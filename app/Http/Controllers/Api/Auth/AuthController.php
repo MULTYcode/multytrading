@@ -25,10 +25,6 @@ class AuthController extends Controller
         $credentials = $request->only(
         'firstname', 
         'lastname', 
-        'birth', 
-        'address', 
-        'gender', 
-        'phone', 
         'email', 
         'password'
     );
@@ -36,10 +32,6 @@ class AuthController extends Controller
         $rules = [
             'firstname' => 'required|max:10',
             'lastname' => 'required|max:10',
-            'birth' => 'required',
-            'address' => 'required',
-            'gender' => 'required',
-            'phone' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required',
         ];
@@ -51,20 +43,12 @@ class AuthController extends Controller
 
         $firstname = $request->firstname;
         $lastname = $request->lastname;
-        $birth = $request->birth;
-        $address = $request->address;
-        $gender = $request->gender;
-        $phone = $request->phone;
         $email = $request->email;
         $password = $request->password;
         
         $user = User::create([
             'firstname' => $firstname, 
             'lastname' => $lastname, 
-            'birth' => $birth, 
-            'address' => $address, 
-            'gender' => $gender, 
-            'phone' => $phone, 
             'email' => $email, 
             'password' => Hash::make($password)
             ]);
