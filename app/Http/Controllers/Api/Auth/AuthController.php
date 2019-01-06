@@ -154,14 +154,14 @@ class AuthController extends Controller
         $api_token = sha1(time());
         $create_token = User::where('email', $email)->update(['api_token' => $api_token]);
         // ambil user
-        if($create_token){
+/*         if($create_token){
             $data = DB::table('users')->select('name', 'email')->get();   
-        }
+        } */
 
         //$res['token'] = $token;
         //$res['email'] = $email;
         //return response()->json($res, 200);
-        return response()->json($data, 200);
+        return response()->json('OK', 200);
 
         //return response()->json(['success'=>true, 'data'=>$token], 200);
 
