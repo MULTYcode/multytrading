@@ -149,14 +149,8 @@ class AuthController extends Controller
             return Response::json(['error'=>true,'msg' => 'Gagal login'], 200);
         }
 
-/*         $user = User::where('email', '=', $request->email)->first();
-        $user->token = $token;
-        $user->save();
+        DB::table('user')->where('email',$request->email)->update(['api_token'=>$token]);
 
-        $return = array(
-            "error" => false,
-            "data"=>$user
-        ); */
         return response()->json('OK', 200);
     }
 
