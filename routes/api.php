@@ -46,6 +46,9 @@ Route::group([
 
     Route::group(['middleware' => ['jwt.auth']], function() {
         Route::get('logout', 'Auth\AuthController@logout');
+
+        Route::post('cektoken', 'UserCtrl@cektoken');
+        
         Route::get('test', function(){
             return response()->json(['foo'=>'bar']);
         });

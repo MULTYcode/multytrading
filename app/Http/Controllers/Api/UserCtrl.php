@@ -13,15 +13,15 @@ use App\Mail\verifyEmail;
 class UserCtrl extends Controller
 {
     protected function getToken(Request $request){
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email');
         $rules = [
             'email' => 'required|email',
-            'password' => 'required',
         ];
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
             return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
         }
+        return response()->json('OK', 200);
     }
 
     protected function getuser(Request $request)
