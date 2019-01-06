@@ -26,7 +26,7 @@ class UserCtrl extends Controller
         }
 
         try {
-            if (!$token = JWTAuth::parseToken()) {
+            if (!$token = JWTAuth::getToken()) {
                 return response()->json(['error'=>true,'msg'=>'User Not found']);
             }
         }
