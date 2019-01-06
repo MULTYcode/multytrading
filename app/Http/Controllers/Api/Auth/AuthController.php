@@ -120,7 +120,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function login(Request $request){
+    public function login2(Request $request){
         if(!$request->email && !$request->password) return response()->json(['error'=>true,'msg'=>'field is required'], 200);
         if(!$request->email) return response()->json(['error'=>true,'msg'=>'email tidak boleh kosong'], 200);
         if(!$request->password) return response()->json(['error'=>true,'msg'=>'password tidak boleh kosong'], 200);
@@ -154,7 +154,7 @@ class AuthController extends Controller
         return response()->json('OK', 200);
     }
 
-    public function loginOri(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
         
