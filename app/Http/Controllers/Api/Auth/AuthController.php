@@ -151,7 +151,7 @@ class AuthController extends Controller
             return response()->json(['success'=>false, 'error' => 'Failed to login, please try again.'], 500);
         }
         // all good so return the token
-        User::where('email', $request->email)->update(['api_token' => $token]);
+        DB::table('user')->where('email',$request->email)->update(['api_token'=>$token]);
         // ambil user
         //$data = User::select('email,token,image')->where('email', $email)->first();        
 
