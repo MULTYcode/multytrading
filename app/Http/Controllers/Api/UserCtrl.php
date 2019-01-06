@@ -13,8 +13,7 @@ use App\Mail\verifyEmail;
 class UserCtrl extends Controller
 {
     protected function cekToken(Request $request){
-        return response()->json('OK', 200);
-/*         $credentials = $request->only('email');
+        $credentials = $request->only('email');
         $rules = [
             'email' => 'required|email',
         ];
@@ -22,8 +21,30 @@ class UserCtrl extends Controller
         if($validator->fails()) {
             return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
         }
-        return response()->json('OK', 200);
- */    }
+
+        try {
+            if (!$token = JWTAuth::parseToken()-> authenticate()) {
+                return response()->json(['error'=>true,'msg'=>'User Not found']);
+            }
+        }
+        catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json([ 'error'=>true,'msg'=>'Token was expired']);
+        }
+        catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json([ 'error'=>true,'msg'=>'Invalid Token']);
+        }
+        catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json([ 'error'=>true,'msg'=>'Invalid Token']);
+        }
+
+        ////////////// dsaddsad
+        $data = User::where('email', $request->email)->first();
+        if(!$data) {
+            return response()->json( 'Error', 404);
+        }
+
+        return response()->json($data->api_token, 200);
+    }
 
     protected function getuser(Request $request)
     {
