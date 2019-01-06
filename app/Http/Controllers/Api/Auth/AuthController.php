@@ -158,9 +158,9 @@ class AuthController extends Controller
         //$res['token'] = $token;
         //$res['email'] = $email;
         //return response()->json($res, 200);
-        //return response()->json($return, 200);
+        return response()->json($token, 200);
 
-        return response()->json(['success'=>true, 'data'=>$token], 200);
+        //return response()->json(['success'=>true, 'data'=>$token], 200);
 
     }
     /**
