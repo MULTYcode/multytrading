@@ -12,7 +12,7 @@ use App\Mail\verifyEmail;
 
 class UserCtrl extends Controller
 {
-    protected function getToken(Request $request){
+    protected function cekToken(Request $request){
         $credentials = $request->only('email');
         $rules = [
             'email' => 'required|email',
