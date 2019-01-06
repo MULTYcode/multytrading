@@ -155,11 +155,11 @@ class AuthController extends Controller
         // ambil user
         //$data = User::where('email', $email)->first();        
 
-        $res['token'] = $token;
-        $res['email'] = $email;
-        return response()->json($res, 200);
+        //$res['token'] = $token;
+        //$res['email'] = $email;
+        //return response()->json($res, 200);
 
-        //return response()->json(['success'=>true, 'data'=>$res], 200);
+        return response()->json(['success'=>true, 'data'=>$token], 200);
 
     }
     /**
