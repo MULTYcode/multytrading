@@ -153,17 +153,14 @@ class AuthController extends Controller
         // all good so return the token
         User::where('email', $request->email)->update(['api_token' => $token]);
         // ambil user
-        $data = User::where('email', $email)->first();        
+        $data = User::select('email,token,image')->where('email', $email)->first();        
 
         //$res['token'] = $token;
         //$res['email'] = $email;
         //return response()->json($res, 200);
-        $return = array(
-            "token" => $token,
-            "data"=>$data
-        );
-        return response()->json($return, 200);
-        //return response()->json(['success'=>true, 'data'=>$res], 200);
+        //return response()->json($return, 200);
+
+        return response()->json(['success'=>true, 'data'=>$data], 200);
 
     }
     /**
