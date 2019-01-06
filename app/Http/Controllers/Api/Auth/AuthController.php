@@ -138,23 +138,23 @@ class AuthController extends Controller
         try {
             // attempt to verify the credentials and create a token for the user
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 404);
-                //$res['error'] = 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.';
-                //return response()->json($data, 404);
+                //return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 404);
+                $res['error'] = 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.';
+                return response()->json($data, 404);
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            //$res['error'] = 'Failed to login, please try again.';
-            //return response()->json($res, 500);
-            return response()->json(['success'=>false, 'error' => 'Failed to login, please try again.'], 500);
+            $res['error'] = 'Failed to login, please try again.';
+            return response()->json($res, 500);
+            //return response()->json(['success'=>false, 'error' => 'Failed to login, please try again.'], 500);
         }
         // all good so return the token
-        return response()->json(['success'=>true, 'data'=>['token'=>$token ]], 200);
-        //$res['data'] = $token;
-        //return response()->json($res, 200);
+        //return response()->json(['success'=>true, 'data'=>['token'=>$token ]], 200);
+        $res['data'] = $token;
+        return response()->json($res, 200);
     }
     /**
-     * Log out
+     * Log outfix login
      * Invalidate the token, so user cannot use it anymore
      * They have to relogin to get a new token
      *
