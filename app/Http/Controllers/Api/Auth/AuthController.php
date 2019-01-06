@@ -119,7 +119,48 @@ class AuthController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+
+    public function login(Request $request){
+        if(!$request->email && !$request->password) return response()->json(['error'=>true,'msg'=>'field is required'], 200);
+        if(!$request->email) return response()->json(['error'=>true,'msg'=>'email tidak boleh kosong'], 200);
+        if(!$request->password) return response()->json(['error'=>true,'msg'=>'password tidak boleh kosong'], 200);
+        $credit = $request->only('email','password');
+
+        try {
+            // attempt to verify the credentials and create a token for the user
+            $user = User::where('email', $request->email)->first();
+            if($user){
+                if($user->activated != 1 || $user->activated == null){
+                    return response()->json(['error'=>true,'msg' => 'Silahkan anda klik link "verifikasi email" yang kami kirim ke email anda, terima kasih'], 200);
+                }elseif($user->verification != 1 || $user->verification == null){
+                    return response()->json(['error'=>true,'msg' => 'maaf, akun anda belum aktif, silahkan bersabar menunggu verifikasi Muslim Loyalty, terimakasih'], 200);
+                }else{
+                    $token = JWTAuth::attempt($credit);
+                    if(!$token){
+                        return Response::json(['error'=>true,'msg' => 'Email atau password salah'], 200);
+                    }   
+                }
+            }else{
+                return Response::json(['error'=>true,'msg' => 'Email atau password salah'], 200);
+            }
+
+        } catch (JWTException $e) {
+            // something went wrong whilst attempting to encode the token
+            return Response::json(['error'=>true,'msg' => 'Gagal login'], 200);
+        }
+
+        $user = User::where('email', '=', $request->email)->first();
+        $user->token = $token;
+        $user->save();
+
+        $return = array(
+            "error" => false,
+            "data"=>$user
+        );
+        return response()->json($return, 200);
+    }
+
+    public function loginOri(Request $request)
     {
         $credentials = $request->only('email', 'password');
         
