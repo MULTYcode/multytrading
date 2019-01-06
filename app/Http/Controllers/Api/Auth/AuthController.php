@@ -158,8 +158,8 @@ class AuthController extends Controller
             $data = DB::table('users')->select('first_name', 'email', 'image', 'api_token')->get();   
         }
 
-        return response()->json($data, 200);
-        //return response()->json(['success'=>true, 'data'=>$token], 200);
+        //return response()->json($data, 200);
+        return response()->json(['success'=>true, 'id'=>$token, 'data'=>$data], 200);
 
     }
     /**
