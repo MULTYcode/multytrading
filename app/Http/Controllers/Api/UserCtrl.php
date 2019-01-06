@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Response;
 
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 use Validator, Mail;
 use App\Mail\verifyEmail;
 
