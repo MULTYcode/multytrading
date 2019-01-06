@@ -81,7 +81,9 @@ class AuthController extends Controller
                 $mail->subject($subject);
             });
 
-        return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.']);
+        //return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.']);
+        $res['message'] = 'Thanks for signing up! Please check your email to complete your registration.';
+        return response()->json($res, 200);
     }
 
     /**
