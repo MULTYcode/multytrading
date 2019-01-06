@@ -46,7 +46,7 @@ class UserCtrl extends Controller
             return response()->json( 'Error', 404);
         }
 
-        return response()->json($data->api_token, 200);
+        return response()->json($token, 200);
     }
 
     protected function getuser(Request $request)
