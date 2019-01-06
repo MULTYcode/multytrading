@@ -132,7 +132,7 @@ class AuthController extends Controller
             if($user){
                 if($user->activated != 1 || $user->activated == null){
                     return response()->json(['error'=>true,'msg' => 'Silahkan anda klik link "verifikasi email" yang kami kirim ke email anda, terima kasih'], 200);
-                }elseif($user->verification != 1 || $user->verification == null){
+                }elseif($user->verified != 1 || $user->verified == null){
                     return response()->json(['error'=>true,'msg' => 'maaf, akun anda belum aktif, silahkan bersabar menunggu verifikasi Muslim Loyalty, terimakasih'], 200);
                 }else{
                     $token = JWTAuth::attempt($credit);
