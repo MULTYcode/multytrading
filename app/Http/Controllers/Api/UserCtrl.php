@@ -13,7 +13,13 @@ use App\Mail\verifyEmail;
 class UserCtrl extends Controller
 {
     protected function cekToken(Request $request){
-        $credentials = $request->only('email');
+        try{
+            $data = DB::table('users')->select('api_token')->get();
+        }catch(Exception $e){
+            return response()->json($e->getMessage());
+        }
+        return response()->json($data, 200);
+/*         $credentials = $request->only('email');
         $rules = [
             'email' => 'required|email',
         ];
@@ -22,7 +28,7 @@ class UserCtrl extends Controller
             return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
         }
         return response()->json('OK', 200);
-    }
+ */    }
 
     protected function getuser(Request $request)
     {
