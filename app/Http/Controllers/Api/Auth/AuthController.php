@@ -157,11 +157,10 @@ class AuthController extends Controller
 
         $res['token'] = $token;
         $res['email'] = $email;
+        return response()->json($res, 200);
 
-        return response()->json(['success'=>true, 'data'=>$res], 200);
-        //$res['success'] = true;
-        //$res['data'] = $token;
-        //return response()->json($res, 200);
+        //return response()->json(['success'=>true, 'data'=>$res], 200);
+
     }
     /**
      * Log out
