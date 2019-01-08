@@ -40,7 +40,6 @@ class UserCtrl extends Controller
             return response()->json([ 'error'=>true,'msg'=>'Invalid Token']);
         }
 
-        ////////////// dsaddsad
         $data = User::where('email', $request->email)->first();
         if(!$data) {
             return response()->json( 'Error', 404);
