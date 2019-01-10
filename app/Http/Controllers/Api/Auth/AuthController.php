@@ -154,8 +154,15 @@ class AuthController extends Controller
         $api_token = sha1(time());
         $create_token = User::where('email', $request->email)->update(['api_token' => $api_token]);
         // ambil user
-        if($create_token){
-            $data = DB::table('users')->select('first_name', 'email', 'image', 'api_token')->get();   
+        try{
+            if($create_token){
+                $data = DB::table('users')->select('first_name', 'email', 'image', 'api_token')->get();  
+                if(!$data){
+                    return response()->json(['success'=>false, 'error' => 'Failed to login, please try again.'], 500);        
+                } 
+            }    
+        }catch (Exception $e){
+            return response()->json(['success'=>false, 'error' => 'Failed to login, please try again.'], 500);
         }
 
         //return response()->json($data, 200);
