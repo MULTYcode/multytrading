@@ -48,10 +48,8 @@ Route::group([
         Route::get('logout', 'Auth\AuthController@logout');
 
         Route::post('cektoken', 'UserCtrl@cektoken');
+        Route::post('picuser', 'UserCtrl@picuser');
         
-        Route::get('test', function(){
-            return response()->json(['foo'=>'bar']);
-        });
     });
 
 });
