@@ -48,7 +48,7 @@ Route::group([
         Route::get('logout', 'Auth\AuthController@logout');
 
         Route::post('cektoken', 'UserCtrl@cektoken');
-        Route::post('picuser', 'UserCtrl@picuser');
+        Route::post('useravatar', 'UserCtrl@uploadAvatar');
         
     });
 

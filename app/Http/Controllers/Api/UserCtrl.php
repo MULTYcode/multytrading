@@ -15,6 +15,32 @@ use App\Mail\verifyEmail;
 
 class UserCtrl extends Controller
 {
+
+    public static function getUser()
+    {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], $e->getStatusCode());
+
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }   
+
+        return $user;
+    }
+
     protected function cekToken(Request $request){
         $credentials = $request->only('email');
         $rules = [
@@ -48,7 +74,7 @@ class UserCtrl extends Controller
         return response()->json($data->api_token,200);
     }
 
-    protected function getuser(Request $request)
+/*     protected function getuser(Request $request)
     {
         try{
             $token = str_replace('Bearer ','',$request->header('Authorization'));
@@ -56,7 +82,7 @@ class UserCtrl extends Controller
         }catch(Exception $e){
             return response($e->getMessage());
         }
-    }
+    } */
 
     protected function updateuser(Request $request)
     {
@@ -102,13 +128,35 @@ class UserCtrl extends Controller
        ]);
        $image = $request->file('image');
        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-       $destinationPath = base_path('public/images');
+       $destinationPath = base_path('public/uploads/avatars');
        $image->move($destinationPath, $input['imagename']);
 
        $token = str_replace('Bearer ','',$request->header('Authorization'));
        if(User::where('api_token', $token)->update(['image'=>url('images/'.$input['imagename'])])){
             return response()->json('success');
        }
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        $users = $this->getUser();
+        $user = User::find($users->id);
+        if($user){
+            if ($request->hasFile('photos')) {
+                $destinationPath = 'upload/photos';
+                $image = Input::file('photos');
+                // $image_name = $image->getClientOriginalName();
+                $rename = 'photo_'.str_random(4).'.jpg';
+                $image->move($destinationPath,$rename);
+                @unlink($user->photo);
+                $user->photo = $destinationPath.'/'.$rename;
+
+                $user->save();
+
+                return response()->json($user);
+            }
+        }
+        return response()->json(['message'=>'nothing to update']);
     }
 
     protected function getpicuser(Request $request)
