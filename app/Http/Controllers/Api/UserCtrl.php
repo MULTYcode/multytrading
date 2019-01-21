@@ -52,8 +52,8 @@ class UserCtrl extends Controller
                 // $image_name = $image->getClientOriginalName();
                 $rename = 'photo_'.str_random(4).'.jpg';
                 $image->move($destinationPath,$rename);
-                @unlink($user->photo);
-                $user->photo = $destinationPath.'/'.$rename;
+                @unlink($user->image);
+                $user->image = $destinationPath.'/'.$rename;
 
                 $user->save();
 
