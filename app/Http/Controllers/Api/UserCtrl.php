@@ -41,6 +41,28 @@ class UserCtrl extends Controller
         return $user;
     }
 
+    public function uploadAvatar(Request $request)
+    {
+        $users = $this->getUser();
+        $user = User::find($users->id);
+        if($user){
+            if ($request->hasFile('photos')) {
+                $destinationPath = 'upload/avatars';
+                $image = Input::file('photos');
+                // $image_name = $image->getClientOriginalName();
+                $rename = 'photo_'.str_random(4).'.jpg';
+                $image->move($destinationPath,$rename);
+                @unlink($user->photo);
+                $user->photo = $destinationPath.'/'.$rename;
+
+                $user->save();
+
+                return response()->json($user);
+            }
+        }
+        return response()->json(['message'=>'nothing to update']);
+    }
+
     protected function cekToken(Request $request){
         $credentials = $request->only('email');
         $rules = [
@@ -135,28 +157,6 @@ class UserCtrl extends Controller
        if(User::where('api_token', $token)->update(['image'=>url('images/'.$input['imagename'])])){
             return response()->json('success');
        }
-    }
-
-    public function uploadAvatar(Request $request)
-    {
-        $users = $this->getUser();
-        $user = User::find($users->id);
-        if($user){
-            if ($request->hasFile('photos')) {
-                $destinationPath = 'upload/photos';
-                $image = Input::file('photos');
-                // $image_name = $image->getClientOriginalName();
-                $rename = 'photo_'.str_random(4).'.jpg';
-                $image->move($destinationPath,$rename);
-                @unlink($user->photo);
-                $user->photo = $destinationPath.'/'.$rename;
-
-                $user->save();
-
-                return response()->json($user);
-            }
-        }
-        return response()->json(['message'=>'nothing to update']);
     }
 
     protected function getpicuser(Request $request)
