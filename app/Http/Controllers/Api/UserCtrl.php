@@ -47,7 +47,7 @@ class UserCtrl extends Controller
         $user = User::find($users->id);
         if($user){
             if ($request->hasFile('photos')) {
-                $destinationPath = 'upload/avatars';
+                $destinationPath = 'uploads/avatars';
                 $image = Input::file('photos');
                 // $image_name = $image->getClientOriginalName();
                 $rename = 'photo_'.str_random(4).'.jpg';
