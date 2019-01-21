@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Input;
 
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
